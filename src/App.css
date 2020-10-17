@@ -1,0 +1,129 @@
+.padder {
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+.visited {
+  background-color: yellow;
+}
+.danger::placeholder {
+  color: red;
+  opacity: 1;
+}
+.coin_input {
+  border-radius: 10px;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.input_item {
+  margin: auto;
+}
+.button_div {
+  padding-bottom: 15px;
+}
+.create_coin_button {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.back_button {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.visualize_button {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.input_field_size {
+  width: 400px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+.next {
+  display: block;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.remove {
+  visibility: hidden;
+}
+.coin {
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+  border-width: 1px;
+  border-color: blueviolet;
+}
+.row {
+  display: inline-block;
+}
+.coin-color {
+  background-color: cyan;
+}
+.coinreachable {
+  background-color: green;
+}
+.coinunreachable {
+  background-color: red;
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
