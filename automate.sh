@@ -8,6 +8,6 @@ DATE=$(date)
 
 git commit -m "changes made on $DATE"
 
-git push
+git push -u origin master
 
 osascript -e 'display notificaton "pushed to remote" with title "SUCCESS"'
