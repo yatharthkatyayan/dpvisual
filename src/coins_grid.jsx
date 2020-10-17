@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import CoinDiv from "./coins";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import Home from "./homepage";
 //let total_coins = 10;
 let timeoutArray = [];
 function coinMaker_all(total_coins) {
@@ -112,7 +114,22 @@ class Coins extends Component {
       timeoutArray.push(myvar);
     }
   }
+  /*
+<div className="input_item">
+            <Router>
+              <Route path="/" component={Home} />
 
+              <Link to="/">
+                <button
+                  className="create_coin_button"
+                  //  onClick={() => this.Homepage()}
+                >
+                  HomePage
+                </button>
+              </Link>
+            </Router>
+          </div>
+*/
   setCoin() {
     /*----------------------input 1--------------------------------*/
     let x = document.getElementById("input_number_1").value;
@@ -180,6 +197,9 @@ class Coins extends Component {
         });
       }
     }
+  }
+  Homepage() {
+    this.setState({ coin_taker: <div></div> });
   }
   clearCoins() {
     for (let i = 0; i < timeoutArray.length; i++) {

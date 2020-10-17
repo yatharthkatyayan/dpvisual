@@ -50,7 +50,21 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
+:link {
+  text-decoration: none;
+}
+.homepage_button {
+  width: 400px;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  text-decoration: none;
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .input_field_size {
   width: 400px;
   padding: 12px;
