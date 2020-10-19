@@ -3,12 +3,19 @@
   padding-left: 5px;
   padding-top: 5px;
 }
+.marginer {
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
 .visited {
   background-color: yellow;
 }
 .danger::placeholder {
   color: red;
   opacity: 1;
+}
+::placeholder {
+  font-family: Times;
 }
 .coin_input {
   border-radius: 10px;
@@ -27,6 +34,7 @@
   padding-bottom: 15px;
 }
 .create_coin_button {
+  font-family: Times;
   background-color: #4caf50;
   color: white;
   padding: 12px 20px;
@@ -35,6 +43,7 @@
   cursor: pointer;
 }
 .back_button {
+  font-family: Times;
   background-color: #4caf50;
   color: white;
   padding: 12px 20px;
@@ -43,6 +52,7 @@
   cursor: pointer;
 }
 .visualize_button {
+  font-family: Times;
   background-color: #4caf50;
   color: white;
   padding: 12px 20px;
@@ -54,6 +64,7 @@
   text-decoration: none;
 }
 .homepage_button {
+  font-family: Times;
   width: 400px;
   margin-top: 4px;
   margin-bottom: 16px;
@@ -66,9 +77,10 @@
   cursor: pointer;
 }
 .input_field_size {
+  font-family: Times;
   width: 400px;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
   margin-top: 6px;

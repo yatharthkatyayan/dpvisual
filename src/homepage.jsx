@@ -3,6 +3,7 @@ import Coins from "./coins_grid";
 import Test1 from "./Test1";
 import Test2 from "./Test2";
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
+
 class Home extends Component {
   state = {};
   test1() {}
@@ -25,9 +26,9 @@ class Home extends Component {
               </Link>
             </div>
           </Route>
-          <Route path="/test1" component={Test1} />
-          <Route path="/test2" component={Test2} />
-          <Route path="/coins_grid" component={Coins} />
+          <Route path="/test1" exact component={Test1} />
+          <Route path="/test2" exact component={Test2} />
+          <Route path="/coins_grid" exact component={Coins} />
         </Router>
       </div>
     );

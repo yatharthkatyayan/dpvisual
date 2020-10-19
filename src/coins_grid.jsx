@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import CoinDiv from "./coins";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import Home from "./homepage";
+
 //let total_coins = 10;
 let timeoutArray = [];
 function coinMaker_all(total_coins) {
@@ -115,20 +115,7 @@ class Coins extends Component {
     }
   }
   /*
-<div className="input_item">
-            <Router>
-              <Route path="/" component={Home} />
 
-              <Link to="/">
-                <button
-                  className="create_coin_button"
-                  //  onClick={() => this.Homepage()}
-                >
-                  HomePage
-                </button>
-              </Link>
-            </Router>
-          </div>
 */
   setCoin() {
     /*----------------------input 1--------------------------------*/
@@ -198,9 +185,7 @@ class Coins extends Component {
       }
     }
   }
-  Homepage() {
-    this.setState({ coin_taker: <div></div> });
-  }
+
   clearCoins() {
     for (let i = 0; i < timeoutArray.length; i++) {
       clearTimeout(timeoutArray[i]);
@@ -233,8 +218,15 @@ class Coins extends Component {
         </div>
         <div className="input_item">
           <button onClick={() => this.setCoin()} className="create_coin_button">
-            create coins
+            <b>create coins</b>
           </button>
+          <div className="input_item">
+            <Link to="/">
+              <button className="create_coin_button marginer">
+                <b>HomePage</b>
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -270,8 +262,15 @@ class Coins extends Component {
               onClick={() => this.setCoin()}
               className="create_coin_button"
             >
-              create coins
+              <b> create coins</b>
             </button>
+          </div>
+          <div className="input_item">
+            <Link to="/">
+              <button className="create_coin_button marginer">
+                <b>HomePage</b>
+              </button>
+            </Link>
           </div>
         </div>
       ),
@@ -331,7 +330,7 @@ class Coins extends Component {
               id="visualize_button"
               className="remove visualize_button"
             >
-              visualize
+              <b>visualize</b>
             </button>
           </div>
           <div className="button_div">
@@ -340,7 +339,7 @@ class Coins extends Component {
               id="back_button"
               className="remove back_button"
             >
-              Back
+              <b> Back</b>
             </button>
           </div>
         </div>
