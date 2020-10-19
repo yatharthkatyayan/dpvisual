@@ -6,19 +6,19 @@ import { Link, BrowserRouter as Router, Route } from "react-router-dom";
 
 class Home extends Component {
   state = {};
-  test1() {}
+
   render() {
     return (
       <div>
         <Router>
           <Route path="/" exact component={Home}>
-            <div className="coin_input">
+            <div className="coin_input ">
               <Link to="/test1">
-                <div className=" homepage_button">test1</div>
+                <div className=" homepage_button ">test1</div>
               </Link>
 
               <Link to="/test2">
-                <div className=" homepage_button">test2</div>
+                <div className=" homepage_button ">test2</div>
               </Link>
 
               <Link to="/coins_grid">

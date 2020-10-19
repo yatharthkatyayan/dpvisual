@@ -1,3 +1,9 @@
+.homepage_button:hover {
+  box-shadow: 10px 10px 10px grey;
+  width: 401px;
+  height: 23px;
+  transform: rotate(0.5deg);
+}
 .padder {
   padding-right: 5px;
   padding-left: 5px;
@@ -67,7 +73,7 @@
   font-family: Times;
   width: 400px;
   margin-top: 4px;
-  margin-bottom: 16px;
+  margin-bottom: 25px;
   text-decoration: none;
   background-color: #4caf50;
   color: white;
@@ -75,6 +81,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: width 3s, height 3s, transform 100ms;
 }
 .input_field_size {
   font-family: Times;
@@ -101,7 +108,6 @@
   width: 75px;
   border-radius: 50%;
   border-width: 1px;
-  border-color: blueviolet;
 }
 .row {
   display: inline-block;
