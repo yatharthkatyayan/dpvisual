@@ -1,3 +1,19 @@
+.square {
+  height: 75px;
+  width: 250px;
+  text-align: left;
+  padding-left: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  padding-bottom: 25px;
+}
+.rightgap {
+  margin-right: 50px;
+}
+.problem {
+  text-align: center;
+  font-family: Times;
+}
 .homepage_button:hover {
   box-shadow: 10px 10px 10px grey;
   width: 401px;
@@ -106,8 +122,8 @@
 .coin {
   height: 75px;
   width: 75px;
+
   border-radius: 50%;
-  border-width: 1px;
 }
 .row {
   display: inline-block;

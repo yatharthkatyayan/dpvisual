@@ -177,6 +177,8 @@ class Coins extends Component {
         remover.classList.remove("remove");
         remover = document.getElementById("visualize_button");
         remover.classList.remove("remove");
+        remover = document.getElementById("color_helper");
+        remover.classList.remove("remove");
         let coin_Array = coinMaker_all(x);
         this.setState({ coinArray: coin_Array });
         this.setState({
@@ -195,6 +197,8 @@ class Coins extends Component {
     let remover = document.getElementById("back_button");
     remover.classList.add("remove");
     remover = document.getElementById("visualize_button");
+    remover.classList.add("remove");
+    remover = document.getElementById("color_helper");
     remover.classList.add("remove");
     let x = (
       <div id="coin_input" className="coin_input">
@@ -279,6 +283,29 @@ class Coins extends Component {
 
     return (
       <div>
+        <div className="problem">
+          <p>
+            <h1> PROBLEM STATEMENT :-</h1>
+            <h2>
+              Given an unlimited supply of coins of given denominations, find if
+              it is possible to the desired change(sum) from these coins.
+            </h2>
+          </p>
+        </div>
+        <div className="problem remove" id="color_helper">
+          <div className="coin visited marginer row"></div>
+          <div className="row square rightgap">
+            <h1>= visited</h1>
+          </div>
+          <div className="coin coinreachable marginer row"></div>
+          <div className="row square rightgap">
+            <h1>= reachable</h1>
+          </div>
+          <div className="coin coinunreachable marginer row"></div>
+          <div className="row square rightgap">
+            <h1>= unreachable</h1>
+          </div>
+        </div>
         <div className="next">
           {coinArray.map((idx, valueidx) => {
             const { coin_values, value, id, reachable, isvisited } = idx;
