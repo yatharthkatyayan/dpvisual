@@ -1,3 +1,47 @@
+@keyframes good-coin {
+  0% {
+    transform: scale(0.5);
+    background-color: rgba(195, 0, 255, 0.274);
+    border-radius: 100%;
+  }
+  25% {
+    background-color: rgba(217, 17, 17, 0);
+  }
+  50% {
+    background-color: rgba(252, 7, 211, 0.582);
+  }
+  75% {
+    transform: scale(1.1);
+    background-color: rgba(73, 50, 205, 0.671);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(53, 128, 35);
+  }
+}
+@keyframes bad-coin {
+  0% {
+    transform: scale(0.5);
+    background-color: cyan;
+    border-radius: 100%;
+  }
+  25% {
+    background-color: rgb(252, 81, 147);
+  }
+
+  50% {
+    background-color: rgb(247, 12, 71);
+  }
+  75% {
+    transform: scale(1.1);
+    background-color: rgb(255, 60, 0);
+  }
+  100% {
+    transform: scale(1);
+    background-color: rgb(253, 32, 2);
+  }
+}
 .square {
   height: 75px;
   width: 250px;
@@ -7,8 +51,9 @@
   overflow: hidden;
   padding-bottom: 25px;
 }
+
 .rightgap {
-  margin-right: 50px;
+  margin-right: 5px;
 }
 .problem {
   text-align: center;
@@ -16,9 +61,7 @@
 }
 .homepage_button:hover {
   box-shadow: 10px 10px 10px grey;
-  width: 401px;
-  height: 23px;
-  transform: rotate(0.5deg);
+  transform: rotate(1deg);
 }
 .padder {
   padding-right: 5px;
@@ -122,7 +165,6 @@
 .coin {
   height: 75px;
   width: 75px;
-
   border-radius: 50%;
 }
 .row {
@@ -132,10 +174,14 @@
   background-color: cyan;
 }
 .coinreachable {
-  background-color: green;
+  animation-name: good-coin;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
 }
 .coinunreachable {
-  background-color: red;
+  animation-name: bad-coin;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
 }
 .App {
   text-align: center;

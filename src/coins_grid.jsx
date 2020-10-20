@@ -47,6 +47,14 @@ class Coins extends Component {
   }
   details(idx, coinArray) {
     let x = coinArray[idx];
+    let temp = [];
+    for (let i = 0; i < x.coin_values.length; i++) {
+      temp.push(x.coin_values[i]);
+      if (i != x.coin_values.length - 1) {
+        temp.push(",");
+      }
+    }
+    this.setState({ coin_combo: temp });
     console.log(x.coin_values);
   }
   visualize(coinArray, coin_we_have) {
@@ -279,6 +287,7 @@ class Coins extends Component {
         </div>
       ),
       coin_we_have = [],
+      coin_combo = [],
     } = this.state;
 
     return (
@@ -304,6 +313,13 @@ class Coins extends Component {
           <div className="coin coinunreachable marginer row"></div>
           <div className="row square rightgap">
             <h1>= unreachable</h1>
+          </div>
+          <div className="coin coin-color marginer row"></div>
+          <div className="row square rightgap">
+            <h1>= unchecked</h1>
+          </div>
+          <div>
+            <h1>Possible coin combinational sum = [{this.state.coin_combo}]</h1>
           </div>
         </div>
         <div className="next">
@@ -338,7 +354,7 @@ class Coins extends Component {
                   value={value}
                   reachable={reachable}
                   isvisited={isvisited}
-                  onClick={() => this.details(id)}
+                  onClick={() => this.details(idx.value, coinArray)}
                 >
                   {value}
                 </CoinDiv>
