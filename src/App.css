@@ -42,6 +42,12 @@
     background-color: rgb(253, 32, 2);
   }
 }
+.coinreachable_done {
+  background-color: rgb(53, 128, 35);
+}
+.coinunreachable_done {
+  background-color: rgb(253, 32, 2);
+}
 .square {
   height: 75px;
   width: 250px;

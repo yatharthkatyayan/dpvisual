@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
-class Test1 extends Component {
+class LCS extends Component {
   state = {};
   render() {
     return (
@@ -17,4 +17,4 @@ class Test1 extends Component {
   }
 }
 
-export default Test1;
+export default LCS;

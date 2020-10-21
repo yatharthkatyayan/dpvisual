@@ -12,11 +12,17 @@ class CoinDiv extends Component {
       onClick,
     } = this.props;
     let classes = "coin-color";
-    if (isvisited) {
+    if (isvisited == 1) {
       if (reachable) {
         classes = "coinreachable";
       } else {
         classes = "coinunreachable";
+      }
+    } else if (isvisited == 2) {
+      if (reachable) {
+        classes = "coinreachable_done";
+      } else {
+        classes = "coinunreachable_done";
       }
     }
     return (

@@ -25,7 +25,7 @@ function coin1(value) {
     coin_values: [],
     id: `coin1-${value}`,
     reachable: false,
-    isvisited: false,
+    isvisited: 0,
   };
 }
 function coin2(value) {
@@ -34,7 +34,7 @@ function coin2(value) {
     coin_values: [],
     id: `coin2-${value}`,
     reachable: false,
-    isvisited: false,
+    isvisited: 0,
   };
 }
 class Coins extends Component {
@@ -58,7 +58,7 @@ class Coins extends Component {
     console.log(x.coin_values);
   }
   visualize(coinArray, coin_we_have) {
-    coinArray[0].isvisited = true;
+    coinArray[0].isvisited = 0;
     coinArray[0].reachable = true;
 
     for (let i = 0; i < coinArray.length; i++) {
@@ -69,7 +69,7 @@ class Coins extends Component {
           let x = coinArray[coinArray[i].value - coin_we_have[j].value];
 
           let myvar = setTimeout(() => {
-            x.isvisited = false;
+            x.isvisited = 0;
             this.setState({ coinArray });
           }, 500 * i);
           timeoutArray.push(myvar);
@@ -99,7 +99,7 @@ class Coins extends Component {
           this.setState({ coinArray });
 
           myvar = setTimeout(() => {
-            x.isvisited = true;
+            x.isvisited = 2;
             this.setState({ coinArray });
           }, 500 * i + 500);
           timeoutArray.push(myvar);
@@ -116,7 +116,7 @@ class Coins extends Component {
       }
 
       let myvar = setTimeout(() => {
-        coinArray[i].isvisited = true;
+        coinArray[i].isvisited = 1;
         this.setState({ coinArray });
       }, 500 * i + 600);
       timeoutArray.push(myvar);
