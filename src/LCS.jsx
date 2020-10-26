@@ -5,6 +5,8 @@ import LCSTree from "./LCS_tree";
 let treearray = [];
 let a = "agbvj";
 let b = "gtx";
+let pos = 10;
+let depth = 0;
 function node(i, j) {
   return {
     parent: null,
@@ -20,7 +22,6 @@ function node(i, j) {
 }
 const parent = node(0, 0);
 function fn(i, j, treenode) {
-  treearray.push(`${i} ${j}`);
   if (i == a.length || j == b.length) return 0;
 
   if (a[i] == b[j]) {
@@ -33,13 +34,11 @@ function fn(i, j, treenode) {
 }
 function traverse(xx, yy, treenode) {
   let x = fn(xx, yy, treenode);
-  for (let i = 0; i < treearray.length; i++) {
-    console.log(treearray[i]);
-  }
-  console.log("result", x);
+  traversetree(parent);
 }
 function traversetree(treenode) {
-  console.log(treenode.value);
+  treearray.push(treenode);
+  // console.log(treearray[treearray.length - 1].value);
   if (treenode.left != null) {
     traversetree(treenode.left);
   }
@@ -49,11 +48,60 @@ function traversetree(treenode) {
 }
 class LCS extends Component {
   state = {};
+
+  position_teller(tree, depth) {
+    if (tree.left != null) {
+      this.position_teller(tree.left, depth + 75);
+    }
+    tree.x = pos;
+    tree.y = depth;
+    pos += 20;
+    if (tree.right != null) {
+      this.position_teller(tree.right, depth + 75);
+    }
+  }
+  help() {
+    traverse(0, 0, parent);
+    this.position_teller(parent, depth);
+
+    this.setState({ nodes: treearray });
+  }
   render() {
+    const { nodes = [] } = this.state;
     return (
       <div className="input_item">
-        <button onClick={() => traverse(0, 0, parent)}>try it normal</button>
-        <button onClick={() => traversetree(parent)}>try it treenode</button>
+        <button onClick={() => this.help()}>normal</button>
+        <div className="hope">
+          {nodes.map((node, nodeidx) => {
+            const {
+              parent,
+              id,
+              x,
+              y,
+              left,
+              right,
+              str1_idx,
+              str2_idx,
+              value,
+            } = node;
+            return (
+              <LCSTree
+                key={nodeidx}
+                parent={parent}
+                id={id}
+                x={x}
+                y={y}
+                left={left}
+                right={right}
+                str1_idx={str1_idx}
+                str2_idx={str2_idx}
+                value={value}
+              >
+                {value}
+              </LCSTree>
+            );
+          })}
+        </div>
         <div>
           <Link to="/">
             <button className="create_coin_button">HomePage</button>

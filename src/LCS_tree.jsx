@@ -14,8 +14,14 @@ class LCSTree extends Component {
       right,
       value,
     } = this.props;
+    let pos_style = {
+      marginTop: `${y}px`,
+      marginLeft: `${x}px`,
+    };
     return (
       <div
+        className={`treenode`}
+        style={pos_style}
         parent={parent}
         id={id}
         x={x}
