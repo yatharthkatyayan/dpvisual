@@ -47,15 +47,16 @@ class Coins extends Component {
   }
   details(idx, coinArray) {
     let x = coinArray[idx];
-    let temp = [];
-    for (let i = 0; i < x.coin_values.length; i++) {
-      temp.push(x.coin_values[i]);
-      if (i != x.coin_values.length - 1) {
-        temp.push(",");
+    if (x.isvisited) {
+      let temp = [];
+      for (let i = 0; i < x.coin_values.length; i++) {
+        temp.push(x.coin_values[i]);
+        if (i != x.coin_values.length - 1) {
+          temp.push(",");
+        }
       }
+      this.setState({ coin_combo: temp });
     }
-    this.setState({ coin_combo: temp });
-    console.log(x.coin_values);
   }
   visualize(coinArray, coin_we_have) {
     coinArray[0].isvisited = 0;

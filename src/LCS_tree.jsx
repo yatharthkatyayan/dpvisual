@@ -13,10 +13,11 @@ class LCSTree extends Component {
       left,
       right,
       value,
+      mod,
     } = this.props;
     let pos_style = {
       marginTop: `${y * 60}px`,
-      marginLeft: `${x}px`,
+      marginLeft: `${x * 25}px`,
     };
     return (
       <div
@@ -31,6 +32,7 @@ class LCSTree extends Component {
         str1_idx={str1_idx}
         str2_idx={str2_idx}
         value={value}
+        mod={mod}
       >
         {value}
       </div>

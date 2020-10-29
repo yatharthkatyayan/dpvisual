@@ -4,10 +4,12 @@ import LCSTree from "./LCS_tree";
 
 let treearray = [];
 let nexts = [];
-let a = "agbvj";
-let b = "gtx";
+let offset = [];
+let a = "anjw";
+let b = "gt";
 let pos = 10;
 const parent = node(0, 0);
+let place = 0;
 
 function node(i, j) {
   return {
@@ -20,6 +22,7 @@ function node(i, j) {
     str1_idx: i,
     str2_idx: j,
     value: `${i} ${j}`,
+    mod: 0,
   };
 }
 
@@ -62,6 +65,7 @@ function traverse(xx, yy, treenode) {
 
   for (let i = 0; i <= depth; i++) {
     nexts.push(0);
+    offset.push(0);
   }
 }
 
@@ -101,10 +105,50 @@ class LCS extends Component {
       this.position_teller_2(tree.right, depth + 1);
     }
   }
+  position_teller_3(tree, depth) {
+    if (tree.left) {
+      this.position_teller_3(tree.left, depth + 1);
+    }
+    if (tree.right) {
+      this.position_teller_3(tree.right, depth + 1);
+    }
+    tree.y = depth;
+    if (tree.left == null && tree.right == null) {
+      place = nexts[depth];
+      tree.x = place;
+    } else if (tree.left && tree.right) {
+      place = (tree.left.x + tree.right.x) / 2;
+    } else {
+      if (tree.left) {
+        place = tree.left.x - 1;
+      } else {
+        place = tree.right.x - 1;
+      }
+    }
+    offset[depth] = Math.max(offset[depth], nexts[depth] - place);
+    if (tree.left || tree.right) {
+      tree.x = place + offset[depth];
+    }
+    nexts[depth] += 2;
+    tree.mod = offset[depth];
+  }
+
+  addmod(tree, modsum) {
+    tree.x = tree.x + modsum;
+    modsum += tree.mod;
+    if (tree.left) {
+      this.addmod(tree.left, modsum);
+    }
+    if (tree.right) {
+      this.addmod(tree.right, modsum);
+    }
+  }
   help() {
     traverse(0, 0, parent);
     // this.position_teller_1(parent, 0);
-    this.position_teller_2(parent, 0);
+    // this.position_teller_2(parent, 0);
+    this.position_teller_3(parent, 0);
+    this.addmod(parent, 0);
     this.setState({ nodes: treearray });
   }
 
@@ -125,6 +169,7 @@ class LCS extends Component {
               str1_idx,
               str2_idx,
               value,
+              mod,
             } = node;
             return (
               <LCSTree
@@ -138,6 +183,7 @@ class LCS extends Component {
                 str1_idx={str1_idx}
                 str2_idx={str2_idx}
                 value={value}
+                mod={mod}
               >
                 {value}
               </LCSTree>

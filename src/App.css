@@ -3,7 +3,7 @@
   width: 35px;
   border-radius: 50%;
   background-color: cyan;
-  position: fixed;
+  position: absolute;
 }
 
 /*-------------------------------------------------coin change -----------------------------------------------*/
