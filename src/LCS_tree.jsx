@@ -14,6 +14,7 @@ class LCSTree extends Component {
       right,
       value,
       mod,
+      thread,
     } = this.props;
     let pos_style = {
       marginTop: `${y * 60}px`,
@@ -33,6 +34,7 @@ class LCSTree extends Component {
         str2_idx={str2_idx}
         value={value}
         mod={mod}
+        thread={thread}
       >
         {value}
       </div>

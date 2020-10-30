@@ -23,6 +23,7 @@ function node(i, j) {
     str2_idx: j,
     value: `${i} ${j}`,
     mod: 0,
+    thread: null,
   };
 }
 
@@ -82,7 +83,7 @@ function traversetree(treenode) {
 
 class LCS extends Component {
   state = {};
-
+  /*
   position_teller_1(tree, depth) {
     if (tree.left != null) {
       this.position_teller_1(tree.left, depth + 75);
@@ -132,23 +133,145 @@ class LCS extends Component {
     nexts[depth] += 2;
     tree.mod = offset[depth];
   }
-
-  addmod(tree, modsum) {
-    tree.x = tree.x + modsum;
-    modsum += tree.mod;
-    if (tree.left) {
-      this.addmod(tree.left, modsum);
+*/
+  nextright(tree) {
+    if (tree.thread) {
+      return tree.thread;
     }
-    if (tree.right) {
-      this.addmod(tree.right, modsum);
+    if (tree.left || tree.right) {
+      if (tree.right) {
+        return tree.right;
+      } else {
+        return tree.left;
+      }
+    } else {
+      return null;
     }
   }
+
+  nextleft(tree) {
+    if (tree.thread) {
+      return tree.thread;
+    }
+    if (tree.left || tree.right) {
+      if (tree.left) {
+        return tree.left;
+      } else {
+        return tree.right;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  addmod(tree, modsum = 0) {
+    tree.x = tree.x + modsum;
+    if (tree.left) {
+      this.addmod(tree.left, modsum + tree.mod);
+    }
+    if (tree.right) {
+      this.addmod(tree.right, modsum + tree.mod);
+    }
+    return tree;
+  }
+
+  layout(tree) {
+    return this.addmod(this.setup(tree, 0), 0);
+  }
+
+  setup(tree, depth) {
+    if (tree.left == null && tree.right == null) {
+      tree.x = 0;
+      tree.y = depth;
+      return tree;
+    }
+    if (tree.left == null && tree.right != null) {
+      tree.x = this.setup(tree.right, depth + 1).x;
+      return tree;
+    }
+    if (tree.right == null && tree.left != null) {
+      tree.x = this.setup(tree.left, depth + 1).x;
+      return tree;
+    }
+    let left_tree = this.setup(tree.left, depth + 1);
+    let right_tree = this.setup(tree.right, depth + 1);
+
+    tree.x = this.fix_subtrees(left_tree, right_tree);
+    return tree;
+  }
+
+  fix_subtrees(left_tree, right_tree) {
+    let { li, ri, diff, loffset, roffset, lo, ro } = this.contour(
+      left_tree,
+      right_tree,
+      0,
+      0,
+      0,
+      null,
+      null
+    );
+    diff += 1;
+    diff += (right_tree.x + diff + left_tree.x) % 2;
+    right_tree.mod = diff;
+    right_tree.x += diff;
+
+    if (right_tree.left || right_tree.right) {
+      roffset += diff;
+    }
+    if (ri && !li) {
+      if (lo) {
+        lo.thread = ri;
+        lo.mod = roffset - loffset;
+      }
+    } else if (li && !ri) {
+      if (ro) {
+        ro.thread = li;
+        ro.mod = loffset - roffset;
+      }
+    }
+    return (left_tree.x + right_tree.x) / 2;
+  }
+
+  contour(
+    left_tree,
+    right_tree,
+    maxoffset = 0,
+    loffset = 0,
+    roffset = 0,
+    left_outer = null,
+    right_outer = null
+  ) {
+    let delta = left_tree.x + loffset - (right_tree.x + roffset);
+    if (!maxoffset || delta > maxoffset) {
+      maxoffset = delta;
+    }
+    if (!left_outer) {
+      left_outer = left_tree;
+    }
+    if (!right_outer) {
+      right_outer = right_tree;
+    }
+
+    let lo = this.nextleft(left_outer);
+    let li = this.nextright(left_tree || left_outer);
+    let ri = this.nextleft(right_tree || right_outer);
+    let ro = this.nextright(right_outer);
+
+    if (li && ri) {
+      loffset += left_tree.mod;
+      roffset += right_tree.mod;
+      return this.contour(li, ri, maxoffset, loffset, roffset, lo, ro);
+    }
+    return li, ri, maxoffset, loffset, roffset, left_outer, right_outer;
+  }
+
   help() {
     traverse(0, 0, parent);
-    // this.position_teller_1(parent, 0);
-    // this.position_teller_2(parent, 0);
-    this.position_teller_3(parent, 0);
-    this.addmod(parent, 0);
+    /* this.position_teller_1(parent, 0);
+     this.position_teller_2(parent, 0);
+     this.position_teller_3(parent, 0);
+     this.addmod(parent, 0);  */
+    this.layout(parent);
     this.setState({ nodes: treearray });
   }
 
@@ -170,6 +293,7 @@ class LCS extends Component {
               str2_idx,
               value,
               mod,
+              thread,
             } = node;
             return (
               <LCSTree
@@ -184,6 +308,7 @@ class LCS extends Component {
                 str2_idx={str2_idx}
                 value={value}
                 mod={mod}
+                thread={thread}
               >
                 {value}
               </LCSTree>
