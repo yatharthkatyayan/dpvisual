@@ -5,8 +5,8 @@ import LCSTree from "./LCS_tree";
 let treearray = [];
 let nexts = [];
 let offset = [];
-let a = "anjw";
-let b = "gt";
+let a = "anjg";
+let b = "gtb";
 let pos = 10;
 const parent = node(0, 0);
 let place = 0;
@@ -26,7 +26,7 @@ function node(i, j) {
     thread: null,
   };
 }
-
+/*
 function depth_of_tree(treenode) {
   if (treenode.left == null && treenode.right == null) {
     return 0;
@@ -46,7 +46,7 @@ function depth_of_tree(treenode) {
     }
   }
 }
-
+*/
 function fn(i, j, treenode) {
   if (i == a.length || j == b.length) return 0;
 
@@ -62,12 +62,14 @@ function fn(i, j, treenode) {
 function traverse(xx, yy, treenode) {
   let x = fn(xx, yy, treenode);
   traversetree(parent);
+  /*
   let depth = depth_of_tree(parent);
 
   for (let i = 0; i <= depth; i++) {
     nexts.push(0);
     offset.push(0);
   }
+  */
 }
 
 function traversetree(treenode) {
@@ -166,6 +168,7 @@ class LCS extends Component {
 
   addmod(tree, modsum = 0) {
     tree.x = tree.x + modsum;
+
     if (tree.left) {
       this.addmod(tree.left, modsum + tree.mod);
     }
@@ -186,35 +189,45 @@ class LCS extends Component {
       return tree;
     }
     if (tree.left == null && tree.right != null) {
-      tree.x = this.setup(tree.right, depth + 1).x;
+      let temp_tree = this.setup(tree.right, depth + 1);
+      tree.x = temp_tree.x;
+      tree.y = temp_tree.y;
+      //    console.log("setup 1: ", tree.x); /*-----------------------------------*/
       return tree;
     }
     if (tree.right == null && tree.left != null) {
-      tree.x = this.setup(tree.left, depth + 1).x;
+      let temp_tree = this.setup(tree.left, depth + 1);
+      tree.x = temp_tree.x;
+      tree.y = temp_tree.y;
+      //    console.log("setup 2: ", tree.x); /*-----------------------------------*/
       return tree;
     }
     let left_tree = this.setup(tree.left, depth + 1);
     let right_tree = this.setup(tree.right, depth + 1);
 
     tree.x = this.fix_subtrees(left_tree, right_tree);
+    tree.y = left_tree.y - 1;
+    //  console.log("setup 3: ", tree.x); /*-------------------------------------*/
     return tree;
   }
 
   fix_subtrees(left_tree, right_tree) {
-    let { li, ri, diff, loffset, roffset, lo, ro } = this.contour(
-      left_tree,
-      right_tree,
-      0,
-      0,
-      0,
-      null,
-      null
-    );
+    let hope = this.contour(left_tree, right_tree, 0, 0, 0, null, null);
+    let li = hope.li;
+    let ri = hope.ri;
+    let diff = hope.maxoffset;
+    let loffset = hope.loffset;
+    let roffset = hope.roffset;
+    let lo = hope.left_outer;
+    let ro = hope.right_outer;
+    //  console.log("hope : ", hope);
+    // console.log("contour : ", li, ri, diff, loffset, roffset, lo, ro);
     diff += 1;
     diff += (right_tree.x + diff + left_tree.x) % 2;
     right_tree.mod = diff;
+    //  console.log("fix tree mod 1: ", right_tree.mod); /*-----------------------*/
     right_tree.x += diff;
-
+    //  console.log("fix tree x 1: ", right_tree.x); /*--------------------------*/
     if (right_tree.left || right_tree.right) {
       roffset += diff;
     }
@@ -222,11 +235,13 @@ class LCS extends Component {
       if (lo) {
         lo.thread = ri;
         lo.mod = roffset - loffset;
+        //    console.log("fix tree mod 2: ", lo.mod); /*--------------------------*/
       }
     } else if (li && !ri) {
       if (ro) {
         ro.thread = li;
         ro.mod = loffset - roffset;
+        //    console.log("fix tree mod 2: ", ro.mod); /*--------------------------*/
       }
     }
     return (left_tree.x + right_tree.x) / 2;
@@ -235,13 +250,13 @@ class LCS extends Component {
   contour(
     left_tree,
     right_tree,
-    maxoffset = 0,
-    loffset = 0,
-    roffset = 0,
+    maxoffset,
+    loffset,
+    roffset,
     left_outer = null,
     right_outer = null
   ) {
-    let delta = left_tree.x + loffset - (right_tree.x + roffset);
+    let delta = left_tree.x + loffset - (right_tree.x + roffset) + 1;
     if (!maxoffset || delta > maxoffset) {
       maxoffset = delta;
     }
@@ -252,17 +267,18 @@ class LCS extends Component {
       right_outer = right_tree;
     }
 
-    let lo = this.nextleft(left_outer);
+    let lo = this.nextleft(left_outer || left_tree);
     let li = this.nextright(left_tree || left_outer);
     let ri = this.nextleft(right_tree || right_outer);
-    let ro = this.nextright(right_outer);
+    let ro = this.nextright(right_outer || right_tree);
 
     if (li && ri) {
       loffset += left_tree.mod;
       roffset += right_tree.mod;
       return this.contour(li, ri, maxoffset, loffset, roffset, lo, ro);
     }
-    return li, ri, maxoffset, loffset, roffset, left_outer, right_outer;
+
+    return { li, ri, maxoffset, loffset, roffset, left_outer, right_outer };
   }
 
   help() {
