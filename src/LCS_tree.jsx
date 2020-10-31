@@ -17,8 +17,8 @@ class LCSTree extends Component {
       thread,
     } = this.props;
     let pos_style = {
-      marginTop: `${y * 60}px`,
-      marginLeft: `${x * 25}px`,
+      marginTop: `${y * 45}px`,
+      marginLeft: `${x * 18}px`,
     };
     return (
       <div
