@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+
 class LCSTree extends Component {
   state = {};
   render() {
@@ -16,28 +17,29 @@ class LCSTree extends Component {
       mod,
       thread,
     } = this.props;
-    let pos_style = {
-      marginTop: `${y * 45}px`,
-      marginLeft: `${x * 18}px`,
-    };
+
     return (
-      <div
-        className={`treenode`}
-        style={pos_style}
-        parent={parent}
-        id={id}
-        x={x}
-        y={y}
-        left={left}
-        right={right}
-        str1_idx={str1_idx}
-        str2_idx={str2_idx}
-        value={value}
-        mod={mod}
-        thread={thread}
-      >
-        {value}
-      </div>
+      <g>
+        <circle
+          cx={x * 35 + 100}
+          cy={y * 100 + 100}
+          r="25"
+          fill="yellow"
+          parent={parent}
+          id={id}
+          x={x}
+          y={y}
+          left={left}
+          right={right}
+          str1_idx={str1_idx}
+          str2_idx={str2_idx}
+          value={value}
+          mod={mod}
+          thread={thread}
+        >
+          {value}
+        </circle>
+      </g>
     );
   }
 }

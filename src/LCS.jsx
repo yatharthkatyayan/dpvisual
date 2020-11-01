@@ -200,9 +200,12 @@ class LCS extends Component {
   render() {
     const { nodes = [] } = this.state;
     return (
-      <div className="input_item ">
+      <div>
         <button onClick={() => this.help()}>normal</button>
-        <div className="hope">
+        <Link to="/">
+          <button className="create_coin_button">HomePage</button>
+        </Link>
+        <svg viewBox="0 0 2097.5 1000" className="hope">
           {nodes.map((node, nodeidx) => {
             const {
               parent,
@@ -236,12 +239,7 @@ class LCS extends Component {
               </LCSTree>
             );
           })}
-        </div>
-        <div>
-          <Link to="/">
-            <button className="create_coin_button">HomePage</button>
-          </Link>
-        </div>
+        </svg>
       </div>
     );
   }
