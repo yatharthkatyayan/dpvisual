@@ -1,15 +1,9 @@
 .treenode {
-  height: 35px;
-  width: 35px;
   flex: 1 1 0;
-  border-radius: 50%;
-  background-color: cyan;
-  position: absolute;
-  transform: scale(0.833333);
 }
 .hope {
   flex: 1 1 0;
-  object-fit: fill;
+  background-color: blue;
 }
 /*-------------------------------------------------coin change -----------------------------------------------*/
 @keyframes good-coin {

@@ -21,9 +21,10 @@ class LCSTree extends Component {
     return (
       <g>
         <circle
-          cx={x * 35 + 100}
-          cy={y * 100 + 100}
-          r="25"
+          // className="treenode"
+          cx={x * 85 + 50}
+          cy={y * 150 + 50}
+          r="35"
           fill="yellow"
           parent={parent}
           id={id}

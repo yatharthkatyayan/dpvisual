@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import LCSTree from "./LCS_tree";
 
 let treearray = [];
-let a = "ank";
-let b = "gtbh";
+let a = "amcls";
+let b = "b";
 let pos = 10;
 const parent = node(0, 0);
-let place = 0;
+let x_place = 0;
+let y_place = 0;
 
 function node(i, j) {
   return {
@@ -86,7 +87,8 @@ class LCS extends Component {
 
   addmod(tree, modsum = 0) {
     tree.x = tree.x + modsum;
-
+    x_place = Math.max(x_place, tree.x);
+    y_place = Math.max(y_place, tree.y);
     if (tree.left) {
       this.addmod(tree.left, modsum + tree.mod);
     }
@@ -104,6 +106,7 @@ class LCS extends Component {
     if (tree.left == null && tree.right == null) {
       tree.x = 0;
       tree.y = depth;
+
       return tree;
     }
     if (tree.left == null && tree.right != null) {
@@ -193,53 +196,60 @@ class LCS extends Component {
 
   help() {
     traverse(0, 0, parent);
-    this.layout(parent);
-    this.setState({ nodes: treearray });
-  }
 
+    this.layout(parent);
+    // x_place += 1;
+    // y_place += 1;
+    this.setState({ nodes: treearray });
+    console.log("x_place : ", x_place);
+    console.log("y_place : ", y_place);
+  }
+  //${x_place * 85 + 100} ${y_place * 150 + 100}
   render() {
     const { nodes = [] } = this.state;
     return (
       <div>
         <button onClick={() => this.help()}>normal</button>
+        <div>
+          <svg viewBox={`0 0 ${x_place * 85 + 1000} ${y_place * 150 + 100}`}>
+            {nodes.map((node, nodeidx) => {
+              const {
+                parent,
+                id,
+                x,
+                y,
+                left,
+                right,
+                str1_idx,
+                str2_idx,
+                value,
+                mod,
+                thread,
+              } = node;
+              return (
+                <LCSTree
+                  key={nodeidx}
+                  parent={parent}
+                  id={id}
+                  x={x}
+                  y={y}
+                  left={left}
+                  right={right}
+                  str1_idx={str1_idx}
+                  str2_idx={str2_idx}
+                  value={value}
+                  mod={mod}
+                  thread={thread}
+                >
+                  {value}
+                </LCSTree>
+              );
+            })}
+          </svg>
+        </div>
         <Link to="/">
           <button className="create_coin_button">HomePage</button>
         </Link>
-        <svg viewBox="0 0 2097.5 1000" className="hope">
-          {nodes.map((node, nodeidx) => {
-            const {
-              parent,
-              id,
-              x,
-              y,
-              left,
-              right,
-              str1_idx,
-              str2_idx,
-              value,
-              mod,
-              thread,
-            } = node;
-            return (
-              <LCSTree
-                key={nodeidx}
-                parent={parent}
-                id={id}
-                x={x}
-                y={y}
-                left={left}
-                right={right}
-                str1_idx={str1_idx}
-                str2_idx={str2_idx}
-                value={value}
-                mod={mod}
-                thread={thread}
-              >
-                {value}
-              </LCSTree>
-            );
-          })}
-        </svg>
       </div>
     );
   }
