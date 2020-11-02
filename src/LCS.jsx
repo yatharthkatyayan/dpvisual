@@ -211,7 +211,12 @@ class LCS extends Component {
       <div>
         <button onClick={() => this.help()}>normal</button>
         <div>
-          <svg viewBox={`0 0 ${x_place * 85 + 1000} ${y_place * 150 + 100}`}>
+          <svg
+            className="hope"
+            viewBox={`0 0 ${x_place * 85 + 1000} ${y_place * 150 + 100}`}
+            width="100%"
+            height={`${window.innerHeight - 70}`}
+          >
             {nodes.map((node, nodeidx) => {
               const {
                 parent,
