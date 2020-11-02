@@ -209,15 +209,19 @@ class LCS extends Component {
     return (
       <div>
         <div className="oneliner menu">
-          <button onClick={() => this.help()}>normal</button>
-          <Link to="/">
-            <button className="create_coin_button">HomePage</button>
-          </Link>
+          <div>
+            <button onClick={() => this.help()}>normal</button>
+          </div>
+          <div>
+            <Link to="/">
+              <button className="create_coin_button">HomePage</button>
+            </Link>
+          </div>
         </div>
         <div className="oneliner hope">
           <svg
             width="100%"
-            height={`${window.innerHeight - 70}`}
+            height={`${window.innerHeight}`}
             viewBox={`0 0 ${x_place * 85 + 100} ${y_place * 150 + 100}`}
           >
             {nodes.map((node, nodeidx) => {

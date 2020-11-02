@@ -11,16 +11,20 @@
   white-space: nowrap;
 }
 .oneliner {
-  display: inline-block;
+  float: left;
 }
 .menu {
-  width: 30%;
+  display: inline-block;
+  width: 25%;
+  margin-top: 80px;
+  overflow: scroll;
 }
 .hope {
   flex: 1 1 0;
   background-color: blue;
-  width: 70%;
+  width: 75%;
   height: 100vh;
+  overflow: hidden;
 }
 /*-------------------------------------------------coin change -----------------------------------------------*/
 @keyframes good-coin {
