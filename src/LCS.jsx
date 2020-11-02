@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import LCSTree from "./LCS_tree";
 
 let treearray = [];
-let a = "amcls";
-let b = "b";
+let a = "am";
+let b = "bj";
 let pos = 10;
 const parent = node(0, 0);
 let x_place = 0;
@@ -20,7 +20,7 @@ function node(i, j) {
     right: null,
     str1_idx: i,
     str2_idx: j,
-    value: `${i} ${j}`,
+    value: `${i},${j}`,
     mod: 0,
     thread: null,
   };
@@ -44,7 +44,7 @@ function traverse(xx, yy, treenode) {
 
 function traversetree(treenode) {
   treearray.push(treenode);
-  // console.log(treearray[treearray.length - 1].value);
+
   if (treenode.left != null) {
     traversetree(treenode.left);
   }
@@ -143,7 +143,7 @@ class LCS extends Component {
     let ro = hope.right_outer;
 
     diff += 1;
-    // diff += (right_tree.x + diff + left_tree.x) % 2;
+
     right_tree.mod += diff;
 
     right_tree.x += diff;
@@ -198,24 +198,27 @@ class LCS extends Component {
     traverse(0, 0, parent);
 
     this.layout(parent);
-    // x_place += 1;
-    // y_place += 1;
+
     this.setState({ nodes: treearray });
     console.log("x_place : ", x_place);
     console.log("y_place : ", y_place);
   }
-  //${x_place * 85 + 100} ${y_place * 150 + 100}
+
   render() {
     const { nodes = [] } = this.state;
     return (
       <div>
-        <button onClick={() => this.help()}>normal</button>
-        <div>
+        <div className="oneliner menu">
+          <button onClick={() => this.help()}>normal</button>
+          <Link to="/">
+            <button className="create_coin_button">HomePage</button>
+          </Link>
+        </div>
+        <div className="oneliner hope">
           <svg
-            className="hope"
-            viewBox={`0 0 ${x_place * 85 + 100} ${y_place * 150 + 100}`}
             width="100%"
             height={`${window.innerHeight - 70}`}
+            viewBox={`0 0 ${x_place * 85 + 100} ${y_place * 150 + 100}`}
           >
             {nodes.map((node, nodeidx) => {
               const {
@@ -252,9 +255,6 @@ class LCS extends Component {
             })}
           </svg>
         </div>
-        <Link to="/">
-          <button className="create_coin_button">HomePage</button>
-        </Link>
       </div>
     );
   }

@@ -1,9 +1,26 @@
-.treenode {
-  flex: 1 1 0;
+.treedata {
+  font-size: 40px;
+  font-weight: bold;
+  text-anchor: middle;
+  alignment-baseline: central;
+  transform: scale(0.83333);
+  transform-origin: center center;
+  transform-box: fill-box;
+  font-family: Inter, -apple-system, system-ui, "Helvetica Neue", sans-serif;
+  display: block;
+  white-space: nowrap;
+}
+.oneliner {
+  display: inline-block;
+}
+.menu {
+  width: 30%;
 }
 .hope {
   flex: 1 1 0;
   background-color: blue;
+  width: 70%;
+  height: 100vh;
 }
 /*-------------------------------------------------coin change -----------------------------------------------*/
 @keyframes good-coin {

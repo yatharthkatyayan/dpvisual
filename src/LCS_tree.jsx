@@ -21,11 +21,12 @@ class LCSTree extends Component {
     return (
       <g>
         <circle
-          // className="treenode"
           cx={x * 85 + 50}
           cy={y * 150 + 50}
           r="35"
-          fill="yellow"
+          fill="white"
+          stroke="black"
+          strokeWidth="4px"
           parent={parent}
           id={id}
           x={x}
@@ -37,9 +38,10 @@ class LCSTree extends Component {
           value={value}
           mod={mod}
           thread={thread}
-        >
+        ></circle>
+        <text x={x * 85 + 50} y={y * 150 + 50} className="treedata">
           {value}
-        </circle>
+        </text>
       </g>
     );
   }
