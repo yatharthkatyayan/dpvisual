@@ -213,7 +213,7 @@ class LCS extends Component {
         <div>
           <svg
             className="hope"
-            viewBox={`0 0 ${x_place * 85 + 1000} ${y_place * 150 + 100}`}
+            viewBox={`0 0 ${x_place * 85 + 100} ${y_place * 150 + 100}`}
             width="100%"
             height={`${window.innerHeight - 70}`}
           >
