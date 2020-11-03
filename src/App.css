@@ -1,3 +1,15 @@
+.lcs-visual {
+  margin-top: 80vh;
+  margin-left: 45%;
+  width: max-content;
+  font-family: Times;
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .treedata {
   font-size: 40px;
   font-weight: bold;
@@ -10,16 +22,15 @@
   display: block;
   white-space: nowrap;
 }
-.oneliner {
-  float: left;
-}
+
 .menu {
-  display: inline-block;
+  float: left;
   width: 25%;
-  margin-top: 80px;
   overflow: scroll;
+  height: 100vh;
 }
 .hope {
+  float: right;
   flex: 1 1 0;
   background-color: blue;
   width: 75%;

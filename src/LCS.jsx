@@ -208,9 +208,9 @@ class LCS extends Component {
     const { nodes = [] } = this.state;
     return (
       <div>
-        <div className="oneliner menu">
-          <div>
-            <button onClick={() => this.help()}>normal</button>
+        <div className="menu">
+          <div className="lcs-visual">
+            <div onClick={() => this.help()}>Visualize</div>
           </div>
           <div>
             <Link to="/">
@@ -218,7 +218,7 @@ class LCS extends Component {
             </Link>
           </div>
         </div>
-        <div className="oneliner hope">
+        <div className="hope">
           <svg
             width="100%"
             height={`${window.innerHeight}`}

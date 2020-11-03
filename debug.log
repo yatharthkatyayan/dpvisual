@@ -14,3 +14,5 @@
 [1101/055212.988:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1101/140136.702:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1102/080717.960:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1103/112355.257:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1103/112355.292:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\YATHARTH\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\3f456e74-2763-4a30-bbf2-af9d3365e763: The system cannot find the path specified. (0x3)
