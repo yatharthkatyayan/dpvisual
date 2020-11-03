@@ -21,7 +21,7 @@ class LCSTree extends Component {
     return (
       <g>
         <circle
-          cx={x * 85 + 50}
+          cx={x * 45 + 50}
           cy={y * 150 + 50}
           r="35"
           fill="white"
@@ -39,7 +39,7 @@ class LCSTree extends Component {
           mod={mod}
           thread={thread}
         ></circle>
-        <text x={x * 85 + 50} y={y * 150 + 50} className="treedata">
+        <text x={x * 45 + 50} y={y * 150 + 50} className="treedata">
           {value}
         </text>
       </g>

@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import LCSTree from "./LCS_tree";
 
 let treearray = [];
-let a = "am";
-let b = "bj";
+let str1 = "";
+let str2 = "";
 let pos = 10;
 const parent = node(0, 0);
 let x_place = 0;
@@ -26,9 +26,9 @@ function node(i, j) {
   };
 }
 function fn(i, j, treenode) {
-  if (i == a.length || j == b.length) return 0;
+  if (i == str1.length || j == str2.length) return 0;
 
-  if (a[i] == b[j]) {
+  if (str1[i] == str2[j]) {
     treenode.left = node(i + 1, j + 1);
     return 1 + fn(i + 1, j + 1, treenode.left);
   }
@@ -38,6 +38,10 @@ function fn(i, j, treenode) {
 }
 
 function traverse(xx, yy, treenode) {
+  let temp = document.getElementById("string_1").value;
+  str1 = temp;
+  temp = document.getElementById("string_2").value;
+  str2 = temp;
   let x = fn(xx, yy, treenode);
   traversetree(parent);
 }
@@ -194,11 +198,15 @@ class LCS extends Component {
     return { li, ri, maxoffset, loffset, roffset, left_outer, right_outer };
   }
 
+  clearScreen() {
+    treearray = [];
+    this.setState({ nodes: treearray });
+  }
+
   help() {
+    this.clearScreen();
     traverse(0, 0, parent);
-
     this.layout(parent);
-
     this.setState({ nodes: treearray });
     console.log("x_place : ", x_place);
     console.log("y_place : ", y_place);
@@ -209,8 +217,28 @@ class LCS extends Component {
     return (
       <div>
         <div className="menu">
-          <div className="lcs-visual">
-            <div onClick={() => this.help()}>Visualize</div>
+          <div>
+            <input
+              id="string_1"
+              className="input_lcs"
+              required="true"
+              type="text"
+              placeholder="String 1"
+            />
+          </div>
+          <div>
+            <input
+              id="string_2"
+              className="input_lcs"
+              required="true"
+              type="text"
+              placeholder="String 2"
+            />
+          </div>
+          <div>
+            <button className="lcs-visual" onClick={() => this.help()}>
+              Visualize
+            </button>
           </div>
           <div>
             <Link to="/">
@@ -222,7 +250,7 @@ class LCS extends Component {
           <svg
             width="100%"
             height={`${window.innerHeight}`}
-            viewBox={`0 0 ${x_place * 85 + 100} ${y_place * 150 + 100}`}
+            viewBox={`0 0 ${x_place * 45 + 100} ${y_place * 150 + 100}`}
           >
             {nodes.map((node, nodeidx) => {
               const {
