@@ -250,7 +250,7 @@ class LCS extends Component {
           <div className="padding_style">
             <svg
               className="svg"
-              preserveAspectRatio="none"
+              //  preserveAspectRatio="none"
               //  width={`${window.innerWidth * 0.75 - 20}`}
               //  height={`${window.innerHeight - 20}`}
               viewBox={`0 0 ${x_place * 45 + 100} ${y_place * 150 + 100}`}

@@ -6,6 +6,7 @@
   margin-top: 0.5em;
   opacity: 0.35;
   color: rgb(0, 0, 0);
+  overflow: hidden;
 }
 .svg {
   -webkit-box-flex: 1;
@@ -13,6 +14,7 @@
   border-radius: 0px 0px 8px 8px;
   background-color: rgb(255, 255, 255);
   margin: 0.6em;
+  overflow: hidden;
 }
 .padding_style {
   -webkit-box-flex: 1;
@@ -24,6 +26,7 @@
   box-shadow: rgba(120, 120, 120, 0.05) 10px 10px 50px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .input_lcs {
   margin: 10%;
@@ -68,6 +71,7 @@
 }
 .parent_div {
   display: flex;
+  overflow: hidden;
 }
 .hope {
   -webkit-box-flex: 1;
@@ -76,6 +80,7 @@
   flex-direction: column;
   padding: 0.8em;
   height: 100vh;
+  overflow: hidden;
 }
 /*-------------------------------------------------coin change -----------------------------------------------*/
 @keyframes good-coin {
