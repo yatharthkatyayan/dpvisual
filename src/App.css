@@ -1,3 +1,30 @@
+.footer {
+  font-size: 0.8em;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  text-align: center;
+  margin-top: 0.5em;
+  opacity: 0.35;
+  color: rgb(0, 0, 0);
+}
+.svg {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  border-radius: 0px 0px 8px 8px;
+  background-color: rgb(255, 255, 255);
+  margin: 0.6em;
+}
+.padding_style {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  height: calc(100% - 1.6em);
+  border: 1px solid rgb(236, 236, 236);
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: rgba(120, 120, 120, 0.05) 10px 10px 50px;
+  display: flex;
+  flex-direction: column;
+}
 .input_lcs {
   margin: 10%;
   margin-bottom: 0px;
@@ -35,18 +62,20 @@
 }
 
 .menu {
-  float: left;
-  width: 25%;
-  overflow: scroll;
+  width: 350px;
   height: 100vh;
+  overflow: scroll;
+}
+.parent_div {
+  display: flex;
 }
 .hope {
-  float: right;
-  flex: 1 1;
-  background-color: blue;
-  width: 75%;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0.8em;
   height: 100vh;
-  overflow: hidden;
 }
 /*-------------------------------------------------coin change -----------------------------------------------*/
 @keyframes good-coin {

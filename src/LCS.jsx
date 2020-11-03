@@ -215,13 +215,13 @@ class LCS extends Component {
   render() {
     const { nodes = [] } = this.state;
     return (
-      <div>
+      <div className="parent_div">
         <div className="menu">
           <div>
             <input
               id="string_1"
               className="input_lcs"
-              required="true"
+              required={true}
               type="text"
               placeholder="String 1"
             />
@@ -230,7 +230,7 @@ class LCS extends Component {
             <input
               id="string_2"
               className="input_lcs"
-              required="true"
+              required={true}
               type="text"
               placeholder="String 2"
             />
@@ -247,45 +247,50 @@ class LCS extends Component {
           </div>
         </div>
         <div className="hope">
-          <svg
-            width="100%"
-            height={`${window.innerHeight}`}
-            viewBox={`0 0 ${x_place * 45 + 100} ${y_place * 150 + 100}`}
-          >
-            {nodes.map((node, nodeidx) => {
-              const {
-                parent,
-                id,
-                x,
-                y,
-                left,
-                right,
-                str1_idx,
-                str2_idx,
-                value,
-                mod,
-                thread,
-              } = node;
-              return (
-                <LCSTree
-                  key={nodeidx}
-                  parent={parent}
-                  id={id}
-                  x={x}
-                  y={y}
-                  left={left}
-                  right={right}
-                  str1_idx={str1_idx}
-                  str2_idx={str2_idx}
-                  value={value}
-                  mod={mod}
-                  thread={thread}
-                >
-                  {value}
-                </LCSTree>
-              );
-            })}
-          </svg>
+          <div className="padding_style">
+            <svg
+              className="svg"
+              preserveAspectRatio="none"
+              //  width={`${window.innerWidth * 0.75 - 20}`}
+              //  height={`${window.innerHeight - 20}`}
+              viewBox={`0 0 ${x_place * 45 + 100} ${y_place * 150 + 100}`}
+            >
+              {nodes.map((node, nodeidx) => {
+                const {
+                  parent,
+                  id,
+                  x,
+                  y,
+                  left,
+                  right,
+                  str1_idx,
+                  str2_idx,
+                  value,
+                  mod,
+                  thread,
+                } = node;
+                return (
+                  <LCSTree
+                    key={nodeidx}
+                    parent={parent}
+                    id={id}
+                    x={x}
+                    y={y}
+                    left={left}
+                    right={right}
+                    str1_idx={str1_idx}
+                    str2_idx={str2_idx}
+                    value={value}
+                    mod={mod}
+                    thread={thread}
+                  >
+                    {value}
+                  </LCSTree>
+                );
+              })}
+            </svg>
+          </div>
+          <div className="footer">made by yatharth katyayan</div>
         </div>
       </div>
     );
