@@ -1,3 +1,7 @@
+.font_input {
+  font-family: Menlo, monospace;
+  font-size: 14px;
+}
 .footer {
   font-size: 0.8em;
   -webkit-box-flex: 0;
@@ -39,6 +43,18 @@
   box-sizing: border-box;
   resize: vertical;
 }
+.lcs-homepage {
+  margin-top: 20px;
+  margin-left: 33%;
+  width: max-content;
+  font-family: Times;
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .lcs-visual {
   margin-top: 50vh;
   margin-left: 35%;
@@ -78,9 +94,9 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding: 8px;
-  height: calc(100vh - 16px);
-
+  padding: 0.8em;
+  height: calc(100vh - 1.6em);
+  background-color: rgb(236, 236, 236);
   overflow: hidden;
 }
 /*-------------------------------------------------coin change -----------------------------------------------*/

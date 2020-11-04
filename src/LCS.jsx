@@ -220,7 +220,7 @@ class LCS extends Component {
           <div>
             <input
               id="string_1"
-              className="input_lcs"
+              className="input_lcs font_input"
               required={true}
               type="text"
               placeholder="String 1"
@@ -229,7 +229,7 @@ class LCS extends Component {
           <div>
             <input
               id="string_2"
-              className="input_lcs"
+              className="input_lcs font_input"
               required={true}
               type="text"
               placeholder="String 2"
@@ -242,7 +242,7 @@ class LCS extends Component {
           </div>
           <div>
             <Link to="/">
-              <button className="create_coin_button">HomePage</button>
+              <button className="lcs-homepage">HomePage</button>
             </Link>
           </div>
         </div>
@@ -250,9 +250,6 @@ class LCS extends Component {
           <div className="padding_style">
             <svg
               className="svg"
-              //  preserveAspectRatio="none"
-              //  width={`${window.innerWidth * 0.75 - 20}`}
-              //  height={`${window.innerHeight - 20}`}
               viewBox={`0 0 ${x_place * 45 + 100} ${y_place * 150 + 100}`}
             >
               {nodes.map((node, nodeidx) => {
