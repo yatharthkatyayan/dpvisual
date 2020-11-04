@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import LCSTree from "./LCS_tree";
-
+import LCSEdges from "./lcs_edges";
 let treearray = [];
 let treeEdge = [];
 let str1 = "";
@@ -27,27 +27,54 @@ function node(i, j) {
   };
 }
 
+function edge_1(parent, child) {
+  if (parent.left && parent.right) {
+    if (parent.left === child) {
+      return {
+        x1: parent.x * 45 + 50,
+        y1: parent.y * 150 + 50,
+        x2: child.x * 45 + 50,
+        y2: child.y * 150 + 50,
+      };
+    } else {
+      return {
+        x1: parent.x * 45 + 50,
+        y1: parent.y * 150 + 50,
+        x2: child.x * 45 + 50,
+        y2: child.y * 150 + 50,
+      };
+    }
+  } else {
+    return {
+      x1: parent.x * 45 + 50,
+      y1: parent.y * 150 + 50,
+      x2: child.x * 45 + 50,
+      y2: child.y * 150 + 50,
+    };
+  }
+}
+
 function edge(parent, child) {
   if (parent.left && parent.right) {
     if (parent.left === child) {
       let pi = Math.PI;
-      let p_degree = 225 * (pi / 180);
-      let c_degree = 45 * (pi / 180);
+      let p_degree = 110 * (pi / 180);
+      let c_degree = 290 * (pi / 180);
       return {
-        x1: parent.x + 35 * Math.cos(p_degree),
-        y1: parent.y + 35 * Math.sin(p_degree),
-        x2: child.x + 35 * Math.cos(c_degree),
-        y2: child.y + 35 * Math.sin(c_degree),
+        x1: parent.x * 45 + 50 + 35 * Math.cos(p_degree),
+        y1: parent.y * 150 + 50 + 35 * Math.sin(p_degree),
+        x2: child.x * 45 + 50 + 35 * Math.cos(c_degree),
+        y2: child.y * 150 + 50 + 35 * Math.sin(c_degree),
       };
     } else {
       let pi = Math.PI;
-      let p_degree = 315 * (pi / 180);
-      let c_degree = 135 * (pi / 180);
+      let p_degree = 70 * (pi / 180);
+      let c_degree = 250 * (pi / 180);
       return {
-        x1: parent.x + 35 * Math.cos(p_degree),
-        y1: parent.y + 35 * Math.sin(p_degree),
-        x2: child.x + 35 * Math.cos(c_degree),
-        y2: child.y + 35 * Math.sin(c_degree),
+        x1: parent.x * 45 + 50 + 35 * Math.cos(p_degree),
+        y1: parent.y * 150 + 50 + 35 * Math.sin(p_degree),
+        x2: child.x * 45 + 50 + 35 * Math.cos(c_degree),
+        y2: child.y * 150 + 50 + 35 * Math.sin(c_degree),
       };
     }
   } else {
@@ -55,10 +82,10 @@ function edge(parent, child) {
     let p_degree = 270 * (pi / 180);
     let c_degree = 90 * (pi / 180);
     return {
-      x1: parent.x + 35 * Math.cos(p_degree),
-      y1: parent.y + 35 * Math.sin(p_degree),
-      x2: child.x + 35 * Math.cos(c_degree),
-      y2: child.y + 35 * Math.sin(c_degree),
+      x1: parent.x * 45 + 50 + 35 * Math.cos(p_degree),
+      y1: parent.y * 150 + 50 + 35 * Math.sin(p_degree),
+      x2: child.x * 45 + 50 + 35 * Math.cos(c_degree),
+      y2: child.y * 150 + 50 + 35 * Math.sin(c_degree),
     };
   }
 }
@@ -86,10 +113,20 @@ function traverse(xx, yy, treenode) {
   let x = fn(xx, yy, treenode);
   traversetree(parent);
 }
+/*-------------------------------------------------------------------------------------------------------*/
+function traverseedge(treenode) {
+  if (treenode.parent) treeEdge.push(edge_1(treenode.parent, treenode));
+  if (treenode.left != null) {
+    traverseedge(treenode.left);
+  }
+  if (treenode.right != null) {
+    traverseedge(treenode.right);
+  }
+}
 
 function traversetree(treenode) {
   treearray.push(treenode);
-  if (treenode.parent) treeEdge.push(edge(treenode.parent, treenode));
+
   if (treenode.left != null) {
     traversetree(treenode.left);
   }
@@ -253,6 +290,8 @@ class LCS extends Component {
     traverse(0, 0, parent);
     this.layout(parent);
     this.setState({ nodes: treearray });
+    traverseedge(parent);
+    this.setState({ edges: treeEdge });
     console.log("x_place : ", x_place);
     console.log("y_place : ", y_place);
   }
@@ -328,6 +367,19 @@ class LCS extends Component {
                   >
                     {value}
                   </LCSTree>
+                );
+              })}
+
+              {edges.map((edge, edgeidx) => {
+                const { x1, y1, x2, y2 } = edge;
+                return (
+                  <LCSEdges
+                    key={edgeidx}
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
+                  ></LCSEdges>
                 );
               })}
             </svg>
