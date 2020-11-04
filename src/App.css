@@ -78,8 +78,9 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding: 0.8em;
-  height: 100vh;
+  padding: 8px;
+  height: calc(100vh - 16px);
+
   overflow: hidden;
 }
 /*-------------------------------------------------coin change -----------------------------------------------*/
