@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import LCSTree from "./LCS_tree";
 
 let treearray = [];
-let treeEdges = [];
+let treeEdge = [];
 let str1 = "";
 let str2 = "";
 let pos = 10;
@@ -89,9 +89,7 @@ function traverse(xx, yy, treenode) {
 
 function traversetree(treenode) {
   treearray.push(treenode);
-  if (treenode.parent) {
-    treeEdges.push();
-  }
+  if (treenode.parent) treeEdge.push(edge(treenode.parent, treenode));
   if (treenode.left != null) {
     traversetree(treenode.left);
   }
@@ -243,7 +241,9 @@ class LCS extends Component {
 
   clearScreen() {
     treearray = [];
+    treeEdge = [];
     this.setState({ nodes: treearray });
+    this.setState({ edges: treeEdge });
     x_place = 0;
     y_place = 0;
   }
@@ -258,7 +258,7 @@ class LCS extends Component {
   }
 
   render() {
-    const { nodes = [] } = this.state;
+    const { nodes = [], edges = [] } = this.state;
     return (
       <div className="parent_div">
         <div className="menu">
