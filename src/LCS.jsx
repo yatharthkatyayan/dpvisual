@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import LCSTree from "./LCS_tree";
 
 let treearray = [];
+let treeEdges = [];
 let str1 = "";
 let str2 = "";
 let pos = 10;
@@ -25,15 +26,55 @@ function node(i, j) {
     thread: null,
   };
 }
+
+function edge(parent, child) {
+  if (parent.left && parent.right) {
+    if (parent.left === child) {
+      let pi = Math.PI;
+      let p_degree = 225 * (pi / 180);
+      let c_degree = 45 * (pi / 180);
+      return {
+        x1: parent.x + 35 * Math.cos(p_degree),
+        y1: parent.y + 35 * Math.sin(p_degree),
+        x2: child.x + 35 * Math.cos(c_degree),
+        y2: child.y + 35 * Math.sin(c_degree),
+      };
+    } else {
+      let pi = Math.PI;
+      let p_degree = 315 * (pi / 180);
+      let c_degree = 135 * (pi / 180);
+      return {
+        x1: parent.x + 35 * Math.cos(p_degree),
+        y1: parent.y + 35 * Math.sin(p_degree),
+        x2: child.x + 35 * Math.cos(c_degree),
+        y2: child.y + 35 * Math.sin(c_degree),
+      };
+    }
+  } else {
+    let pi = Math.PI;
+    let p_degree = 270 * (pi / 180);
+    let c_degree = 90 * (pi / 180);
+    return {
+      x1: parent.x + 35 * Math.cos(p_degree),
+      y1: parent.y + 35 * Math.sin(p_degree),
+      x2: child.x + 35 * Math.cos(c_degree),
+      y2: child.y + 35 * Math.sin(c_degree),
+    };
+  }
+}
+
 function fn(i, j, treenode) {
   if (i == str1.length || j == str2.length) return 0;
 
   if (str1[i] == str2[j]) {
     treenode.left = node(i + 1, j + 1);
+    treenode.left.parent = treenode;
     return 1 + fn(i + 1, j + 1, treenode.left);
   }
   treenode.left = node(i, j + 1);
+  treenode.left.parent = treenode;
   treenode.right = node(i + 1, j);
+  treenode.right.parent = treenode;
   return Math.max(fn(i, j + 1, treenode.left), fn(i + 1, j, treenode.right));
 }
 
@@ -48,7 +89,9 @@ function traverse(xx, yy, treenode) {
 
 function traversetree(treenode) {
   treearray.push(treenode);
-
+  if (treenode.parent) {
+    treeEdges.push();
+  }
   if (treenode.left != null) {
     traversetree(treenode.left);
   }
@@ -201,6 +244,8 @@ class LCS extends Component {
   clearScreen() {
     treearray = [];
     this.setState({ nodes: treearray });
+    x_place = 0;
+    y_place = 0;
   }
 
   help() {
