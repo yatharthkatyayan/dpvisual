@@ -289,9 +289,9 @@ class LCS extends Component {
     this.clearScreen();
     traverse(0, 0, parent);
     this.layout(parent);
-    this.setState({ nodes: treearray });
     traverseedge(parent);
     this.setState({ edges: treeEdge });
+    this.setState({ nodes: treearray });
     console.log("x_place : ", x_place);
     console.log("y_place : ", y_place);
   }
