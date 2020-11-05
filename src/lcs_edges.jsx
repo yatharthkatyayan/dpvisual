@@ -30,7 +30,7 @@ class LCSEdges extends Component {
           strokeWidth="5px"
           markerEnd="url(#markerArrow1)"
         ></line>
-        <text x={(x1 + x2) / 2} y={(y1 + y2) / 2}>
+        <text className="lcs_text" x={(x1 + x2) / 2} y={(y1 + y2) / 2}>
           {value}
         </text>
       </g>
