@@ -24,6 +24,7 @@ function node(i, j) {
     value: `${i},${j}`,
     mod: 0,
     thread: null,
+    returned_value: -1,
   };
 }
 
@@ -45,6 +46,7 @@ function edge(parent, child) {
       y1: temp_y1,
       x2: temp_x2,
       y2: temp_y2,
+      value: child.returned_value,
     };
   } else if (parent.x != child.x && parent.right === child) {
     let temp_x2 = -44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
@@ -59,6 +61,7 @@ function edge(parent, child) {
       y1: temp_y1,
       x2: temp_x2,
       y2: temp_y2,
+      value: child.returned_value,
     };
   } else {
     return {
@@ -66,23 +69,35 @@ function edge(parent, child) {
       y1: parent.y * 150 + 50 + 35,
       x2: child.x * 45 + 50,
       y2: child.y * 150 + 50 - 44,
+      value: child.returned_value,
     };
   }
 }
 
 function fn(i, j, treenode) {
-  if (i == str1.length || j == str2.length) return 0;
+  if (i == str1.length || j == str2.length) {
+    treenode.returned_value = 0;
+    return 0;
+  }
 
   if (str1[i] == str2[j]) {
     treenode.left = node(i + 1, j + 1);
     treenode.left.parent = treenode;
-    return 1 + fn(i + 1, j + 1, treenode.left);
+    let temp = 1 + fn(i + 1, j + 1, treenode.left);
+    treenode.returned_value = temp;
+    return temp;
   }
   treenode.left = node(i, j + 1);
   treenode.left.parent = treenode;
   treenode.right = node(i + 1, j);
   treenode.right.parent = treenode;
-  return Math.max(fn(i, j + 1, treenode.left), fn(i + 1, j, treenode.right));
+  let temp1 = fn(i, j + 1, treenode.left);
+  let temp2 = fn(i + 1, j, treenode.right);
+  let temp = Math.max(temp1, temp2);
+  //  treenode.left.returned_value = temp1;
+  //  treenode.right.returned_value = temp2;
+  treenode.returned_value = temp;
+  return temp;
 }
 
 function traverse(xx, yy, treenode) {
@@ -349,7 +364,7 @@ class LCS extends Component {
               })}
 
               {edges.map((edge, edgeidx) => {
-                const { x1, y1, x2, y2 } = edge;
+                const { x1, y1, x2, y2, value } = edge;
                 return (
                   <LCSEdges
                     key={edgeidx}
@@ -357,6 +372,7 @@ class LCS extends Component {
                     y1={y1}
                     x2={x2}
                     y2={y2}
+                    value={value}
                   ></LCSEdges>
                 );
               })}
