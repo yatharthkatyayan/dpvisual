@@ -28,18 +28,32 @@ function node(i, j) {
 }
 
 function edge_1(parent, child) {
-  let slope =
+  let slope = 0;
+  slope =
     (parent.y * 150 + 50 - (child.y * 150 + 50)) /
     (parent.x * 45 + 50 - (child.x * 45 + 50));
-  if (parent.x != child.x) {
-    let temp_x2 = 35 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
+  if (parent.x != child.x && parent.left === child) {
+    let temp_x2 = 44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
     let temp_y2 =
-      (35 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
+      (44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
+    let temp_x1 = -35 / Math.sqrt(1 + slope * slope) + (parent.x * 45 + 50);
+    let temp_y1 =
+      (-35 * slope) / Math.sqrt(1 + slope * slope) + (parent.y * 150 + 50);
+
+    return {
+      x1: temp_x1,
+      y1: temp_y1,
+      x2: temp_x2,
+      y2: temp_y2,
+    };
+  } else if (parent.x != child.x && parent.right === child) {
+    let temp_x2 = -44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
+    let temp_y2 =
+      (-44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
     let temp_x1 = 35 / Math.sqrt(1 + slope * slope) + (parent.x * 45 + 50);
     let temp_y1 =
       (35 * slope) / Math.sqrt(1 + slope * slope) + (parent.y * 150 + 50);
-    console.log(parent.y, child.y);
-    console.log(parent.x, child.x);
+
     return {
       x1: temp_x1,
       y1: temp_y1,
@@ -49,9 +63,9 @@ function edge_1(parent, child) {
   } else {
     return {
       x1: parent.x * 45 + 50,
-      y1: parent.y * 150 + 50 - 35,
+      y1: parent.y * 150 + 50 + 35,
       x2: child.x * 45 + 50,
-      y2: child.y * 150 + 50 + 35,
+      y2: child.y * 150 + 50 - 44,
     };
   }
 }
@@ -294,8 +308,6 @@ class LCS extends Component {
     traverseedge(parent);
     this.setState({ edges: treeEdge });
     this.setState({ nodes: treearray });
-    console.log("x_place : ", x_place);
-    console.log("y_place : ", y_place);
   }
 
   render() {
@@ -338,18 +350,6 @@ class LCS extends Component {
               className="svg"
               viewBox={`0 0 ${x_place * 45 + 100} ${y_place * 150 + 100}`}
             >
-              {edges.map((edge, edgeidx) => {
-                const { x1, y1, x2, y2 } = edge;
-                return (
-                  <LCSEdges
-                    key={edgeidx}
-                    x1={x1}
-                    y1={y1}
-                    x2={x2}
-                    y2={y2}
-                  ></LCSEdges>
-                );
-              })}
               {nodes.map((node, nodeidx) => {
                 const {
                   parent,
@@ -381,6 +381,19 @@ class LCS extends Component {
                   >
                     {value}
                   </LCSTree>
+                );
+              })}
+
+              {edges.map((edge, edgeidx) => {
+                const { x1, y1, x2, y2 } = edge;
+                return (
+                  <LCSEdges
+                    key={edgeidx}
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
+                  ></LCSEdges>
                 );
               })}
             </svg>
