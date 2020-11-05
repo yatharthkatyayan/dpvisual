@@ -27,7 +27,7 @@ function node(i, j) {
   };
 }
 
-function edge_1(parent, child) {
+function edge(parent, child) {
   let slope = 0;
   slope =
     (parent.y * 150 + 50 - (child.y * 150 + 50)) /
@@ -69,43 +69,7 @@ function edge_1(parent, child) {
     };
   }
 }
-/*
-function edge(parent, child) {
-  if (parent.left && parent.right) {
-    if (parent.left === child) {
-      let pi = Math.PI;
-      let p_degree = 110 * (pi / 180);
-      let c_degree = 290 * (pi / 180);
-      return {
-        x1: parent.x * 45 + 50 + 35 * Math.cos(p_degree),
-        y1: parent.y * 150 + 50 + 35 * Math.sin(p_degree),
-        x2: child.x * 45 + 50 + 35 * Math.cos(c_degree),
-        y2: child.y * 150 + 50 + 35 * Math.sin(c_degree),
-      };
-    } else {
-      let pi = Math.PI;
-      let p_degree = 70 * (pi / 180);
-      let c_degree = 250 * (pi / 180);
-      return {
-        x1: parent.x * 45 + 50 + 35 * Math.cos(p_degree),
-        y1: parent.y * 150 + 50 + 35 * Math.sin(p_degree),
-        x2: child.x * 45 + 50 + 35 * Math.cos(c_degree),
-        y2: child.y * 150 + 50 + 35 * Math.sin(c_degree),
-      };
-    }
-  } else {
-    let pi = Math.PI;
-    let p_degree = 270 * (pi / 180);
-    let c_degree = 90 * (pi / 180);
-    return {
-      x1: parent.x * 45 + 50 + 35 * Math.cos(p_degree),
-      y1: parent.y * 150 + 50 + 35 * Math.sin(p_degree),
-      x2: child.x * 45 + 50 + 35 * Math.cos(c_degree),
-      y2: child.y * 150 + 50 + 35 * Math.sin(c_degree),
-    };
-  }
-}
-*/
+
 function fn(i, j, treenode) {
   if (i == str1.length || j == str2.length) return 0;
 
@@ -131,7 +95,7 @@ function traverse(xx, yy, treenode) {
 }
 /*-------------------------------------------------------------------------------------------------------*/
 function traverseedge(treenode) {
-  if (treenode.parent) treeEdge.push(edge_1(treenode.parent, treenode));
+  if (treenode.parent) treeEdge.push(edge(treenode.parent, treenode));
   if (treenode.left != null) {
     traverseedge(treenode.left);
   }
