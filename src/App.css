@@ -1,3 +1,13 @@
+/*---------------------------------------------NAVBAR-------------------------------------------------------*/
+.navbar {
+  max-width: fit-content;
+  background-color: blue;
+  height: 100vh;
+}
+.line {
+  display: flex;
+  flex-direction: row;
+}
 .overlay {
   height: 100%;
   width: 0;
@@ -50,7 +60,7 @@
     right: 35px;
   }
 }
-
+/*---------------------------------------------------LCS------------------------------------------------------------*/
 .font_input {
   font-family: Menlo, monospace;
   font-size: 14px;
@@ -153,6 +163,7 @@
 .parent_div {
   display: flex;
   overflow: hidden;
+  width: 100%;
 }
 .hope {
   -webkit-box-flex: 1;

@@ -9,7 +9,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="line">
         <Router>
           <SideNav />
           <Route path="/problem" exact component={Home}>

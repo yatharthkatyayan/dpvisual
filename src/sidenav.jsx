@@ -13,8 +13,8 @@ class SideNav extends Component {
   }
   render() {
     return (
-      <div className="">
-        <div id="myNav" className="overlay ">
+      <div className="navbar">
+        <div id="myNav" className="overlay">
           <a
             href="javascript:void(0)"
             className="closebtn"
