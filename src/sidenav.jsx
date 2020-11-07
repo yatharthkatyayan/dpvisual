@@ -23,7 +23,7 @@ class SideNav extends Component {
             &times;
           </a>
           <div className="overlay-content">
-            <Link to="/HomePage" onClick={() => this.closeNav()}>
+            <Link to="/" onClick={() => this.closeNav()}>
               <a href="#">HomePage</a>
             </Link>
             <Link to="/info" onClick={() => this.closeNav()}>
@@ -38,8 +38,11 @@ class SideNav extends Component {
           </div>
         </div>
 
-        <div className="fullnav" onClick={() => this.openNav()}>
-          &#9776; open
+        <div
+          style={{ fontSize: "50px", cursor: "pointer" }}
+          onClick={() => this.openNav()}
+        >
+          &#9776;{" "}
         </div>
       </div>
     );

@@ -1,8 +1,10 @@
 /*---------------------------------------------NAVBAR-------------------------------------------------------*/
 .navbar {
   max-width: fit-content;
-  background-color: blue;
+  background-color: rgb(236, 236, 236);
   height: 100vh;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .line {
   display: flex;
@@ -111,7 +113,7 @@
   margin-left: 33%;
   width: max-content;
   font-family: Times;
-  background-color: #4caf50;
+  background-color: gray;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -123,7 +125,7 @@
   margin-left: 35%;
   width: max-content;
   font-family: Times;
-  background-color: #4caf50;
+  background-color: gray;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -245,7 +247,6 @@
 }
 .homepage_button:hover {
   box-shadow: 10px 10px 10px grey;
-  transform: rotate(1deg);
 }
 .padder {
   padding-right: 5px;

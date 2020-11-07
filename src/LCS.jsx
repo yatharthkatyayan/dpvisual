@@ -317,11 +317,6 @@ class LCS extends Component {
               Visualize
             </button>
           </div>
-          <div>
-            <Link to="/">
-              <button className="lcs-homepage">HomePage</button>
-            </Link>
-          </div>
         </div>
         <div className="hope">
           <div className="padding_style">

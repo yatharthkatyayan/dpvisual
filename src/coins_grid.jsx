@@ -233,13 +233,6 @@ class Coins extends Component {
           <button onClick={() => this.setCoin()} className="create_coin_button">
             <b>create coins</b>
           </button>
-          <div className="input_item">
-            <Link to="/">
-              <button className="create_coin_button marginer">
-                <b>HomePage</b>
-              </button>
-            </Link>
-          </div>
         </div>
       </div>
     );
@@ -277,13 +270,6 @@ class Coins extends Component {
             >
               <b> create coins</b>
             </button>
-          </div>
-          <div className="input_item">
-            <Link to="/">
-              <button className="create_coin_button marginer">
-                <b>HomePage</b>
-              </button>
-            </Link>
           </div>
         </div>
       ),
