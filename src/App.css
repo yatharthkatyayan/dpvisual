@@ -1,3 +1,8 @@
+.homepage {
+  align-self: center;
+  margin: auto;
+}
+
 /*---------------------------------------------NAVBAR-------------------------------------------------------*/
 .navbar {
   max-width: fit-content;
