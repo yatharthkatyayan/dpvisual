@@ -22,6 +22,7 @@
   }
 }
 .home_animation {
+  stroke: rgb(0, 0, 0);
   animation-name: homepage;
   animation-duration: 10s;
   animation-iteration-count: 1;
