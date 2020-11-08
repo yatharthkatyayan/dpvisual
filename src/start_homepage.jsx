@@ -1,154 +1,67 @@
 import React, { Component } from "react";
+
 class homepage extends Component {
   state = {};
+
   render() {
     return (
       <div className="homepage_screen">
         <svg viewBox={`0 0 1000 500`} className="">
-          <g className="home_back_animation homepage_text">
-            <text x={100} y={100}>
-              D
-            </text>
-            <text x={200} y={200}>
-              D
-            </text>
-            <text x={300} y={300}>
-              D
-            </text>
-            <text x={400} y={400}>
-              D
-            </text>
-            <text x={500} y={50}>
-              D
-            </text>
-            <text x={600} y={150}>
-              D
-            </text>
-            <text x={700} y={250}>
-              D
-            </text>
-            <text x={800} y={350}>
-              D
-            </text>
-            <text x={900} y={450}>
-              D
-            </text>
-            <text x={150} y={35}>
-              D
-            </text>
-            <text x={250} y={135}>
-              D
-            </text>
-            <text x={350} y={235}>
-              D
-            </text>
-            <text x={450} y={335}>
-              D
-            </text>
-            <text x={550} y={435}>
-              D
-            </text>
-            <text x={650} y={75}>
-              D
-            </text>
-            <text x={750} y={175}>
-              D
-            </text>
-            <text x={850} y={275}>
-              D
-            </text>
-            <text x={950} y={375}>
-              D
-            </text>
-            <text x={25} y={475}>
-              D
-            </text>
-            <text x={45} y={250}>
-              D
-            </text>
-            <text x={250} y={150}>
-              D
-            </text>
-            <text x={350} y={350}>
-              D
-            </text>
-            <text x={450} y={150}>
-              D
-            </text>
-            <text x={550} y={350}>
-              D
-            </text>
-            <text x={650} y={250}>
-              D
-            </text>
-            <text x={750} y={150}>
-              D
-            </text>
-            <text x={850} y={350}>
-              D
-            </text>
-            <text x={950} y={150}>
-              D
-            </text>
-            <text x={500} y={350}>
-              D
-            </text>
-          </g>
           <g className="homepage_text">
-            <text x={0} y={50}>
+            <text x={300} y={200}>
               D
             </text>
-            <text x={200} y={150}>
+            <text x={350} y={200}>
               Y
             </text>
-            <text x={350} y={90}>
+            <text x={400} y={200}>
               N
             </text>
-            <text x={500} y={180}>
+            <text x={450} y={200}>
               A
             </text>
-            <text x={630} y={30}>
+            <text x={500} y={200}>
               M
             </text>
-            <text x={780} y={140}>
+            <text x={550} y={200}>
               I
             </text>
-            <text x={900} y={110}>
+            <text x={600} y={200}>
               C
             </text>
           </g>
           <g className="homepage_text">
-            <text x={15} y={280}>
+            <text x={200} y={280}>
               P
             </text>
-            <text x={100} y={350}>
+            <text x={250} y={280}>
               R
             </text>
-            <text x={230} y={450}>
+            <text x={300} y={280}>
               O
             </text>
-            <text x={360} y={290}>
+            <text x={350} y={280}>
               G
             </text>
-            <text x={440} y={380}>
+            <text x={400} y={280}>
               R
             </text>
-            <text x={510} y={295}>
+            <text x={450} y={280}>
               A
             </text>
-            <text x={640} y={490}>
+            <text x={500} y={280}>
               M
             </text>
-            <text x={740} y={260}>
+            <text x={550} y={280}>
               M
             </text>
-            <text x={810} y={390}>
+            <text x={600} y={280}>
               I
             </text>
-            <text x={915} y={265}>
+            <text x={650} y={280}>
               N
             </text>
-            <text x={990} y={180}>
+            <text x={700} y={280}>
               G
             </text>
           </g>

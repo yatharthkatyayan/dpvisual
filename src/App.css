@@ -1,38 +1,12 @@
-@keyframes homepage {
-  25% {
-    transform: rotate(0deg);
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-.homepage_text {
-  stroke: white;
-  fill: white;
-}
 .homepage_screen {
   -webkit-box-flex: 1;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-
   height: 100vh;
-  background-color: rgb(34, 31, 31);
   overflow: hidden;
 }
 
-.home_back_animation {
-  animation-name: homepage;
-  animation-duration: 4s;
-  animation-delay: 2s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-timing-function: linear;
-  transform: rotate(0deg);
-}
 /*---------------------------------------------NAVBAR-------------------------------------------------------*/
 .navbar {
   max-width: fit-content;
