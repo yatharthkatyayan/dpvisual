@@ -1,3 +1,32 @@
+@keyframes homepage {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.home_animation {
+  animation-name: homepage;
+  animation-duration: 10s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
 .homepage_screen {
   -webkit-box-flex: 1;
   flex-grow: 1;

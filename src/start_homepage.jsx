@@ -7,7 +7,7 @@ class homepage extends Component {
     return (
       <div className="homepage_screen">
         <svg viewBox={`0 0 1000 500`} className="">
-          <g className="homepage_text">
+          <g className="homepage_text home_animation">
             <text x={300} y={200}>
               D
             </text>
@@ -30,7 +30,7 @@ class homepage extends Component {
               C
             </text>
           </g>
-          <g className="homepage_text">
+          <g className="homepage_text home_animation">
             <text x={200} y={280}>
               P
             </text>
