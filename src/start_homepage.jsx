@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-
+/* <link
+  href="https://fonts.googleapis.com/css2?family=Euphoria+Script&display=swap"
+  rel="stylesheet"
+></link>; */
 class homepage extends Component {
   state = {};
 
