@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import Coins from "./coins_grid";
+
 import Home from "./homepage";
 
 ReactDOM.render(

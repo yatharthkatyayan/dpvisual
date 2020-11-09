@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Coins from "./coins_grid";
+import Coins from "./problems/coin-change/coins_grid";
 import SideNav from "./sidenav";
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
 import LCS from "./problems/LCS/LCS";
