@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import CoinDiv from "./coins";
+import CoinDiv from "./problems/coin-change/coins";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
 //let total_coins = 10;
