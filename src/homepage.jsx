@@ -3,7 +3,7 @@ import Coins from "./problems/coin-change/coins_grid";
 import SideNav from "./sidenav";
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
 import LCS from "./problems/LCS/LCS";
-import LIS from "./problems/LIS/lis";
+import LIS from "./problems/LIS/LIS";
 import homepage from "./start_homepage";
 import DpInfo from "./dp_info";
 import ContactUs from "./contactUS";

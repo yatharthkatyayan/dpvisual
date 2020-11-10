@@ -2,7 +2,14 @@ import React, { Component } from "react";
 class LIS extends Component {
   state = {};
   render() {
-    return <h1>lis here</h1>;
+    return (
+      <div className="parent_div">
+        <div className="menu"></div>
+        <div className="hope">
+          <div className="padding_style"></div>
+        </div>
+      </div>
+    );
   }
 }
 
