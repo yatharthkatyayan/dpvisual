@@ -109,7 +109,7 @@ class LIS extends Component {
                     key={nodeidx}
                     value={numbers_array[nodeidx]}
                     x1={nodeidx * 75 + 50}
-                    y1={numbers_array.length * 10}
+                    y1={numbers_array.length * 20}
                     font={font_size}
                   ></LIS_array>
                 );
@@ -120,7 +120,7 @@ class LIS extends Component {
                     key={nodeidx}
                     value={dp_array[nodeidx]}
                     x1={nodeidx * 75 + 50}
-                    y1={numbers.length * 60}
+                    y1={numbers.length * 55}
                     font={font_size}
                   ></LIS_array>
                 );
