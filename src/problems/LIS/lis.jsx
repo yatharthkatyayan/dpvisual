@@ -49,7 +49,6 @@ class LIS extends Component {
       font_size += 1;
       maximum = maximum / 10;
     }
-    console.log("font : ", font_size);
 
     if (font_size <= 3) {
       font_size = 40;
@@ -65,11 +64,14 @@ class LIS extends Component {
   }
   visualize() {
     this.takeValues();
-    this.setState({ numbers_array: numbers });
-    this.setState({ dp_array: DP_array });
+
     if (numbers) {
       let x = this.lis(numbers, numbers.length);
       console.log("ans :", x);
+    }
+    if (numbers) {
+      this.setState({ numbers_array: numbers });
+      this.setState({ dp_array: DP_array });
     }
   }
   render() {
@@ -108,6 +110,17 @@ class LIS extends Component {
                     value={numbers_array[nodeidx]}
                     x1={nodeidx * 75 + 50}
                     y1={numbers_array.length * 10}
+                    font={font_size}
+                  ></LIS_array>
+                );
+              })}
+              {dp_array.map((node, nodeidx) => {
+                return (
+                  <LIS_array
+                    key={nodeidx}
+                    value={dp_array[nodeidx]}
+                    x1={nodeidx * 75 + 50}
+                    y1={numbers.length * 60}
                     font={font_size}
                   ></LIS_array>
                 );
