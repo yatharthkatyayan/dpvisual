@@ -2,7 +2,7 @@ import React, { Component } from "react";
 class LIS_array extends Component {
   state = {};
   render() {
-    const { value, x1, y1 } = this.props;
+    const { value, x1, y1, font } = this.props;
     return (
       <g>
         <rect
@@ -17,9 +17,10 @@ class LIS_array extends Component {
         <text
           x={x1 + 35}
           y={y1 + 35}
-          className="treedata"
-          lengthAdjust="spacing"
-          textLength="70"
+          className="LISdata"
+          fontSize={`${font}px`}
+          //  lengthAdjust="spacingAndGlyphs"
+          //  textLength="70"
         >
           {value}
         </text>

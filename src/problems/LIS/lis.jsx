@@ -4,6 +4,7 @@ import "../../App.css";
 
 let numbers = [];
 let DP_array = [];
+let font_size = 0;
 class LIS extends Component {
   state = {};
 
@@ -31,11 +32,35 @@ class LIS extends Component {
   takeValues() {
     let val = document.getElementById("Input_1").value;
     let number_pattern = /\d+/g;
+    let maximum = -100000000;
     numbers = val.match(number_pattern);
     if (numbers) {
       for (let i = 0; i < numbers.length; i++) {
         numbers[i] = parseInt(numbers[i], 10);
+        if (numbers[i] > maximum) {
+          maximum = numbers[i];
+        }
       }
+    }
+
+    font_size = 0;
+
+    while (maximum >= 1) {
+      font_size += 1;
+      maximum = maximum / 10;
+    }
+    console.log("font : ", font_size);
+
+    if (font_size <= 3) {
+      font_size = 40;
+    } else if (font_size > 3 && font_size <= 4) {
+      font_size = 30;
+    } else if (font_size > 4 && font_size <= 7) {
+      font_size = 20;
+    } else if (font_size > 7 && font_size <= 9) {
+      font_size = 15;
+    } else {
+      font_size = 10;
     }
   }
   visualize() {
@@ -83,6 +108,7 @@ class LIS extends Component {
                     value={numbers_array[nodeidx]}
                     x1={nodeidx * 75 + 50}
                     y1={numbers_array.length * 10}
+                    font={font_size}
                   ></LIS_array>
                 );
               })}

@@ -1,3 +1,17 @@
+/*---------------------------------------------LIS---------------------------------------------------------------*/
+.LISdata {
+  overflow-wrap: break-word;
+  font-weight: bold;
+  text-anchor: middle;
+  alignment-baseline: central;
+  transform: scale(0.83333);
+  transform-origin: center center;
+  transform-box: fill-box;
+  font-family: Inter, -apple-system, system-ui, "Helvetica Neue", sans-serif;
+  display: block;
+  white-space: nowrap;
+}
+/*----------------------------------------------------------HOMEPAGE-------------------------------------------------*/
 @keyframes homepage {
   0% {
     opacity: 0;
