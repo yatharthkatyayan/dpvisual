@@ -1,10 +1,14 @@
 import React, { Component } from "react";
+import LIS_array from "./LIS_array";
+import "../../App.css";
+
 let numbers = [];
+let DP_array = [];
 class LIS extends Component {
   state = {};
 
   lis(arr, n) {
-    let DP_array = [];
+    DP_array = [];
     DP_array.push(1);
     for (let i = 1; i < n; i++) {
       DP_array.push(1);
@@ -36,10 +40,15 @@ class LIS extends Component {
   }
   visualize() {
     this.takeValues();
-    let x = this.lis(numbers, numbers.length);
-    console.log("ans :", x);
+    this.setState({ numbers_array: numbers });
+    this.setState({ dp_array: DP_array });
+    if (numbers) {
+      let x = this.lis(numbers, numbers.length);
+      console.log("ans :", x);
+    }
   }
   render() {
+    const { numbers_array = [], dp_array = [] } = this.state;
     return (
       <div className="parent_div">
         <div className="menu">
@@ -60,7 +69,25 @@ class LIS extends Component {
         </div>
 
         <div className="hope">
-          <div className="padding_style"></div>
+          <div className="padding_style">
+            <svg
+              className="svg"
+              viewBox={`0 0 ${numbers.length * 75 + 100} ${
+                numbers.length * 75 + 100
+              }`}
+            >
+              {numbers_array.map((node, nodeidx) => {
+                return (
+                  <LIS_array
+                    key={nodeidx}
+                    value={numbers_array[nodeidx]}
+                    x1={nodeidx * 75 + 50}
+                    y1={numbers_array.length * 10}
+                  ></LIS_array>
+                );
+              })}
+            </svg>
+          </div>
         </div>
       </div>
     );

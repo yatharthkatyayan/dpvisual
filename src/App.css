@@ -172,6 +172,7 @@
   cursor: pointer;
 }
 .treedata {
+  overflow-wrap: break-word;
   font-size: 40px;
   font-weight: bold;
   text-anchor: middle;
