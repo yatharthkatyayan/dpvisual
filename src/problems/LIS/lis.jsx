@@ -64,7 +64,7 @@ class LIS extends Component {
   }
   visualize() {
     this.takeValues();
-
+    //  document.getElementById("input_text").classList.remove("remove");
     if (numbers) {
       let x = this.lis(numbers, numbers.length);
       console.log("ans :", x);
@@ -100,16 +100,24 @@ class LIS extends Component {
             <svg
               className="svg"
               viewBox={`0 0 ${numbers.length * 75 + 100} ${
-                numbers.length * 75 + 100
+                numbers.length * 75 + 200
               }`}
             >
+              <text
+                id="input_text"
+                x="0"
+                y={numbers_array.length * 20 + 35}
+                className="remove"
+              >
+                INPUT
+              </text>
               {numbers_array.map((node, nodeidx) => {
                 return (
                   <LIS_array
                     key={nodeidx}
                     value={numbers_array[nodeidx]}
-                    x1={nodeidx * 75 + 50}
-                    y1={numbers_array.length * 20}
+                    x1={nodeidx * 75}
+                    y1={numbers_array.length * 25 - 15}
                     font={font_size}
                   ></LIS_array>
                 );
@@ -119,8 +127,8 @@ class LIS extends Component {
                   <LIS_array
                     key={nodeidx}
                     value={dp_array[nodeidx]}
-                    x1={nodeidx * 75 + 50}
-                    y1={numbers.length * 55}
+                    x1={nodeidx * 75}
+                    y1={numbers.length * 65 + 100}
                     font={font_size}
                   ></LIS_array>
                 );
