@@ -4,7 +4,7 @@ import "../../App.css";
 class LCSEdges extends Component {
   state = {};
   render() {
-    const { x1, y1, x2, y2, value = 0 } = this.props;
+    const { x1, y1, x2, y2, value = -1 } = this.props;
 
     return (
       <g>
@@ -30,9 +30,12 @@ class LCSEdges extends Component {
           strokeWidth="5px"
           markerEnd="url(#markerArrow1)"
         ></line>
-        <text className="lcs_text" x={(x1 + x2) / 2} y={(y1 + y2) / 2}>
-          {value}
-        </text>
+        if(value != -1)
+        {
+          <text className="lcs_text" x={(x1 + x2) / 2} y={(y1 + y2) / 2}>
+            {value}
+          </text>
+        }
       </g>
     );
   }

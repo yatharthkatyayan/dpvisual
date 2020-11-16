@@ -4,6 +4,7 @@ import LCSTree from "./LCS_tree";
 import LCSEdges from "./lcs_edges";
 let treearray = [];
 let treeEdge = [];
+let fullrec = [];
 let str1 = "";
 let str2 = "";
 let pos = 10;
@@ -76,8 +77,10 @@ function edge(parent, child) {
 }
 
 function fn(i, j, treenode) {
+  fullrec.push(treenode);
   if (i == str1.length || j == str2.length) {
     treenode.returned_value = 0;
+    fullrec.push(treenode.parent);
     return 0;
   }
 
@@ -86,6 +89,7 @@ function fn(i, j, treenode) {
     treenode.left.parent = treenode;
     let temp = 1 + fn(i + 1, j + 1, treenode.left);
     treenode.returned_value = temp;
+    fullrec.push(treenode.parent);
     return temp;
   }
   treenode.left = node(i, j + 1);
@@ -98,6 +102,7 @@ function fn(i, j, treenode) {
   //  treenode.left.returned_value = temp1;
   //  treenode.right.returned_value = temp2;
   treenode.returned_value = temp;
+  if (treenode.parent) fullrec.push(treenode.parent);
   return temp;
 }
 
@@ -107,11 +112,15 @@ function traverse(xx, yy, treenode) {
   temp = document.getElementById("string_2").value;
   str2 = temp;
   let x = fn(xx, yy, treenode);
-  traversetree(parent);
+  //  traversetree(parent);
 }
 /*-------------------------------------------------------------------------------------------------------*/
 function traverseedge(treenode) {
-  if (treenode.parent) treeEdge.push(edge(treenode.parent, treenode));
+  if (treenode.parent) {
+    let temp = edge(treenode.parent, treenode);
+    treenode.edge = temp;
+    treeEdge.push(temp);
+  }
   if (treenode.left != null) {
     traverseedge(treenode.left);
   }
@@ -275,6 +284,7 @@ class LCS extends Component {
   clearScreen() {
     treearray = [];
     treeEdge = [];
+    fullrec = [];
     this.setState({ nodes: treearray });
     this.setState({ edges: treeEdge });
     x_place = 0;
@@ -285,9 +295,24 @@ class LCS extends Component {
     this.clearScreen();
     traverse(0, 0, parent);
     this.layout(parent);
-    traverseedge(parent);
-    this.setState({ edges: treeEdge });
-    this.setState({ nodes: treearray });
+    this.animate(this.state.nodes);
+    //  traverseedge(parent);
+    //  this.setState({ edges: treeEdge });
+    //  this.setState({ nodes: treearray });
+  }
+
+  animate(nodes) {
+    for (let i = 0; i < fullrec.length - 1; i++) {
+      console.log(fullrec[i]);
+      setTimeout(() => {
+        treearray.push(fullrec[i]);
+        this.setState({ nodes: treearray });
+      }, 500 * i);
+      setTimeout(() => {
+        treeEdge.push(edge(fullrec[i], fullrec[i + 1]));
+        this.setState({ edges: treeEdge });
+      }, 500 * i);
+    }
   }
 
   render() {
