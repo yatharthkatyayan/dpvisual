@@ -385,7 +385,7 @@ class LCS extends Component {
           }
           this.setState({ edges: treeEdge });
         }
-      }, 500 * i);
+      }, 500 * i + 100);
     }
   }
 

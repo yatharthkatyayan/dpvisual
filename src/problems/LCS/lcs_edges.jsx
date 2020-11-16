@@ -22,6 +22,7 @@ class LCSEdges extends Component {
             </marker>
           </defs>
           <line
+            className="circle"
             x1={x1}
             y1={y1}
             x2={x2}
@@ -31,7 +32,7 @@ class LCSEdges extends Component {
             markerEnd="url(#markerArrow1)"
           ></line>
 
-          <text className="lcs_text" x={(x1 + x2) / 2} y={(y1 + y2) / 2}>
+          <text className="lcs_text " x={(x1 + x2) / 2} y={(y1 + y2) / 2}>
             {value}
           </text>
         </g>
@@ -53,6 +54,7 @@ class LCSEdges extends Component {
             </marker>
           </defs>
           <line
+            className="circle"
             x1={x1}
             y1={y1}
             x2={x2}
