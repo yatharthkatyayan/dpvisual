@@ -32,47 +32,106 @@ function node(i, j) {
 
 function edge(parent, child) {
   let slope = 0;
-  slope =
-    (parent.y * 150 + 50 - (child.y * 150 + 50)) /
-    (parent.x * 45 + 50 - (child.x * 45 + 50));
-  if (parent.x != child.x && parent.left === child) {
-    let temp_x2 = 44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
-    let temp_y2 =
-      (44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
-    let temp_x1 = -35 / Math.sqrt(1 + slope * slope) + (parent.x * 45 + 50);
-    let temp_y1 =
-      (-35 * slope) / Math.sqrt(1 + slope * slope) + (parent.y * 150 + 50);
+  if (parent && child) {
+    slope =
+      (parent.y * 150 + 50 - (child.y * 150 + 50)) /
+      (parent.x * 45 + 50 - (child.x * 45 + 50));
+    if (parent.left == child || parent.right == child) {
+      /* parent to child*/
 
-    return {
-      x1: temp_x1,
-      y1: temp_y1,
-      x2: temp_x2,
-      y2: temp_y2,
-      value: child.returned_value,
-    };
-  } else if (parent.x != child.x && parent.right === child) {
-    let temp_x2 = -44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
-    let temp_y2 =
-      (-44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
-    let temp_x1 = 35 / Math.sqrt(1 + slope * slope) + (parent.x * 45 + 50);
-    let temp_y1 =
-      (35 * slope) / Math.sqrt(1 + slope * slope) + (parent.y * 150 + 50);
+      if (parent.x != child.x && parent.left === child) {
+        let temp_x2 = 44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
+        let temp_y2 =
+          (44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
+        let temp_x1 = -35 / Math.sqrt(1 + slope * slope) + (parent.x * 45 + 50);
+        let temp_y1 =
+          (-35 * slope) / Math.sqrt(1 + slope * slope) + (parent.y * 150 + 50);
 
-    return {
-      x1: temp_x1,
-      y1: temp_y1,
-      x2: temp_x2,
-      y2: temp_y2,
-      value: child.returned_value,
-    };
-  } else {
-    return {
-      x1: parent.x * 45 + 50,
-      y1: parent.y * 150 + 50 + 35,
-      x2: child.x * 45 + 50,
-      y2: child.y * 150 + 50 - 44,
-      value: child.returned_value,
-    };
+        return {
+          id: `${temp_x1} ${temp_y1} ${temp_x2} ${temp_y2}`,
+          x1: temp_x1,
+          y1: temp_y1,
+          x2: temp_x2,
+          y2: temp_y2,
+          value: -1,
+        };
+      } else if (parent.x != child.x && parent.right === child) {
+        let temp_x2 = -44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
+        let temp_y2 =
+          (-44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
+        let temp_x1 = 35 / Math.sqrt(1 + slope * slope) + (parent.x * 45 + 50);
+        let temp_y1 =
+          (35 * slope) / Math.sqrt(1 + slope * slope) + (parent.y * 150 + 50);
+
+        return {
+          id: `${temp_x1} ${temp_y1} ${temp_x2} ${temp_y2}`,
+          x1: temp_x1,
+          y1: temp_y1,
+          x2: temp_x2,
+          y2: temp_y2,
+          value: -1,
+        };
+      } else {
+        return {
+          id: `${parent.x * 45 + 50} ${parent.y * 150 + 50 + 35} ${
+            child.x * 45 + 50
+          } ${child.y * 150 + 50 - 44}`,
+          x1: parent.x * 45 + 50,
+          y1: parent.y * 150 + 50 + 35,
+          x2: child.x * 45 + 50,
+          y2: child.y * 150 + 50 - 44,
+          value: -1,
+        };
+      }
+    } else {
+      /* child to parent*/
+
+      if (parent.x != child.x && child.left === parent) {
+        let temp_x2 = -44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
+        let temp_y2 =
+          (-44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
+        let temp_x1 = 35 / Math.sqrt(1 + slope * slope) + (parent.x * 45 + 50);
+        let temp_y1 =
+          (35 * slope) / Math.sqrt(1 + slope * slope) + (parent.y * 150 + 50);
+        //      console.log("child 2 parent 1");
+        return {
+          id: `${temp_x1} ${temp_y1} ${temp_x2} ${temp_y2}`,
+          x1: temp_x1,
+          y1: temp_y1,
+          x2: temp_x2,
+          y2: temp_y2,
+          value: child.returned_value,
+        };
+      } else if (parent.x != child.x && child.right === parent) {
+        let temp_x2 = 44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
+        let temp_y2 =
+          (44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
+        let temp_x1 = -35 / Math.sqrt(1 + slope * slope) + (parent.x * 45 + 50);
+        let temp_y1 =
+          (-35 * slope) / Math.sqrt(1 + slope * slope) + (parent.y * 150 + 50);
+        //      console.log("child 2 parent 2");
+        return {
+          id: `${temp_x1} ${temp_y1} ${temp_x2} ${temp_y2}`,
+          x1: temp_x1,
+          y1: temp_y1,
+          x2: temp_x2,
+          y2: temp_y2,
+          value: child.returned_value,
+        };
+      } else {
+        //     console.log("child 2 parent 3");
+        return {
+          id: `${parent.x * 45 + 50} ${parent.y * 150 + 50 + 35} ${
+            child.x * 45 + 50
+          } ${child.y * 150 + 50 - 44}`,
+          x1: parent.x * 45 + 50,
+          y1: parent.y * 150 + 50 - 35,
+          x2: child.x * 45 + 50,
+          y2: child.y * 150 + 50 + 44,
+          value: child.returned_value,
+        };
+      }
+    }
   }
 }
 
@@ -295,22 +354,40 @@ class LCS extends Component {
     this.clearScreen();
     traverse(0, 0, parent);
     this.layout(parent);
-    this.animate(this.state.nodes);
+    this.animate();
     //  traverseedge(parent);
     //  this.setState({ edges: treeEdge });
     //  this.setState({ nodes: treearray });
   }
 
-  animate(nodes) {
+  animate() {
     for (let i = 0; i < fullrec.length - 1; i++) {
-      console.log(fullrec[i]);
       setTimeout(() => {
         treearray.push(fullrec[i]);
         this.setState({ nodes: treearray });
       }, 500 * i);
       setTimeout(() => {
-        treeEdge.push(edge(fullrec[i], fullrec[i + 1]));
-        this.setState({ edges: treeEdge });
+        if (fullrec[i + 1]) {
+          let edge_new = edge(fullrec[i], fullrec[i + 1]);
+          let temp_id = edge(fullrec[i + 1], fullrec[i]).id;
+          let index = -1;
+          for (let j = 0; j < treeEdge.length; j++) {
+            console.log(treeEdge[j].id, "tree id");
+            console.log(temp_id, "temp id");
+            if (treeEdge[j].id == temp_id) {
+              index = j;
+              break;
+            }
+          }
+
+          if (index == -1) {
+            treeEdge.push(edge_new);
+          } else {
+            treeEdge.splice(index, 1);
+            treeEdge.push(edge_new);
+          }
+          this.setState({ edges: treeEdge });
+        }
       }, 500 * i);
     }
   }
