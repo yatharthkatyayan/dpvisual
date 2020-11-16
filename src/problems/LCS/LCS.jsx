@@ -8,7 +8,7 @@ let fullrec = [];
 let str1 = "";
 let str2 = "";
 let pos = 10;
-const parent = node(0, 0);
+let parent = node(0, 0);
 let x_place = 0;
 let y_place = 0;
 
@@ -343,10 +343,12 @@ class LCS extends Component {
     treearray = [];
     treeEdge = [];
     fullrec = [];
-    this.setState({ nodes: treearray });
-    this.setState({ edges: treeEdge });
     x_place = 0;
     y_place = 0;
+    parent = node(0, 0);
+    console.log("called");
+    this.setState({ nodes: treearray });
+    this.setState({ edges: treeEdge });
   }
 
   help() {
@@ -354,6 +356,8 @@ class LCS extends Component {
     traverse(0, 0, parent);
     this.layout(parent);
     this.animate();
+    console.log(x_place, y_place);
+    console.log(str1, str2);
     //  traverseedge(parent);
     //  this.setState({ edges: treeEdge });
     //  this.setState({ nodes: treearray });
