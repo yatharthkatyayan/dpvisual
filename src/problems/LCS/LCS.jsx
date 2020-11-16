@@ -25,6 +25,7 @@ function node(i, j) {
     mod: 0,
     thread: null,
     returned_value: -1,
+    edge: null,
   };
 }
 
@@ -337,6 +338,7 @@ class LCS extends Component {
                   value,
                   mod,
                   thread,
+                  edge,
                 } = node;
                 return (
                   <LCSTree
@@ -352,6 +354,7 @@ class LCS extends Component {
                     value={value}
                     mod={mod}
                     thread={thread}
+                    edge={edge}
                   >
                     {value}
                   </LCSTree>
