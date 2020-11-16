@@ -100,7 +100,7 @@ function edge(parent, child) {
           y1: temp_y1,
           x2: temp_x2,
           y2: temp_y2,
-          value: child.returned_value,
+          value: parent.returned_value,
         };
       } else if (parent.x != child.x && child.right === parent) {
         let temp_x2 = 44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
@@ -116,7 +116,7 @@ function edge(parent, child) {
           y1: temp_y1,
           x2: temp_x2,
           y2: temp_y2,
-          value: child.returned_value,
+          value: parent.returned_value,
         };
       } else {
         //     console.log("child 2 parent 3");
@@ -128,7 +128,7 @@ function edge(parent, child) {
           y1: parent.y * 150 + 50 - 35,
           x2: child.x * 45 + 50,
           y2: child.y * 150 + 50 + 44,
-          value: child.returned_value,
+          value: parent.returned_value,
         };
       }
     }
@@ -146,8 +146,8 @@ function fn(i, j, treenode) {
   if (str1[i] == str2[j]) {
     treenode.left = node(i + 1, j + 1);
     treenode.left.parent = treenode;
-    let temp = 1 + fn(i + 1, j + 1, treenode.left);
-    treenode.returned_value = temp;
+    treenode.returned_value = fn(i + 1, j + 1, treenode.left);
+    let temp = treenode.returned_value + 1;
     fullrec.push(treenode.parent);
     return temp;
   }
@@ -372,8 +372,6 @@ class LCS extends Component {
           let temp_id = edge(fullrec[i + 1], fullrec[i]).id;
           let index = -1;
           for (let j = 0; j < treeEdge.length; j++) {
-            console.log(treeEdge[j].id, "tree id");
-            console.log(temp_id, "temp id");
             if (treeEdge[j].id == temp_id) {
               index = j;
               break;
