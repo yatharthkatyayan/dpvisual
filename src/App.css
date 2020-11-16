@@ -197,6 +197,7 @@
   font-family: Inter, -apple-system, system-ui, "Helvetica Neue", sans-serif;
   display: block;
   white-space: nowrap;
+  user-select: none;
 }
 .lcs_text {
   font-size: 25px;

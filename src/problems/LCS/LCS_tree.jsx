@@ -17,7 +17,6 @@ class LCSTree extends Component {
       mod,
       thread,
       returned_value,
-      edge,
     } = this.props;
 
     return (
@@ -41,7 +40,6 @@ class LCSTree extends Component {
           mod={mod}
           thread={thread}
           returned_value={returned_value}
-          edge={edge}
         ></circle>
         <text x={x * 45 + 50} y={y * 150 + 50} className="treedata">
           {value}
