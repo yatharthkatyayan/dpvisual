@@ -96,7 +96,7 @@ function edge(parent, child) {
         let temp_x1 = 35 / Math.sqrt(1 + slope * slope) + (parent.x * 45 + 50);
         let temp_y1 =
           (35 * slope) / Math.sqrt(1 + slope * slope) + (parent.y * 150 + 50);
-        //      console.log("child 2 parent 1");
+
         return {
           id: `${temp_x1} ${temp_y1} ${temp_x2} ${temp_y2}`,
           x1: temp_x1,
@@ -113,7 +113,7 @@ function edge(parent, child) {
         let temp_x1 = -35 / Math.sqrt(1 + slope * slope) + (parent.x * 45 + 50);
         let temp_y1 =
           (-35 * slope) / Math.sqrt(1 + slope * slope) + (parent.y * 150 + 50);
-        //      console.log("child 2 parent 2");
+
         return {
           id: `${temp_x1} ${temp_y1} ${temp_x2} ${temp_y2}`,
           x1: temp_x1,
@@ -124,7 +124,6 @@ function edge(parent, child) {
           time: 0,
         };
       } else {
-        //     console.log("child 2 parent 3");
         return {
           id: `${parent.x * 45 + 50} ${parent.y * 150 + 50 + 35} ${
             child.x * 45 + 50
@@ -164,8 +163,7 @@ function fn(i, j, treenode) {
   let temp1 = fn(i, j + 1, treenode.left);
   let temp2 = fn(i + 1, j, treenode.right);
   let temp = Math.max(temp1, temp2);
-  //  treenode.left.returned_value = temp1;
-  //  treenode.right.returned_value = temp2;
+
   treenode.returned_value = temp;
   if (treenode.parent) fullrec.push(treenode.parent);
   return temp;

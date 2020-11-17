@@ -31,7 +31,7 @@ class LIS extends Component {
 
   takeValues() {
     let val = document.getElementById("Input_1").value;
-    let number_pattern = /\d+/g;
+    let number_pattern = /-?\d*\.{0,1}\d+/g;
     let maximum = -100000000;
     numbers = val.match(number_pattern);
     if (numbers) {
