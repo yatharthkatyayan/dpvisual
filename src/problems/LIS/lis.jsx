@@ -7,6 +7,7 @@ let DP_array = [];
 let font_size = 0;
 class LIS extends Component {
   state = {};
+
   setArray(n) {
     DP_array = new Array(n);
     for (let i = 0; i < n; i++) {
@@ -15,24 +16,28 @@ class LIS extends Component {
   }
 
   lis(arr, n) {
-    DP_array[0] = 1;
-    for (let i = 1; i < n; i++) {
-      let maxval = 0;
-      for (let j = 0; j < i; j++) {
-        if (arr[i] > arr[j]) {
-          maxval = Math.max(maxval, DP_array[j]);
+    if (n) {
+      DP_array[0] = 1;
+      for (let i = 1; i < n; i++) {
+        let maxval = 0;
+
+        //    setTimeout(() => {
+        for (let j = 0; j < i; j++) {
+          if (arr[i] > arr[j]) {
+            maxval = Math.max(maxval, DP_array[j]);
+          }
+        }
+        DP_array[i] = maxval + 1;
+        //   }, 0 * i);
+      }
+      let ans = 0;
+      for (let i = 0; i < n; i++) {
+        if (ans < DP_array[i]) {
+          ans = DP_array[i];
         }
       }
-      DP_array[i] = maxval + 1;
+      return ans;
     }
-    let ans = 0;
-    for (let i = 0; i < n; i++) {
-      console.log(DP_array[i]);
-      if (ans < DP_array[i]) {
-        ans = DP_array[i];
-      }
-    }
-    return ans;
   }
 
   takeValues() {
@@ -70,15 +75,16 @@ class LIS extends Component {
   }
   visualize() {
     this.takeValues();
-    //  document.getElementById("input_text").classList.remove("remove");
+    console.log(this.state.numbers_array, numbers);
     if (numbers) {
-      this.setArray(numbers.length);
-      let x = this.lis(numbers, numbers.length);
-      console.log("ans :", x);
-    }
-    if (numbers) {
-      this.setState({ numbers_array: numbers });
+      //  this.setArray(numbers.length);
+      console.log(this.state.numbers_array, numbers);
       this.setState({ dp_array: DP_array });
+      console.log(this.state.numbers_array, numbers);
+      this.setState({ numbers_array: numbers });
+      console.log(this.state.numbers_array, numbers);
+      let x = this.lis(numbers, numbers.length);
+      console.log(this.state.numbers_array, numbers);
     }
   }
   render() {
