@@ -53,6 +53,7 @@ function edge(parent, child) {
           x2: temp_x2,
           y2: temp_y2,
           value: -1,
+          time: 0,
         };
       } else if (parent.x != child.x && parent.right === child) {
         let temp_x2 = -44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
@@ -69,6 +70,7 @@ function edge(parent, child) {
           x2: temp_x2,
           y2: temp_y2,
           value: -1,
+          time: 0,
         };
       } else {
         return {
@@ -80,6 +82,7 @@ function edge(parent, child) {
           x2: child.x * 45 + 50,
           y2: child.y * 150 + 50 - 44,
           value: -1,
+          time: 0,
         };
       }
     } else {
@@ -100,6 +103,7 @@ function edge(parent, child) {
           x2: temp_x2,
           y2: temp_y2,
           value: parent.returned_value,
+          time: 0,
         };
       } else if (parent.x != child.x && child.right === parent) {
         let temp_x2 = 44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
@@ -116,6 +120,7 @@ function edge(parent, child) {
           x2: temp_x2,
           y2: temp_y2,
           value: parent.returned_value,
+          time: 0,
         };
       } else {
         //     console.log("child 2 parent 3");
@@ -128,6 +133,7 @@ function edge(parent, child) {
           x2: child.x * 45 + 50,
           y2: child.y * 150 + 50 + 44,
           value: parent.returned_value,
+          time: 0,
         };
       }
     }
@@ -368,7 +374,8 @@ class LCS extends Component {
       setTimeout(() => {
         treearray.push(fullrec[i]);
         this.setState({ nodes: treearray });
-      }, 500 * i);
+      }, 1000 * i);
+
       setTimeout(() => {
         if (fullrec[i + 1]) {
           let edge_new = edge(fullrec[i], fullrec[i + 1]);
@@ -380,16 +387,33 @@ class LCS extends Component {
               break;
             }
           }
-
+          edge_new.time = i + 2;
           if (index == -1) {
             treeEdge.push(edge_new);
+            this.setState({ edges: treeEdge });
+            let icon1 = document.getElementById(
+              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 1`
+            );
+            let icon2 = document.getElementById(
+              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
+            );
+            if (icon1) icon1.beginElement();
+            if (icon2) icon2.beginElement();
           } else {
             treeEdge.splice(index, 1);
             treeEdge.push(edge_new);
+            this.setState({ edges: treeEdge });
+            let icon1 = document.getElementById(
+              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 1`
+            );
+            let icon2 = document.getElementById(
+              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
+            );
+            icon1.beginElement();
+            icon2.beginElement();
           }
-          this.setState({ edges: treeEdge });
         }
-      }, 500 * i + 100);
+      }, 1000 * i + 100);
     }
   }
 
@@ -463,15 +487,16 @@ class LCS extends Component {
               })}
 
               {edges.map((edge, edgeidx) => {
-                const { x1, y1, x2, y2, value } = edge;
+                const { x1, y1, x2, y2, value, time } = edge;
                 return (
                   <LCSEdges
                     key={edgeidx}
-                    x1={x1}
-                    y1={y1}
-                    x2={x2}
-                    y2={y2}
+                    x_1={x1}
+                    y_1={y1}
+                    x_2={x2}
+                    y_2={y2}
                     value={value}
+                    time={time}
                   ></LCSEdges>
                 );
               })}

@@ -4,7 +4,8 @@ import "../../App.css";
 class LCSEdges extends Component {
   state = {};
   render() {
-    const { x1, y1, x2, y2, value = -1 } = this.props;
+    const { x_1, y_1, x_2, y_2, value = -1, time } = this.props;
+
     if (value != -1) {
       return (
         <g>
@@ -22,17 +23,37 @@ class LCSEdges extends Component {
             </marker>
           </defs>
           <line
-            className="circle"
-            x1={x1}
-            y1={y1}
-            x2={x2}
-            y2={y2}
+            x1={x_1}
+            y1={y_1}
+            x2={x_2}
+            y2={y_2}
             stroke="black"
             strokeWidth="5px"
             markerEnd="url(#markerArrow1)"
-          ></line>
+          >
+            <animate
+              id={`edge ${x_1} ${y_1} ${x_2} ${y_2} 1`}
+              attributeName="x2"
+              from={`${x_1}`}
+              to={`${x_2}`}
+              begin="indefinite"
+              dur="0.2s"
+              repeatCount="1"
+              restart="whenNotActive"
+            />
+            <animate
+              id={`edge ${x_1} ${y_1} ${x_2} ${y_2} 2`}
+              attributeName="y2"
+              from={`${y_1}`}
+              to={`${y_2}`}
+              begin="indefinite"
+              dur="0.2s"
+              repeatCount="1"
+              restart="whenNotActive"
+            />
+          </line>
 
-          <text className="lcs_text " x={(x1 + x2) / 2} y={(y1 + y2) / 2}>
+          <text className="lcs_text " x={(x_1 + x_2) / 2} y={(y_1 + y_2) / 2}>
             {value}
           </text>
         </g>
@@ -54,15 +75,35 @@ class LCSEdges extends Component {
             </marker>
           </defs>
           <line
-            className="circle"
-            x1={x1}
-            y1={y1}
-            x2={x2}
-            y2={y2}
+            x1={x_1}
+            y1={y_1}
+            x2={x_2}
+            y2={y_2}
             stroke="black"
             strokeWidth="5px"
             markerEnd="url(#markerArrow1)"
-          ></line>
+          >
+            <animate
+              id={`edge ${x_1} ${y_1} ${x_2} ${y_2} 1`}
+              attributeName="x2"
+              from={`${x_1}`}
+              to={`${x_2}`}
+              begin="indefinte"
+              dur="0.2s"
+              repeatCount="1"
+              restart="whenNotActive"
+            />
+            <animate
+              id={`edge ${x_1} ${y_1} ${x_2} ${y_2} 2`}
+              attributeName="y2"
+              from={`${y_1}`}
+              to={`${y_2}`}
+              begin="indefinite"
+              dur="0.2s"
+              repeatCount="1"
+              restart="whenNotActive"
+            />
+          </line>
         </g>
       );
     }
