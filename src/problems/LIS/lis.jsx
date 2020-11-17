@@ -7,17 +7,23 @@ let DP_array = [];
 let font_size = 0;
 class LIS extends Component {
   state = {};
+  setArray(n) {
+    DP_array = new Array(n);
+    for (let i = 0; i < n; i++) {
+      DP_array[i] = null;
+    }
+  }
 
   lis(arr, n) {
-    DP_array = [];
-    DP_array.push(1);
+    DP_array[0] = 1;
     for (let i = 1; i < n; i++) {
-      DP_array.push(1);
+      let maxval = 0;
       for (let j = 0; j < i; j++) {
-        if (arr[i] > arr[j] && DP_array[i] < DP_array[j] + 1) {
-          DP_array[i] = DP_array[j] + 1;
+        if (arr[i] > arr[j]) {
+          maxval = Math.max(maxval, DP_array[j]);
         }
       }
+      DP_array[i] = maxval + 1;
     }
     let ans = 0;
     for (let i = 0; i < n; i++) {
@@ -66,6 +72,7 @@ class LIS extends Component {
     this.takeValues();
     //  document.getElementById("input_text").classList.remove("remove");
     if (numbers) {
+      this.setArray(numbers.length);
       let x = this.lis(numbers, numbers.length);
       console.log("ans :", x);
     }
