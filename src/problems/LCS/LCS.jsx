@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import LCSTree from "./LCS_tree";
 import LCSEdges from "./lcs_edges";
+
 let treearray = [];
 let treeEdge = [];
 let fullrec = [];
@@ -180,30 +180,6 @@ function traverse(xx, yy, treenode) {
   //  traversetree(parent);
 }
 /*-------------------------------------------------------------------------------------------------------*/
-function traverseedge(treenode) {
-  if (treenode.parent) {
-    let temp = edge(treenode.parent, treenode);
-    treenode.edge = temp;
-    treeEdge.push(temp);
-  }
-  if (treenode.left != null) {
-    traverseedge(treenode.left);
-  }
-  if (treenode.right != null) {
-    traverseedge(treenode.right);
-  }
-}
-
-function traversetree(treenode) {
-  treearray.push(treenode);
-
-  if (treenode.left != null) {
-    traversetree(treenode.left);
-  }
-  if (treenode.right != null) {
-    traversetree(treenode.right);
-  }
-}
 
 class LCS extends Component {
   state = {};
@@ -361,16 +337,6 @@ class LCS extends Component {
     this.setState({ edges: treeEdge });
   }
 
-  help() {
-    this.clearScreen();
-    traverse(0, 0, parent);
-    this.layout(parent);
-    this.animate();
-    //  traverseedge(parent);
-    //  this.setState({ edges: treeEdge });
-    //  this.setState({ nodes: treearray });
-  }
-
   animate() {
     for (let i = 0; i < fullrec.length - 1; i++) {
       let time1 = setTimeout(() => {
@@ -418,6 +384,16 @@ class LCS extends Component {
       }, 250 * i + 50);
       timeout_array.push(time1);
     }
+  }
+
+  help() {
+    this.clearScreen();
+    traverse(0, 0, parent);
+    this.layout(parent);
+    this.animate();
+    //  traverseedge(parent);
+    //  this.setState({ edges: treeEdge });
+    //  this.setState({ nodes: treearray });
   }
 
   render() {

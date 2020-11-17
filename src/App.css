@@ -116,18 +116,7 @@
   }
 }
 /*---------------------------------------------------LCS------------------------------------------------------------*/
-@keyframes LCS_animation {
-  from {
-    r: 0;
-    font-size: 0;
-  }
-}
-.circle {
-  animation-name: LCS_animation;
-  animation-duration: 0.2s;
-  animation-timing-function: cubic-bezier(0.65, 0, 0.265, 1.55);
-  animation-delay: both;
-}
+
 .font_input {
   font-family: Menlo, monospace;
   font-size: 14px;
