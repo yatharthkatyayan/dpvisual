@@ -13,15 +13,7 @@ class LIS_array extends Component {
           strokeWidth="4px"
           y={y1}
           x={x1}
-        >
-          <animate
-            attributeName="rx"
-            values="0;150;0"
-            begin="click"
-            dur="0.5s"
-            repeatCount="20"
-          />
-        </rect>
+        ></rect>
         <text
           x={x1 + 35}
           y={y1 + 35}

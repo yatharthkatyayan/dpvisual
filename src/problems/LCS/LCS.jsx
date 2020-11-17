@@ -7,6 +7,7 @@ let treeEdge = [];
 let fullrec = [];
 let str1 = "";
 let str2 = "";
+let timeout_array = [];
 let pos = 10;
 let parent = node(0, 0);
 let x_place = 0;
@@ -346,13 +347,16 @@ class LCS extends Component {
   }
 
   clearScreen() {
+    for (let i = 0; i < timeout_array.length; i++) {
+      clearTimeout(timeout_array[i]);
+    }
+    timeout_array = [];
     treearray = [];
     treeEdge = [];
     fullrec = [];
     x_place = 0;
     y_place = 0;
     parent = node(0, 0);
-    console.log("called");
     this.setState({ nodes: treearray });
     this.setState({ edges: treeEdge });
   }
@@ -362,8 +366,6 @@ class LCS extends Component {
     traverse(0, 0, parent);
     this.layout(parent);
     this.animate();
-    console.log(x_place, y_place);
-    console.log(str1, str2);
     //  traverseedge(parent);
     //  this.setState({ edges: treeEdge });
     //  this.setState({ nodes: treearray });
@@ -371,12 +373,12 @@ class LCS extends Component {
 
   animate() {
     for (let i = 0; i < fullrec.length - 1; i++) {
-      setTimeout(() => {
+      let time1 = setTimeout(() => {
         treearray.push(fullrec[i]);
         this.setState({ nodes: treearray });
-      }, 1000 * i);
-
-      setTimeout(() => {
+      }, 250 * i);
+      timeout_array.push(time1);
+      time1 = setTimeout(() => {
         if (fullrec[i + 1]) {
           let edge_new = edge(fullrec[i], fullrec[i + 1]);
           let temp_id = edge(fullrec[i + 1], fullrec[i]).id;
@@ -413,7 +415,8 @@ class LCS extends Component {
             icon2.beginElement();
           }
         }
-      }, 1000 * i + 100);
+      }, 250 * i + 50);
+      timeout_array.push(time1);
     }
   }
 

@@ -37,7 +37,7 @@ class LCSEdges extends Component {
               from={`${x_1}`}
               to={`${x_2}`}
               begin="indefinite"
-              dur="0.2s"
+              dur="0.15s"
               repeatCount="1"
               restart="whenNotActive"
             />
@@ -47,7 +47,7 @@ class LCSEdges extends Component {
               from={`${y_1}`}
               to={`${y_2}`}
               begin="indefinite"
-              dur="0.2s"
+              dur="0.15s"
               repeatCount="1"
               restart="whenNotActive"
             />
@@ -89,7 +89,7 @@ class LCSEdges extends Component {
               from={`${x_1}`}
               to={`${x_2}`}
               begin="indefinte"
-              dur="0.2s"
+              dur="0.15s"
               repeatCount="1"
               restart="whenNotActive"
             />
@@ -99,7 +99,7 @@ class LCSEdges extends Component {
               from={`${y_1}`}
               to={`${y_2}`}
               begin="indefinite"
-              dur="0.2s"
+              dur="0.15s"
               repeatCount="1"
               restart="whenNotActive"
             />
