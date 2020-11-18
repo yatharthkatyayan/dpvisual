@@ -3,41 +3,52 @@ import LIS_array from "./LIS_array";
 import "../../App.css";
 
 let numbers = [];
-let DP_array = [];
 let font_size = 0;
 class LIS extends Component {
   state = {};
 
   setArray(n) {
-    DP_array = new Array(n);
+    let DP_array = new Array(n);
     for (let i = 0; i < n; i++) {
-      DP_array[i] = null;
+      DP_array[i] = this.createobj(null);
     }
+    return DP_array;
   }
 
-  lis(arr, n) {
+  lis(arr, n, DP_array) {
     if (n) {
-      DP_array[0] = 1;
+      DP_array[0].value = 1;
       for (let i = 1; i < n; i++) {
         let maxval = 0;
 
-        //    setTimeout(() => {
         for (let j = 0; j < i; j++) {
-          if (arr[i] > arr[j]) {
-            maxval = Math.max(maxval, DP_array[j]);
+          if (arr[i].value > arr[j].value) {
+            maxval = Math.max(maxval, DP_array[j].value);
           }
+          setTimeout(() => {
+            numbers[j].incheck = true;
+            this.setState({ numbers_array: numbers });
+            DP_array[j].incheck = true;
+            this.setState({ dp_array: DP_array });
+          }, 500 * j);
+          setTimeout(() => {
+            numbers[j].incheck = false;
+            this.setState({ numbers_array: numbers });
+            DP_array[j].incheck = false;
+            this.setState({ dp_array: DP_array });
+          }, 500 * j + 250);
         }
-        DP_array[i] = maxval + 1;
-        //   }, 0 * i);
+        DP_array[i].value = maxval + 1;
       }
-      let ans = 0;
-      for (let i = 0; i < n; i++) {
-        if (ans < DP_array[i]) {
-          ans = DP_array[i];
-        }
-      }
-      return ans;
+      return DP_array;
     }
+  }
+
+  createobj(value) {
+    return {
+      value: value,
+      incheck: false,
+    };
   }
 
   takeValues() {
@@ -51,6 +62,9 @@ class LIS extends Component {
         if (numbers[i] > maximum) {
           maximum = numbers[i];
         }
+      }
+      for (let i = 0; i < numbers.length; i++) {
+        numbers[i] = this.createobj(numbers[i]);
       }
     }
 
@@ -77,14 +91,10 @@ class LIS extends Component {
     this.takeValues();
     console.log(this.state.numbers_array, numbers);
     if (numbers) {
-      //  this.setArray(numbers.length);
-      console.log(this.state.numbers_array, numbers);
-      this.setState({ dp_array: DP_array });
-      console.log(this.state.numbers_array, numbers);
+      let dp = this.setArray(numbers.length);
+      this.setState({ dp_array: dp });
       this.setState({ numbers_array: numbers });
-      console.log(this.state.numbers_array, numbers);
-      let x = this.lis(numbers, numbers.length);
-      console.log(this.state.numbers_array, numbers);
+      let x = this.lis(numbers, numbers.length, dp);
     }
   }
   render() {
@@ -125,21 +135,25 @@ class LIS extends Component {
                 INPUT
               </text>
               {numbers_array.map((node, nodeidx) => {
+                const { value, incheck } = node;
                 return (
                   <LIS_array
                     key={nodeidx}
-                    value={numbers_array[nodeidx]}
+                    value={value}
                     x1={nodeidx * 75}
+                    incheck={incheck}
                     y1={numbers_array.length * 25 - 15}
                     font={font_size}
                   ></LIS_array>
                 );
               })}
               {dp_array.map((node, nodeidx) => {
+                const { value, incheck } = node;
                 return (
                   <LIS_array
                     key={nodeidx}
-                    value={dp_array[nodeidx]}
+                    incheck={incheck}
+                    value={value}
                     x1={nodeidx * 75}
                     y1={numbers.length * 65 + 100}
                     font={font_size}
