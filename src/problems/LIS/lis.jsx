@@ -18,38 +18,45 @@ class LIS extends Component {
   lis(arr, n, DP_array) {
     if (n) {
       let count = 0;
+      let dp = new Array(n);
       DP_array[0].value = 1;
+      dp[0] = 1;
       for (let i = 1; i < n; i++) {
         let maxval = 0;
-        console.log("i");
+      //  console.log("i");
         for (let j = 0; j < i; j++) {
           count++;
 
           setTimeout(() => {
-            console.log(j, -i, "c");
+        //    console.log(j, -i, "c");
             numbers[j].incheck = true;
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = true;
             this.setState({ dp_array: DP_array });
-          }, count * 1500);
+          }, count * 1000);
 
           setTimeout(() => {
-            console.log(j, -i);
+       //     console.log(j, -i);
             numbers[j].incheck = false;
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = false;
             this.setState({ dp_array: DP_array });
-          }, count * 1500 + 500);
+          }, count * 1000 + 500);
 
           if (arr[i].value > arr[j].value) {
-            maxval = Math.max(maxval, DP_array[j].value);
+            maxval = Math.max(maxval, dp[j]);
           }
+        
         }
-
-        setTimeout(() => {
-          DP_array[i].value = maxval + 1;
+      //  console.log("value :",i,maxval+1);
+        dp[i] = maxval+1;
+        setTimeout(()=>{
+          DP_array[i].value = dp[i];
           this.setState({ dp_array: DP_array });
-        }, count * 1500 + 500);
+        },count*1000+500);
+      
+          
+       
       }
       return DP_array;
     }
@@ -106,6 +113,7 @@ class LIS extends Component {
       this.setState({ dp_array: dp });
       this.setState({ numbers_array: numbers });
       let x = this.lis(numbers, numbers.length, dp);
+      this.setState({ dp_array: dp });
     }
   }
   render() {
