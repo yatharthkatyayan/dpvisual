@@ -17,30 +17,39 @@ class LIS extends Component {
 
   lis(arr, n, DP_array) {
     if (n) {
+      let count = 0;
       DP_array[0].value = 1;
       for (let i = 1; i < n; i++) {
         let maxval = 0;
         console.log("i");
         for (let j = 0; j < i; j++) {
+          count++;
+
           setTimeout(() => {
-            console.log(j, -i, "color");
+            console.log(j, -i, "c");
             numbers[j].incheck = true;
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = true;
             this.setState({ dp_array: DP_array });
-          }, (i * n + j) * 500);
+          }, count * 1500);
+
           setTimeout(() => {
             console.log(j, -i);
             numbers[j].incheck = false;
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = false;
             this.setState({ dp_array: DP_array });
-          }, (i * n + j) * 500 + 250);
+          }, count * 1500 + 500);
+
           if (arr[i].value > arr[j].value) {
             maxval = Math.max(maxval, DP_array[j].value);
           }
         }
-        DP_array[i].value = maxval + 1;
+
+        setTimeout(() => {
+          DP_array[i].value = maxval + 1;
+          this.setState({ dp_array: DP_array });
+        }, count * 1500 + 500);
       }
       return DP_array;
     }
