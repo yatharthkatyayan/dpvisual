@@ -20,23 +20,25 @@ class LIS extends Component {
       DP_array[0].value = 1;
       for (let i = 1; i < n; i++) {
         let maxval = 0;
-
+        console.log("i");
         for (let j = 0; j < i; j++) {
-          if (arr[i].value > arr[j].value) {
-            maxval = Math.max(maxval, DP_array[j].value);
-          }
           setTimeout(() => {
+            console.log(j, -i, "color");
             numbers[j].incheck = true;
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = true;
             this.setState({ dp_array: DP_array });
-          }, 500 * j);
+          }, (i * n + j) * 500);
           setTimeout(() => {
+            console.log(j, -i);
             numbers[j].incheck = false;
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = false;
             this.setState({ dp_array: DP_array });
-          }, 500 * j + 250);
+          }, (i * n + j) * 500 + 250);
+          if (arr[i].value > arr[j].value) {
+            maxval = Math.max(maxval, DP_array[j].value);
+          }
         }
         DP_array[i].value = maxval + 1;
       }
@@ -89,7 +91,7 @@ class LIS extends Component {
   }
   visualize() {
     this.takeValues();
-    console.log(this.state.numbers_array, numbers);
+    //  console.log(this.state.numbers_array, numbers);
     if (numbers) {
       let dp = this.setArray(numbers.length);
       this.setState({ dp_array: dp });
