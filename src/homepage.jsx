@@ -7,6 +7,7 @@ import LIS from "./problems/LIS/LIS";
 import homepage from "./start_homepage";
 import DpInfo from "./dp_info";
 import ContactUs from "./contactUS";
+import ED from "./problems/ED/ED";
 
 class Home extends Component {
   state = {};
@@ -32,11 +33,15 @@ class Home extends Component {
                   Longest Increasing Subsequence
                 </div>
               </Link>
+              <Link to="/problem/ED">
+                <div className=" homepage_button">Edit Distance</div>
+              </Link>
             </div>
           </Route>
           <Route path="/problem/LCS" exact component={LCS} />
           <Route path="/problem/coins_change" exact component={Coins} />
           <Route path="/problem/LIS" exact component={LIS} />
+          <Route path="/problem/ED" exact component={ED} />
 
           <Route path="/" exact component={homepage} />
           <Route path="/info" exact component={DpInfo} />
