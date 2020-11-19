@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LIS_array from "./LIS_array";
 import "../../App.css";
+import LIScurve from "./LIS_SVG";
 
 let numbers = [];
 let font_size = 0;
@@ -24,6 +25,11 @@ class LIS extends Component {
       for (let i = 1; i < n; i++) {
         let maxval = 0;
       //  console.log("i");
+      
+      setTimeout(()=>{
+        numbers[i].incheck = true;
+        this.setState({numbers_array : numbers});  
+      },1000*count+ 500);
         for (let j = 0; j < i; j++) {
           count++;
 
@@ -53,6 +59,8 @@ class LIS extends Component {
         setTimeout(()=>{
           DP_array[i].value = dp[i];
           this.setState({ dp_array: DP_array });
+          numbers[i].incheck = false;
+          this.setState({numbers_array : numbers});
         },count*1000+500);
       
           
@@ -117,7 +125,7 @@ class LIS extends Component {
     }
   }
   render() {
-    const { numbers_array = [], dp_array = [] } = this.state;
+    const { numbers_array = [], dp_array = [],svg_array = []} = this.state;
     return (
       <div className="parent_div">
         <div className="menu">
@@ -177,6 +185,14 @@ class LIS extends Component {
                     y1={numbers.length * 65 + 100}
                     font={font_size}
                   ></LIS_array>
+                );
+              })}
+              {svg_array.map((node, nodeidx) => {
+                const { curve } = node;
+                return (
+                  <LIScurve
+                    curve = {curve}
+                  ></LIScurve>
                 );
               })}
             </svg>
