@@ -2,9 +2,21 @@ import React, { Component } from "react";
 class LIScurve extends Component {
   state = {};
   render() {
-    const { curve = undefined } = this.props;
+    const { curve = "", midpx, midpy } = this.props;
     return (
-      <path d={curve} curve={curve} stroke="black" strokeWidth="4px"></path>
+      <g>
+        <path
+          d={curve}
+          stroke="black"
+          strokeWidth="1px"
+          stroke-linecap="round"
+          strokeWidth="4px"
+          fill="transparent"
+        ></path>
+        <text x={midpx} y={midpy} fontSize="4px">
+          0
+        </text>
+      </g>
     );
   }
 }

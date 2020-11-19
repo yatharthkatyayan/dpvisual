@@ -27,7 +27,7 @@ class LIS extends Component {
 
     let theta = Math.atan2(p2y - p1y, p2x - p1x) - Math.PI / 2;
 
-    let offset = 30;
+    let offset = -60;
 
     let c1x = midpx + offset * Math.cos(theta);
     let c1y = midpy + offset * Math.sin(theta);
@@ -35,7 +35,7 @@ class LIS extends Component {
     //  let curve = `M${p1x} ${p1y} Q ${c1x} ${c1y} ${p2x} ${p2y}`;
     let curve =
       "M" + p1x + " " + p1y + " Q " + c1x + " " + c1y + " " + p2x + " " + p2y;
-    return curve;
+    return { curve: curve, midpx: c1x, midpy: c1y };
   }
 
   lis(arr, n, DP_array) {
@@ -61,10 +61,10 @@ class LIS extends Component {
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = true;
             this.setState({ dp_array: DP_array });
-            let curve = this.curveSetter(i, j);
+            let curve_obj = this.curveSetter(i, j);
 
-            temp_curve_array.push(curve);
-            console.log(curve, typeof curve);
+            temp_curve_array.push(curve_obj);
+            console.log(curve_obj.curve);
             this.setState({ svg_array: temp_curve_array });
           }, count * 1000);
 
@@ -73,8 +73,8 @@ class LIS extends Component {
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = false;
             this.setState({ dp_array: DP_array });
-            //   temp_curve_array.pop();
-            //  this.setState({ svg_array: temp_curve_array });
+            temp_curve_array.pop();
+            this.setState({ svg_array: temp_curve_array });
           }, count * 1000 + 500);
 
           if (arr[i].value > arr[j].value) {
@@ -212,8 +212,15 @@ class LIS extends Component {
                 );
               })}
               {svg_array.map((node, nodeidx) => {
-                const { curve } = node;
-                return <LIScurve key={nodeidx} curve={curve}></LIScurve>;
+                const { curve, midpx, midpy } = node;
+                return (
+                  <LIScurve
+                    key={nodeidx}
+                    midpx={midpx}
+                    midpy={midpy}
+                    curve={curve}
+                  ></LIScurve>
+                );
               })}
             </svg>
           </div>
