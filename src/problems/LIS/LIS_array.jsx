@@ -25,7 +25,6 @@ class LIS_array extends Component {
           y={y1 + 35}
           className="LISdata"
           fontSize={`${font}px`}
-          
         >
           {value}
         </text>

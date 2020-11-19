@@ -16,55 +16,79 @@ class LIS extends Component {
     return DP_array;
   }
 
+  curveSetter(i, j) {
+    let p1x = i * 75 + 35;
+    let p1y = numbers.length * 25 - 15 + 35;
+    let p2x = j * 75 + 35;
+    let p2y = p1y;
+
+    let midpx = (p2x + p1x) * 0.5;
+    let midpy = (p2y + p1y) * 0.5;
+
+    let theta = Math.atan2(p2y - p1y, p2x - p1x) - Math.PI / 2;
+
+    let offset = 30;
+
+    let c1x = midpx + offset * Math.cos(theta);
+    let c1y = midpy + offset * Math.sin(theta);
+
+    //  let curve = `M${p1x} ${p1y} Q ${c1x} ${c1y} ${p2x} ${p2y}`;
+    let curve =
+      "M" + p1x + " " + p1y + " Q " + c1x + " " + c1y + " " + p2x + " " + p2y;
+    return curve;
+  }
+
   lis(arr, n, DP_array) {
     if (n) {
       let count = 0;
       let dp = new Array(n);
       DP_array[0].value = 1;
       dp[0] = 1;
+      let temp_curve_array = [];
       for (let i = 1; i < n; i++) {
         let maxval = 0;
-      //  console.log("i");
-      
-      setTimeout(()=>{
-        numbers[i].incheck = true;
-        this.setState({numbers_array : numbers});  
-      },1000*count+ 500);
+
+        setTimeout(() => {
+          numbers[i].incheck = true;
+          this.setState({ numbers_array: numbers });
+        }, 1000 * count + 500);
+
         for (let j = 0; j < i; j++) {
           count++;
 
           setTimeout(() => {
-        //    console.log(j, -i, "c");
             numbers[j].incheck = true;
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = true;
             this.setState({ dp_array: DP_array });
+            let curve = this.curveSetter(i, j);
+
+            temp_curve_array.push(curve);
+            console.log(curve, typeof curve);
+            this.setState({ svg_array: temp_curve_array });
           }, count * 1000);
 
           setTimeout(() => {
-       //     console.log(j, -i);
             numbers[j].incheck = false;
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = false;
             this.setState({ dp_array: DP_array });
+            //   temp_curve_array.pop();
+            //  this.setState({ svg_array: temp_curve_array });
           }, count * 1000 + 500);
 
           if (arr[i].value > arr[j].value) {
             maxval = Math.max(maxval, dp[j]);
           }
-        
         }
-      //  console.log("value :",i,maxval+1);
-        dp[i] = maxval+1;
-        setTimeout(()=>{
+
+        dp[i] = maxval + 1;
+        setTimeout(() => {
           DP_array[i].value = dp[i];
           this.setState({ dp_array: DP_array });
           numbers[i].incheck = false;
-          this.setState({numbers_array : numbers});
-        },count*1000+500);
-      
-          
-       
+          this.setState({ numbers_array: numbers });
+        }, count * 1000 + 500);
       }
       return DP_array;
     }
@@ -125,7 +149,7 @@ class LIS extends Component {
     }
   }
   render() {
-    const { numbers_array = [], dp_array = [],svg_array = []} = this.state;
+    const { numbers_array = [], dp_array = [], svg_array = [] } = this.state;
     return (
       <div className="parent_div">
         <div className="menu">
@@ -189,11 +213,7 @@ class LIS extends Component {
               })}
               {svg_array.map((node, nodeidx) => {
                 const { curve } = node;
-                return (
-                  <LIScurve
-                    curve = {curve}
-                  ></LIScurve>
-                );
+                return <LIScurve key={nodeidx} curve={curve}></LIScurve>;
               })}
             </svg>
           </div>
