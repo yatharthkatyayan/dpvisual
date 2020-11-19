@@ -18,7 +18,7 @@ class LIS extends Component {
 
   curveSetter(i, j) {
     let p1x = i * 75 + 35;
-    let p1y = numbers.length * 25 - 15 + 35;
+    let p1y = numbers.length * 25 - 15;
     let p2x = j * 75 + 35;
     let p2y = p1y;
 
