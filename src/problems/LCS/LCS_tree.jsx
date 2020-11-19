@@ -17,15 +17,21 @@ class LCSTree extends Component {
       mod,
       thread,
       returned_value,
+      calculated,
     } = this.props;
-
+    let color_back = "white";
+    let color_text = "black";
+    if (calculated) {
+      color_back = "black";
+      color_text = "white";
+    }
     return (
       <g>
         <circle
           cx={x * 45 + 50}
           cy={y * 150 + 50}
           r="35"
-          fill="white"
+          fill={color_back}
           stroke="black"
           strokeWidth="5px"
           parent={parent}
@@ -40,8 +46,14 @@ class LCSTree extends Component {
           mod={mod}
           thread={thread}
           returned_value={returned_value}
+          calculated={calculated}
         ></circle>
-        <text x={x * 45 + 50} y={y * 150 + 50} className="treedata">
+        <text
+          x={x * 45 + 50}
+          y={y * 150 + 50}
+          fill={color_text}
+          className="treedata"
+        >
           {value}
         </text>
       </g>
