@@ -18,7 +18,7 @@ class LIS extends Component {
 
   curveSetter(i, j) {
     let p1x = i * 75 + 35;
-    let p1y = numbers.length * 25 - 15;
+    let p1y = numbers.length * 25 - 15 + 75;
     let p2x = j * 75 + 35;
     let p2y = p1y;
 
@@ -26,16 +26,20 @@ class LIS extends Component {
     let midpy = (p2y + p1y) * 0.5;
 
     let theta = Math.atan2(p2y - p1y, p2x - p1x) - Math.PI / 2;
-
-    let offset = -60;
+    let offset = 60;
 
     let c1x = midpx + offset * Math.cos(theta);
     let c1y = midpy + offset * Math.sin(theta);
-
     //  let curve = `M${p1x} ${p1y} Q ${c1x} ${c1y} ${p2x} ${p2y}`;
     let curve =
       "M" + p1x + " " + p1y + " Q " + c1x + " " + c1y + " " + p2x + " " + p2y;
-    return { curve: curve, midpx: c1x, midpy: c1y };
+    let comp = 0;
+    if (numbers[i].value > numbers[j].value) {
+      comp = 1;
+    } else if (numbers[i].value < numbers[j].value) {
+      comp = -1;
+    }
+    return { curve: curve, midpx: c1x, midpy: c1y, comp: comp };
   }
 
   lis(arr, n, DP_array) {
@@ -65,6 +69,7 @@ class LIS extends Component {
 
             temp_curve_array.push(curve_obj);
             console.log(curve_obj.curve);
+            console.log("comp :", curve_obj.comp);
             this.setState({ svg_array: temp_curve_array });
           }, count * 1000);
 
@@ -212,13 +217,15 @@ class LIS extends Component {
                 );
               })}
               {svg_array.map((node, nodeidx) => {
-                const { curve, midpx, midpy } = node;
+                const { curve, midpx, midpy, comp } = node;
                 return (
                   <LIScurve
                     key={nodeidx}
                     midpx={midpx}
                     midpy={midpy}
                     curve={curve}
+                    font={font_size}
+                    check={comp}
                   ></LIScurve>
                 );
               })}

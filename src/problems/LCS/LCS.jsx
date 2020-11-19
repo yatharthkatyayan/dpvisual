@@ -151,8 +151,8 @@ function fn(i, j, treenode) {
   if (str1[i] == str2[j]) {
     treenode.left = node(i + 1, j + 1);
     treenode.left.parent = treenode;
-    treenode.returned_value = fn(i + 1, j + 1, treenode.left);
-    let temp = treenode.returned_value + 1;
+    treenode.returned_value = 1 + fn(i + 1, j + 1, treenode.left);
+    let temp = treenode.returned_value;
     fullrec.push(treenode.parent);
     return temp;
   }
