@@ -9,7 +9,7 @@ let str1 = "";
 let str2 = "";
 let timeout_array = [];
 let pos = 10;
-let parent = node(0, 0);
+
 let x_place = 0;
 let y_place = 0;
 
@@ -154,17 +154,17 @@ function fn(i, j, treenode, dp) {
     fullrec.push(treenode.parent);
     return i;
   }
-  if (dp[i][j] != -1) {
+  if (dp[i - 1][j - 1] != -1) {
     fullrec.push(treenode.parent);
     treenode.returned_value = dp[i][j];
     treenode.calculated = true;
-    return dp[i][j];
+    return dp[i - 1][j - 1];
   }
   if (str1[i - 1] == str2[j - 1]) {
     treenode.left = node(i - 1, j - 1);
     treenode.left.parent = treenode;
     treenode.returned_value = fn(i - 1, j - 1, treenode.left, dp);
-    dp[i][j] = treenode.returned_value;
+    dp[i - 1][j - 1] = treenode.returned_value;
     let temp = treenode.returned_value;
     fullrec.push(treenode.parent);
     return temp;
@@ -180,26 +180,29 @@ function fn(i, j, treenode, dp) {
   let temp3 = fn(i - 1, j - 1, treenode.right, dp);
   let temp = 1 + Math.min(Math.min(temp1, temp2), temp3);
   treenode.returned_value = temp;
-  dp[i][j] = treenode.returned_value;
+  dp[i - 1][j - 1] = treenode.returned_value;
   if (treenode.parent) fullrec.push(treenode.parent);
   return temp;
 }
 
-function traverse(xx, yy, treenode) {
-  let temp = document.getElementById("string_1").value;
-  str1 = temp;
-  temp = document.getElementById("string_2").value;
-  str2 = temp;
-  let dp = new Array(str1.length)
-    .fill(-1)
-    .map(() => new Array(str2.length).fill(-1));
-  let x = fn(str1.length, str2.length, treenode, dp);
-  //  traversetree(parent);
-}
 /*-------------------------------------------------------------------------------------------------------*/
 
 class ED extends Component {
   state = {};
+  traverse(xx, yy) {
+    let temp = document.getElementById("string_1").value;
+    str1 = temp;
+    temp = document.getElementById("string_2").value;
+    str2 = temp;
+    let parent = node(str1.length, str2.length);
+    let dp = new Array(str1.length)
+      .fill(-1)
+      .map(() => new Array(str2.length).fill(-1));
+    let x = fn(str1.length, str2.length, parent, dp);
+    this.layout(parent);
+    //  traversetree(parent);
+  }
+
   nextright(tree) {
     if (tree.thread) {
       return tree.thread;
@@ -300,7 +303,7 @@ class ED extends Component {
       let right_tree = this.setup(tree.middle, depth + 1);
       tree.x = this.fix_subtrees(left_tree, right_tree);
       left_tree = this.setup(tree.right, depth + 1);
-      tree.x = this.fix_subtrees(left_tree, right_tree);
+      tree.x = this.fix_subtrees(right_tree, left_tree);
       tree.x = (tree.left.x + tree.right.x) / 2;
       tree.y = left_tree.y - 1;
     }
@@ -379,7 +382,7 @@ class ED extends Component {
     fullrec = [];
     x_place = 0;
     y_place = 0;
-    parent = node(0, 0);
+    //    parent = node(0, 0);
     this.setState({ nodes: treearray });
     this.setState({ edges: treeEdge });
   }
@@ -391,6 +394,7 @@ class ED extends Component {
         this.setState({ nodes: treearray });
       }, 250 * i);
       timeout_array.push(time1);
+      /*
       time1 = setTimeout(() => {
         if (fullrec[i + 1]) {
           let edge_new = edge(fullrec[i], fullrec[i + 1]);
@@ -430,13 +434,14 @@ class ED extends Component {
         }
       }, 250 * i + 50);
       timeout_array.push(time1);
+      */
     }
   }
 
   help() {
     this.clearScreen();
-    traverse(0, 0, parent);
-    this.layout(parent);
+    this.traverse(0, 0);
+    //  this.layout(parent);
     this.animate();
 
     //   console.log(dp);
