@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/dpvisual/static/css/main.9971ec4e.chunk.css",
-    "main.js": "/dpvisual/static/js/main.48ecee28.chunk.js",
-    "main.js.map": "/dpvisual/static/js/main.48ecee28.chunk.js.map",
+    "main.js": "/dpvisual/static/js/main.d00f3cb0.chunk.js",
+    "main.js.map": "/dpvisual/static/js/main.d00f3cb0.chunk.js.map",
     "runtime-main.js": "/dpvisual/static/js/runtime-main.267b6403.js",
     "runtime-main.js.map": "/dpvisual/static/js/runtime-main.267b6403.js.map",
     "static/js/2.40a5ed79.chunk.js": "/dpvisual/static/js/2.40a5ed79.chunk.js",
     "static/js/2.40a5ed79.chunk.js.map": "/dpvisual/static/js/2.40a5ed79.chunk.js.map",
     "index.html": "/dpvisual/index.html",
-    "precache-manifest.313d313ff528d6631d7c9cb7c4e6b4c1.js": "/dpvisual/precache-manifest.313d313ff528d6631d7c9cb7c4e6b4c1.js",
+    "precache-manifest.8b2b17733b73d669ce3b909414599281.js": "/dpvisual/precache-manifest.8b2b17733b73d669ce3b909414599281.js",
     "service-worker.js": "/dpvisual/service-worker.js",
     "static/css/main.9971ec4e.chunk.css.map": "/dpvisual/static/css/main.9971ec4e.chunk.css.map",
     "static/js/2.40a5ed79.chunk.js.LICENSE.txt": "/dpvisual/static/js/2.40a5ed79.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.267b6403.js",
     "static/js/2.40a5ed79.chunk.js",
     "static/css/main.9971ec4e.chunk.css",
-    "static/js/main.48ecee28.chunk.js"
+    "static/js/main.d00f3cb0.chunk.js"
   ]
 }
