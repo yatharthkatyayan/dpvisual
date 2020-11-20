@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import LCSTree from "../LCS/LCS_tree";
-import LCSEdges from "../LCS/lcs_edges";
+import EDTree from "./ED_tree";
+import EDEdges from "./ED_edges";
 
 let treearray = [];
 let treeEdge = [];
@@ -21,6 +21,7 @@ function node(i, j) {
     y: 0,
     left: null,
     right: null,
+    middle: null,
     str1_idx: i,
     str2_idx: j,
     value: `${i},${j}`,
@@ -143,10 +144,15 @@ function edge(parent, child) {
 
 function fn(i, j, treenode, dp) {
   fullrec.push(treenode);
-  if (i == str1.length || j == str2.length) {
-    treenode.returned_value = 0;
+  if (i == 0) {
+    treenode.returned_value = j;
     fullrec.push(treenode.parent);
-    return 0;
+    return j;
+  }
+  if (j == 0) {
+    treenode.returned_value = i;
+    fullrec.push(treenode.parent);
+    return i;
   }
   if (dp[i][j] != -1) {
     fullrec.push(treenode.parent);
@@ -154,22 +160,25 @@ function fn(i, j, treenode, dp) {
     treenode.calculated = true;
     return dp[i][j];
   }
-  if (str1[i] == str2[j]) {
-    treenode.left = node(i + 1, j + 1);
+  if (str1[i - 1] == str2[j - 1]) {
+    treenode.left = node(i - 1, j - 1);
     treenode.left.parent = treenode;
-    treenode.returned_value = 1 + fn(i + 1, j + 1, treenode.left, dp);
+    treenode.returned_value = fn(i - 1, j - 1, treenode.left, dp);
     dp[i][j] = treenode.returned_value;
     let temp = treenode.returned_value;
     fullrec.push(treenode.parent);
     return temp;
   }
-  treenode.left = node(i, j + 1);
+  treenode.left = node(i, j - 1);
   treenode.left.parent = treenode;
-  treenode.right = node(i + 1, j);
+  treenode.middle = node(i - 1, j);
+  treenode.middle.parent = treenode;
+  treenode.right = node(i - 1, j - 1);
   treenode.right.parent = treenode;
-  let temp1 = fn(i, j + 1, treenode.left, dp);
-  let temp2 = fn(i + 1, j, treenode.right, dp);
-  let temp = Math.max(temp1, temp2);
+  let temp1 = fn(i, j - 1, treenode.left, dp);
+  let temp2 = fn(i - 1, j, treenode.middle, dp);
+  let temp3 = fn(i - 1, j - 1, treenode.right, dp);
+  let temp = 1 + Math.min(Math.min(temp1, temp2), temp3);
   treenode.returned_value = temp;
   dp[i][j] = treenode.returned_value;
   if (treenode.parent) fullrec.push(treenode.parent);
@@ -184,7 +193,7 @@ function traverse(xx, yy, treenode) {
   let dp = new Array(str1.length)
     .fill(-1)
     .map(() => new Array(str2.length).fill(-1));
-  let x = fn(xx, yy, treenode, dp);
+  let x = fn(str1.length, str2.length, treenode, dp);
   //  traversetree(parent);
 }
 /*-------------------------------------------------------------------------------------------------------*/
@@ -449,6 +458,7 @@ class ED extends Component {
                   y,
                   left,
                   right,
+                  middle,
                   str1_idx,
                   str2_idx,
                   value,
@@ -457,7 +467,7 @@ class ED extends Component {
                   calculated,
                 } = node;
                 return (
-                  <LCSTree
+                  <EDTree
                     key={nodeidx}
                     parent={parent}
                     id={id}
@@ -465,6 +475,7 @@ class ED extends Component {
                     y={y}
                     left={left}
                     right={right}
+                    middle={middle}
                     str1_idx={str1_idx}
                     str2_idx={str2_idx}
                     value={value}
@@ -473,14 +484,14 @@ class ED extends Component {
                     calculated={calculated}
                   >
                     {value}
-                  </LCSTree>
+                  </EDTree>
                 );
               })}
 
               {edges.map((edge, edgeidx) => {
                 const { x1, y1, x2, y2, value, time } = edge;
                 return (
-                  <LCSEdges
+                  <EDEdges
                     key={edgeidx}
                     x_1={x1}
                     y_1={y1}
@@ -488,7 +499,7 @@ class ED extends Component {
                     y_2={y2}
                     value={value}
                     time={time}
-                  ></LCSEdges>
+                  ></EDEdges>
                 );
               })}
             </svg>

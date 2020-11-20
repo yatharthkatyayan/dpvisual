@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import LCSTree from "./LCS_tree";
-import LCSEdges from "./lcs_edges";
+import LCSTree from "../LCS/LCS_tree";
+import LCSEdges from "../LCS/lcs_edges";
 
 let treearray = [];
 let treeEdge = [];
@@ -27,6 +27,7 @@ function node(i, j) {
     mod: 0,
     thread: null,
     returned_value: -1,
+    calculated: false,
   };
 }
 
@@ -140,18 +141,24 @@ function edge(parent, child) {
   }
 }
 
-function fn(i, j, treenode) {
+function fn(i, j, treenode, dp) {
   fullrec.push(treenode);
   if (i == str1.length || j == str2.length) {
     treenode.returned_value = 0;
     fullrec.push(treenode.parent);
     return 0;
   }
-
+  if (dp[i][j] != -1) {
+    fullrec.push(treenode.parent);
+    treenode.returned_value = dp[i][j];
+    treenode.calculated = true;
+    return dp[i][j];
+  }
   if (str1[i] == str2[j]) {
     treenode.left = node(i + 1, j + 1);
     treenode.left.parent = treenode;
-    treenode.returned_value = 1 + fn(i + 1, j + 1, treenode.left);
+    treenode.returned_value = 1 + fn(i + 1, j + 1, treenode.left, dp);
+    dp[i][j] = treenode.returned_value;
     let temp = treenode.returned_value;
     fullrec.push(treenode.parent);
     return temp;
@@ -160,11 +167,11 @@ function fn(i, j, treenode) {
   treenode.left.parent = treenode;
   treenode.right = node(i + 1, j);
   treenode.right.parent = treenode;
-  let temp1 = fn(i, j + 1, treenode.left);
-  let temp2 = fn(i + 1, j, treenode.right);
+  let temp1 = fn(i, j + 1, treenode.left, dp);
+  let temp2 = fn(i + 1, j, treenode.right, dp);
   let temp = Math.max(temp1, temp2);
-
   treenode.returned_value = temp;
+  dp[i][j] = treenode.returned_value;
   if (treenode.parent) fullrec.push(treenode.parent);
   return temp;
 }
@@ -174,12 +181,15 @@ function traverse(xx, yy, treenode) {
   str1 = temp;
   temp = document.getElementById("string_2").value;
   str2 = temp;
-  let x = fn(xx, yy, treenode);
+  let dp = new Array(str1.length)
+    .fill(-1)
+    .map(() => new Array(str2.length).fill(-1));
+  let x = fn(xx, yy, treenode, dp);
   //  traversetree(parent);
 }
 /*-------------------------------------------------------------------------------------------------------*/
 
-class LCS extends Component {
+class ED extends Component {
   state = {};
   nextright(tree) {
     if (tree.thread) {
@@ -389,6 +399,8 @@ class LCS extends Component {
     traverse(0, 0, parent);
     this.layout(parent);
     this.animate();
+
+    //   console.log(dp);
     //  traverseedge(parent);
     //  this.setState({ edges: treeEdge });
     //  this.setState({ nodes: treearray });
@@ -442,6 +454,7 @@ class LCS extends Component {
                   value,
                   mod,
                   thread,
+                  calculated,
                 } = node;
                 return (
                   <LCSTree
@@ -457,6 +470,7 @@ class LCS extends Component {
                     value={value}
                     mod={mod}
                     thread={thread}
+                    calculated={calculated}
                   >
                     {value}
                   </LCSTree>
@@ -486,4 +500,4 @@ class LCS extends Component {
   }
 }
 
-export default LCS;
+export default ED;
