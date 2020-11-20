@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/dpvisualizer/static/css/main.9971ec4e.chunk.css",
-    "main.js": "/dpvisualizer/static/js/main.1c8a2859.chunk.js",
-    "main.js.map": "/dpvisualizer/static/js/main.1c8a2859.chunk.js.map",
-    "runtime-main.js": "/dpvisualizer/static/js/runtime-main.3bd6c9d3.js",
-    "runtime-main.js.map": "/dpvisualizer/static/js/runtime-main.3bd6c9d3.js.map",
-    "static/js/2.40a5ed79.chunk.js": "/dpvisualizer/static/js/2.40a5ed79.chunk.js",
-    "static/js/2.40a5ed79.chunk.js.map": "/dpvisualizer/static/js/2.40a5ed79.chunk.js.map",
-    "index.html": "/dpvisualizer/index.html",
-    "precache-manifest.e749b1cce3866dacb66d58226769da2d.js": "/dpvisualizer/precache-manifest.e749b1cce3866dacb66d58226769da2d.js",
-    "service-worker.js": "/dpvisualizer/service-worker.js",
-    "static/css/main.9971ec4e.chunk.css.map": "/dpvisualizer/static/css/main.9971ec4e.chunk.css.map",
-    "static/js/2.40a5ed79.chunk.js.LICENSE.txt": "/dpvisualizer/static/js/2.40a5ed79.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/dpvisualizer/static/media/logo.5d5d9eef.svg"
+    "main.css": "/dpvisual/static/css/main.9971ec4e.chunk.css",
+    "main.js": "/dpvisual/static/js/main.48ecee28.chunk.js",
+    "main.js.map": "/dpvisual/static/js/main.48ecee28.chunk.js.map",
+    "runtime-main.js": "/dpvisual/static/js/runtime-main.267b6403.js",
+    "runtime-main.js.map": "/dpvisual/static/js/runtime-main.267b6403.js.map",
+    "static/js/2.40a5ed79.chunk.js": "/dpvisual/static/js/2.40a5ed79.chunk.js",
+    "static/js/2.40a5ed79.chunk.js.map": "/dpvisual/static/js/2.40a5ed79.chunk.js.map",
+    "index.html": "/dpvisual/index.html",
+    "precache-manifest.313d313ff528d6631d7c9cb7c4e6b4c1.js": "/dpvisual/precache-manifest.313d313ff528d6631d7c9cb7c4e6b4c1.js",
+    "service-worker.js": "/dpvisual/service-worker.js",
+    "static/css/main.9971ec4e.chunk.css.map": "/dpvisual/static/css/main.9971ec4e.chunk.css.map",
+    "static/js/2.40a5ed79.chunk.js.LICENSE.txt": "/dpvisual/static/js/2.40a5ed79.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/dpvisual/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.3bd6c9d3.js",
+    "static/js/runtime-main.267b6403.js",
     "static/js/2.40a5ed79.chunk.js",
     "static/css/main.9971ec4e.chunk.css",
-    "static/js/main.1c8a2859.chunk.js"
+    "static/js/main.48ecee28.chunk.js"
   ]
 }
