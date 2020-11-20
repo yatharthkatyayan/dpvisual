@@ -28,7 +28,7 @@ function node(i, j) {
     mod: 0,
     thread: null,
     returned_value: -1,
-    calculated: false,
+    calculated: 0,
   };
 }
 
@@ -170,12 +170,14 @@ function fn(i, j, treenode, dp) {
     fullrec.push(treenode.parent);
     return i;
   }
+  /*----------------------------------Memory remover---------------------------------------------*/
   if (dp[i - 1][j - 1] != -1) {
     fullrec.push(treenode.parent);
-    treenode.returned_value = dp[i][j];
-    treenode.calculated = true;
+    treenode.returned_value = dp[i - 1][j - 1];
+    treenode.calculated = 1;
     return dp[i - 1][j - 1];
   }
+  /*------------------------------------------------------------------------------------------------*/
   if (str1[i - 1] == str2[j - 1]) {
     treenode.left = node(i - 1, j - 1);
     treenode.left.parent = treenode;
@@ -216,7 +218,7 @@ class ED extends Component {
       .map(() => new Array(str2.length).fill(-1));
     let x = fn(str1.length, str2.length, parent, dp);
     this.layout(parent);
-    //  traversetree(parent);
+    // console.log("ans :", x);
   }
 
   nextright(tree) {
@@ -444,8 +446,8 @@ class ED extends Component {
             let icon2 = document.getElementById(
               `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
             );
-            icon1.beginElement();
-            icon2.beginElement();
+            if (icon1) icon1.beginElement();
+            if (icon2) icon2.beginElement();
           }
         }
       }, 250 * i + 50);
@@ -453,16 +455,14 @@ class ED extends Component {
     }
   }
 
+  componentDidMount() {
+    this.clearScreen();
+  }
+
   help() {
     this.clearScreen();
     this.traverse(0, 0);
-    //  this.layout(parent);
     this.animate();
-
-    //   console.log(dp);
-    //  traverseedge(parent);
-    //  this.setState({ edges: treeEdge });
-    //  this.setState({ nodes: treearray });
   }
 
   render() {

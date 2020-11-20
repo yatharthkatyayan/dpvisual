@@ -27,7 +27,7 @@ function node(i, j) {
     mod: 0,
     thread: null,
     returned_value: -1,
-    calculated: false,
+    calculated: 0,
   };
 }
 
@@ -148,12 +148,14 @@ function fn(i, j, treenode, dp) {
     fullrec.push(treenode.parent);
     return 0;
   }
+  /*----------------------------------Memory remover---------------------------------------------*/
   if (dp[i][j] != -1) {
     fullrec.push(treenode.parent);
     treenode.returned_value = dp[i][j];
-    treenode.calculated = true;
+    treenode.calculated = 1;
     return dp[i][j];
   }
+  /*------------------------------------------------------------------------------------------------*/
   if (str1[i] == str2[j]) {
     treenode.left = node(i + 1, j + 1);
     treenode.left.parent = treenode;
@@ -385,8 +387,8 @@ class ED extends Component {
             let icon2 = document.getElementById(
               `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
             );
-            icon1.beginElement();
-            icon2.beginElement();
+            if (icon1) icon1.beginElement();
+            if (icon2) icon2.beginElement();
           }
         }
       }, 250 * i + 50);
@@ -394,20 +396,20 @@ class ED extends Component {
     }
   }
 
+  componentDidMount() {
+    this.clearScreen();
+  }
+
   help() {
     this.clearScreen();
     traverse(0, 0, parent);
     this.layout(parent);
     this.animate();
-
-    //   console.log(dp);
-    //  traverseedge(parent);
-    //  this.setState({ edges: treeEdge });
-    //  this.setState({ nodes: treearray });
   }
 
   render() {
     const { nodes = [], edges = [] } = this.state;
+
     return (
       <div className="parent_div">
         <div className="menu">

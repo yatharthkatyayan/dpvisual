@@ -4,6 +4,7 @@ import "../../App.css";
 import LIScurve from "./LIS_SVG";
 
 let numbers = [];
+let timeout_array = [];
 let font_size = 0;
 class LIS extends Component {
   state = {};
@@ -52,15 +53,15 @@ class LIS extends Component {
       for (let i = 1; i < n; i++) {
         let maxval = 0;
 
-        setTimeout(() => {
+        let time1 = setTimeout(() => {
           numbers[i].incheck = true;
           this.setState({ numbers_array: numbers });
         }, 1000 * count + 500);
-
+        timeout_array.push(time1);
         for (let j = 0; j < i; j++) {
           count++;
 
-          setTimeout(() => {
+          time1 = setTimeout(() => {
             numbers[j].incheck = true;
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = true;
@@ -72,8 +73,8 @@ class LIS extends Component {
             console.log("comp :", curve_obj.comp);
             this.setState({ svg_array: temp_curve_array });
           }, count * 1000);
-
-          setTimeout(() => {
+          timeout_array.push(time1);
+          time1 = setTimeout(() => {
             numbers[j].incheck = false;
             this.setState({ numbers_array: numbers });
             DP_array[j].incheck = false;
@@ -81,19 +82,20 @@ class LIS extends Component {
             temp_curve_array.pop();
             this.setState({ svg_array: temp_curve_array });
           }, count * 1000 + 500);
-
+          timeout_array.push(time1);
           if (arr[i].value > arr[j].value) {
             maxval = Math.max(maxval, dp[j]);
           }
         }
 
         dp[i] = maxval + 1;
-        setTimeout(() => {
+        time1 = setTimeout(() => {
           DP_array[i].value = dp[i];
           this.setState({ dp_array: DP_array });
           numbers[i].incheck = false;
           this.setState({ numbers_array: numbers });
         }, count * 1000 + 500);
+        timeout_array.push(time1);
       }
       return DP_array;
     }
@@ -142,9 +144,24 @@ class LIS extends Component {
       font_size = 10;
     }
   }
+
+  clearScreen() {
+    numbers = [];
+    this.setState({ numbers_array: numbers });
+    font_size = 0;
+    this.setState({ dp_array: [] });
+    this.setState({ svg_array: [] });
+    for (let i = 0; i < timeout_array.length; i++) {
+      clearTimeout(timeout_array[i]);
+    }
+  }
+  componentDidMount() {
+    this.clearScreen();
+  }
   visualize() {
+    this.clearScreen();
     this.takeValues();
-    //  console.log(this.state.numbers_array, numbers);
+
     if (numbers) {
       let dp = this.setArray(numbers.length);
       this.setState({ dp_array: dp });
