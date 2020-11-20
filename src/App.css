@@ -153,12 +153,13 @@
   overflow: hidden;
 }
 .input_lcs {
-  margin: 10%;
+  margin: 35px;
   margin-bottom: 0px;
   font-family: Times;
   width: 75%;
   padding: 12px;
   border: 2px solid #ccc;
+  background-color: rgb(250, 250, 250);
   border-radius: 4px;
   box-sizing: border-box;
   resize: vertical;

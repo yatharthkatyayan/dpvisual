@@ -182,6 +182,7 @@ class LIS extends Component {
               required={true}
               type="text"
               placeholder="Input Array here"
+              spellCheck={false}
             />
           </div>
           <div>

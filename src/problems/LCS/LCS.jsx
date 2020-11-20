@@ -8,7 +8,7 @@ let fullrec = [];
 let str1 = "";
 let str2 = "";
 let timeout_array = [];
-let pos = 10;
+
 let parent = node(0, 0);
 let x_place = 0;
 let y_place = 0;
@@ -420,6 +420,7 @@ class ED extends Component {
               required={true}
               type="text"
               placeholder="String 1"
+              spellCheck={false}
             />
           </div>
           <div>
@@ -429,6 +430,7 @@ class ED extends Component {
               required={true}
               type="text"
               placeholder="String 2"
+              spellCheck={false}
             />
           </div>
           <div>

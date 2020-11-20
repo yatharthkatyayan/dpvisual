@@ -477,6 +477,7 @@ class ED extends Component {
               required={true}
               type="text"
               placeholder="String 1"
+              spellCheck={false}
             />
           </div>
           <div>
@@ -486,6 +487,7 @@ class ED extends Component {
               required={true}
               type="text"
               placeholder="String 2"
+              spellCheck={false}
             />
           </div>
           <div>

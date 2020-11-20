@@ -23,16 +23,16 @@ class SideNav extends Component {
             &times;
           </a>
           <div className="overlay-content">
-            <Link to="/" onClick={() => this.closeNav()}>
+            <Link to="/dpvisual" onClick={() => this.closeNav()}>
               <a href="#">HomePage</a>
             </Link>
-            <Link to="/info" onClick={() => this.closeNav()}>
+            <Link to="/dpvisual/info" onClick={() => this.closeNav()}>
               <a href="#">What is Dynamic Programming(DP)</a>
             </Link>
-            <Link to="/problem" onClick={() => this.closeNav()}>
+            <Link to="/dpvisual/problem" onClick={() => this.closeNav()}>
               <a href="#">Visualize Dynamic Programming</a>
             </Link>
-            <Link to="/contact" onClick={() => this.closeNav()}>
+            <Link to="/dpvisual/contact" onClick={() => this.closeNav()}>
               <a href="#">Contact us</a>
             </Link>
           </div>

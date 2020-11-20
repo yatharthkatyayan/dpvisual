@@ -17,35 +17,39 @@ class Home extends Component {
       <div className="line">
         <Router>
           <SideNav />
-          <Route path="/problem" exact component={Home}>
+          <Route path="/dpvisual/problem" exact component={Home}>
             <div className="coin_input ">
-              <Link to="/problem/LCS">
+              <Link to="/dpvisual/problem/LCS">
                 <div className=" homepage_button ">
                   Longest Comman Subsequence
                 </div>
               </Link>
 
-              <Link to="/problem/coins_change">
+              <Link to="/dpvisual/problem/coins_change">
                 <div className=" homepage_button">Classical Coin Change</div>
               </Link>
-              <Link to="/problem/LIS">
+              <Link to="/dpvisual/problem/LIS">
                 <div className=" homepage_button">
                   Longest Increasing Subsequence
                 </div>
               </Link>
-              <Link to="/problem/ED">
+              <Link to="/dpvisual/problem/ED">
                 <div className=" homepage_button">Edit Distance</div>
               </Link>
             </div>
           </Route>
-          <Route path="/problem/LCS" exact component={LCS} />
-          <Route path="/problem/coins_change" exact component={Coins} />
-          <Route path="/problem/LIS" exact component={LIS} />
-          <Route path="/problem/ED" exact component={ED} />
+          <Route path="/dpvisual/problem/LCS" exact component={LCS} />
+          <Route
+            path="/dpvisual/problem/coins_change"
+            exact
+            component={Coins}
+          />
+          <Route path="/dpvisual/problem/LIS" exact component={LIS} />
+          <Route path="/dpvisual/problem/ED" exact component={ED} />
 
-          <Route path="/" exact component={homepage} />
-          <Route path="/info" exact component={DpInfo} />
-          <Route path="/contact" exact component={ContactUs} />
+          <Route path="/dpvisual" exact component={homepage} />
+          <Route path="/dpvisual/info" exact component={DpInfo} />
+          <Route path="/dpvisual/contact" exact component={ContactUs} />
         </Router>
       </div>
     );
