@@ -204,9 +204,11 @@ class ED extends Component {
     if (tree.thread) {
       return tree.thread;
     }
-    if (tree.left || tree.right) {
+    if (tree.left || tree.right || tree.middle) {
       if (tree.right) {
         return tree.right;
+      } else if (tree.middle) {
+        return tree.middle;
       } else {
         return tree.left;
       }
@@ -219,9 +221,11 @@ class ED extends Component {
     if (tree.thread) {
       return tree.thread;
     }
-    if (tree.left || tree.right) {
+    if (tree.left || tree.right || tree.middle) {
       if (tree.left) {
         return tree.left;
+      } else if (tree.middle) {
+        return tree.middle;
       } else {
         return tree.right;
       }
@@ -237,6 +241,9 @@ class ED extends Component {
     if (tree.left) {
       this.addmod(tree.left, modsum + tree.mod);
     }
+    if (tree.middle) {
+      this.addmod(tree.middle, modsum + tree.mod);
+    }
     if (tree.right) {
       this.addmod(tree.right, modsum + tree.mod);
     }
@@ -248,32 +255,55 @@ class ED extends Component {
   }
 
   setup(tree, depth) {
-    if (tree.left == null && tree.right == null) {
+    if (tree.left == null && tree.right == null && tree.middle == null) {
       tree.x = 0;
       tree.y = depth;
 
       return tree;
     }
-    if (tree.left == null && tree.right != null) {
+    if (tree.left == null && tree.right != null && tree.middle == null) {
       let temp_tree = this.setup(tree.right, depth + 1);
       tree.x = temp_tree.x;
       tree.y = temp_tree.y - 1;
 
       return tree;
     }
-    if (tree.right == null && tree.left != null) {
+    if (tree.middle != null && tree.left == null && tree.right == null) {
+      let temp_tree = this.setup(tree.middle, depth + 1);
+      tree.x = temp_tree.x;
+      tree.y = temp_tree.y - 1;
+    }
+    if (tree.right == null && tree.left != null && tree.middle == null) {
       let temp_tree = this.setup(tree.left, depth + 1);
       tree.x = temp_tree.x;
       tree.y = temp_tree.y - 1;
 
       return tree;
     }
-    let left_tree = this.setup(tree.left, depth + 1);
-    let right_tree = this.setup(tree.right, depth + 1);
-
-    tree.x = this.fix_subtrees(left_tree, right_tree);
-    tree.y = left_tree.y - 1;
-
+    if (tree.middle == null && tree.left && tree.right) {
+      let left_tree = this.setup(tree.left, depth + 1);
+      let right_tree = this.setup(tree.right, depth + 1);
+      tree.x = this.fix_subtrees(left_tree, right_tree);
+      tree.y = left_tree.y - 1;
+    } else if (tree.left == null && tree.middle && tree.right) {
+      let left_tree = this.setup(tree.middle, depth + 1);
+      let right_tree = this.setup(tree.right, depth + 1);
+      tree.x = this.fix_subtrees(left_tree, right_tree);
+      tree.y = left_tree.y - 1;
+    } else if (tree.left && tree.middle && tree.right == null) {
+      let left_tree = this.setup(tree.left, depth + 1);
+      let right_tree = this.setup(tree.middle, depth + 1);
+      tree.x = this.fix_subtrees(left_tree, right_tree);
+      tree.y = left_tree.y - 1;
+    } else {
+      let left_tree = this.setup(tree.left, depth + 1);
+      let right_tree = this.setup(tree.middle, depth + 1);
+      tree.x = this.fix_subtrees(left_tree, right_tree);
+      left_tree = this.setup(tree.right, depth + 1);
+      tree.x = this.fix_subtrees(left_tree, right_tree);
+      tree.x = (tree.left.x + tree.right.x) / 2;
+      tree.y = left_tree.y - 1;
+    }
     return tree;
   }
 
