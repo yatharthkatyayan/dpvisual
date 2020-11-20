@@ -38,10 +38,17 @@ function edge(parent, child) {
     slope =
       (parent.y * 150 + 50 - (child.y * 150 + 50)) /
       (parent.x * 45 + 50 - (child.x * 45 + 50));
-    if (parent.left == child || parent.right == child) {
+    if (
+      parent.left == child ||
+      parent.right == child ||
+      parent.middle == child
+    ) {
       /* parent to child*/
 
-      if (parent.x != child.x && parent.left === child) {
+      if (
+        parent.x > child.x &&
+        (parent.left === child || parent.middle === child)
+      ) {
         let temp_x2 = 44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
         let temp_y2 =
           (44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
@@ -58,7 +65,10 @@ function edge(parent, child) {
           value: -1,
           time: 0,
         };
-      } else if (parent.x != child.x && parent.right === child) {
+      } else if (
+        parent.x < child.x &&
+        (parent.right === child || parent.middle === child)
+      ) {
         let temp_x2 = -44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
         let temp_y2 =
           (-44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
@@ -75,7 +85,7 @@ function edge(parent, child) {
           value: -1,
           time: 0,
         };
-      } else {
+      } else if (parent.x == child.x) {
         return {
           id: `${parent.x * 45 + 50} ${parent.y * 150 + 50 + 35} ${
             child.x * 45 + 50
@@ -91,7 +101,10 @@ function edge(parent, child) {
     } else {
       /* child to parent*/
 
-      if (parent.x != child.x && child.left === parent) {
+      if (
+        parent.x < child.x &&
+        (child.left === parent || child.middle === parent)
+      ) {
         let temp_x2 = -44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
         let temp_y2 =
           (-44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
@@ -108,7 +121,10 @@ function edge(parent, child) {
           value: parent.returned_value,
           time: 0,
         };
-      } else if (parent.x != child.x && child.right === parent) {
+      } else if (
+        parent.x > child.x &&
+        (child.right === parent || child.middle === parent)
+      ) {
         let temp_x2 = 44 / Math.sqrt(1 + slope * slope) + (child.x * 45 + 50);
         let temp_y2 =
           (44 * slope) / Math.sqrt(1 + slope * slope) + (child.y * 150 + 50);
@@ -125,7 +141,7 @@ function edge(parent, child) {
           value: parent.returned_value,
           time: 0,
         };
-      } else {
+      } else if (parent.x == child.x) {
         return {
           id: `${parent.x * 45 + 50} ${parent.y * 150 + 50 + 35} ${
             child.x * 45 + 50
@@ -394,7 +410,7 @@ class ED extends Component {
         this.setState({ nodes: treearray });
       }, 250 * i);
       timeout_array.push(time1);
-      /*
+
       time1 = setTimeout(() => {
         if (fullrec[i + 1]) {
           let edge_new = edge(fullrec[i], fullrec[i + 1]);
@@ -434,7 +450,6 @@ class ED extends Component {
         }
       }, 250 * i + 50);
       timeout_array.push(time1);
-      */
     }
   }
 
