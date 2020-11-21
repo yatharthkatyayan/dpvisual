@@ -218,7 +218,6 @@ class ED extends Component {
       .map(() => new Array(str2.length).fill(-1));
     let x = fn(str1.length, str2.length, parent, dp);
     this.layout(parent);
-    // console.log("ans :", x);
   }
 
   nextright(tree) {
@@ -344,7 +343,7 @@ class ED extends Component {
 
     right_tree.x += diff;
 
-    if (right_tree.left || right_tree.right) {
+    if (right_tree.left || right_tree.right || right_tree.middle) {
       roffset += diff;
     }
     if (ri && !li) {
@@ -353,6 +352,7 @@ class ED extends Component {
     } else if (li && !ri) {
       ro.thread = li;
       ro.mod = loffset - roffset;
+      if (li.parent.mod) ro.mod += li.parent.mod;
     }
     return (left_tree.x + right_tree.x) / 2;
   }
@@ -400,7 +400,7 @@ class ED extends Component {
     fullrec = [];
     x_place = 0;
     y_place = 0;
-    //    parent = node(0, 0);
+
     this.setState({ nodes: treearray });
     this.setState({ edges: treeEdge });
   }
