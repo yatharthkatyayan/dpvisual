@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import LCSTree from "../LCS/LCS_tree";
 import LCSEdges from "../LCS/lcs_edges";
-
 let treearray = [];
 let treeEdge = [];
 let fullrec = [];
