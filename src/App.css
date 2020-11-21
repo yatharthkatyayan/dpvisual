@@ -115,6 +115,15 @@
     top: 15px;
     right: 35px;
   }
+  .navbar {
+    width: 100vw;
+    max-width: 100vw;
+    height: fit-content;
+    max-height: fit-content;
+  }
+  .line {
+    flex-direction: column;
+  }
 }
 /*---------------------------------------------------LCS------------------------------------------------------------*/
 

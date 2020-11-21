@@ -18,9 +18,9 @@ class LIS extends Component {
   }
 
   curveSetter(i, j) {
-    let p1x = i * 75 + 35;
+    let p1x = i * 75 + 35 + 40;
     let p1y = numbers.length * 25 - 15 + 75;
-    let p2x = j * 75 + 35;
+    let p2x = j * 75 + 35 + 40;
     let p2y = p1y;
 
     let midpx = (p2x + p1x) * 0.5;
@@ -214,7 +214,7 @@ class LIS extends Component {
                   <LIS_array
                     key={nodeidx}
                     value={value}
-                    x1={nodeidx * 75}
+                    x1={nodeidx * 75 + 40}
                     incheck={incheck}
                     y1={numbers_array.length * 25 - 15}
                     font={font_size}
@@ -228,7 +228,7 @@ class LIS extends Component {
                     key={nodeidx}
                     incheck={incheck}
                     value={value}
-                    x1={nodeidx * 75}
+                    x1={nodeidx * 75 + 40}
                     y1={numbers.length * 65 + 100}
                     font={font_size}
                   ></LIS_array>
