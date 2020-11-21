@@ -8,7 +8,6 @@ let value_array = [];
 let weight_array = [];
 let timeout_array = [];
 
-let parent = node(0, 0);
 let x_place = 0;
 let y_place = 0;
 
@@ -142,25 +141,27 @@ function edge(parent, child) {
 
 function fn(i, j, treenode, dp) {
   fullrec.push(treenode);
-  console.log("i :", i);
-  console.log("j :", j);
+
   if (i == value_array.length) {
     treenode.returned_value = 0;
     fullrec.push(treenode.parent);
     return 0;
   }
+
   if (j < 0) {
     treenode.returned_value = -1000;
     fullrec.push(treenode.parent);
     return -1000;
   }
+
   /*----------------------------------Memory remover---------------------------------------------*/
-  if (dp[i][j] != -1) {
+  if (dp[i][j - 1] != -1) {
     fullrec.push(treenode.parent);
-    treenode.returned_value = dp[i][j];
+    treenode.returned_value = dp[i][j - 1];
     treenode.calculated = 1;
-    return dp[i][j];
+    return dp[i][j - 1];
   }
+
   /*------------------------------------------------------------------------------------------------*/
 
   treenode.left = node(i + 1, j);
@@ -172,7 +173,7 @@ function fn(i, j, treenode, dp) {
     value_array[i] + fn(i + 1, j - weight_array[i], treenode.right, dp);
   let temp = Math.max(temp1, temp2);
   treenode.returned_value = temp;
-  dp[i][j] = treenode.returned_value;
+  dp[i][j - 1] = treenode.returned_value;
   if (treenode.parent) fullrec.push(treenode.parent);
   return temp;
 }
@@ -187,25 +188,33 @@ function takeValues(val) {
   }
   return numbers;
 }
-function traverse(xx, yy, treenode) {
-  let temp = document.getElementById("values").value;
-  value_array = takeValues(temp);
-  temp = document.getElementById("weights").value;
-  weight_array = takeValues(temp);
-  let sum = document.getElementById("sum").value;
-  let dp = new Array(value_array.length)
-    .fill(-1)
-    .map(() => new Array(weight_array.length).fill(-1));
-  console.log(value_array);
-  console.log(weight_array);
-  let x = fn(xx, sum, treenode, dp);
-  console.log(x);
-  console.log(fullrec);
-}
+
 /*-------------------------------------------------------------------------------------------------------*/
 
 class KS extends Component {
   state = {};
+
+  traverse(xx, yy) {
+    let temp = document.getElementById("values").value;
+    value_array = takeValues(temp);
+    temp = document.getElementById("weights").value;
+    weight_array = takeValues(temp);
+    temp = document.getElementById("sum").value;
+    let sum = takeValues(temp)[0];
+    let dp = new Array(value_array.length)
+      .fill(-1)
+      .map(() => new Array(sum).fill(-1));
+    let parent = node(xx, sum);
+    let x = fn(xx, sum, parent, dp);
+    this.layout(parent);
+    /*
+    console.log(dp);
+    console.log(value_array);
+    console.log(weight_array);
+    console.log(x);
+    console.log(fullrec);
+    */
+  }
 
   nextright(tree) {
     if (tree.thread) {
@@ -356,7 +365,7 @@ class KS extends Component {
     fullrec = [];
     x_place = 0;
     y_place = 0;
-    parent = node(0, 0);
+
     this.setState({ nodes: treearray });
     this.setState({ edges: treeEdge });
   }
@@ -416,8 +425,7 @@ class KS extends Component {
 
   help() {
     this.clearScreen();
-    traverse(0, 0, parent);
-    this.layout(parent);
+    this.traverse(0, 0);
     this.animate();
   }
 
