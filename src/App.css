@@ -106,7 +106,7 @@
   font-size: 60px;
 }
 
-@media screen and (max-height: 450px) {
+@media screen and (max-width: 666px) {
   .overlay a {
     font-size: 20px;
   }
