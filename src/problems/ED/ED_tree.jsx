@@ -20,6 +20,7 @@ class EDTree extends Component {
       returned_value,
       calculated,
     } = this.props;
+    let size = Math.min(15 / (value.length * 6), 1);
     let color_back = "white";
     let color_text = "black";
     if (calculated) {
@@ -55,6 +56,7 @@ class EDTree extends Component {
           y={y * 150 + 50}
           fill={color_text}
           className="treedata"
+          transform={`scale( ${size})`}
         >
           {value}
         </text>
