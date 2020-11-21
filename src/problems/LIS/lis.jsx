@@ -69,8 +69,6 @@ class LIS extends Component {
             let curve_obj = this.curveSetter(i, j);
 
             temp_curve_array.push(curve_obj);
-            console.log(curve_obj.curve);
-            console.log("comp :", curve_obj.comp);
             this.setState({ svg_array: temp_curve_array });
           }, count * 1000);
           timeout_array.push(time1);
