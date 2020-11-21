@@ -143,9 +143,9 @@ function fn(i, j, treenode, dp) {
   fullrec.push(treenode);
 
   if (j < 0) {
-    treenode.returned_value = -1000;
+    treenode.returned_value = "-∞";
     fullrec.push(treenode.parent);
-    return -1000;
+    return -Infinity;
   }
 
   if (i == value_array.length) {

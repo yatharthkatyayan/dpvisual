@@ -26,6 +26,7 @@ class LCSTree extends Component {
       color_back = "black";
       color_text = "white";
     }
+
     return (
       <g>
         <circle
