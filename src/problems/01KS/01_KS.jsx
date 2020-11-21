@@ -142,16 +142,16 @@ function edge(parent, child) {
 function fn(i, j, treenode, dp) {
   fullrec.push(treenode);
 
-  if (i == value_array.length) {
-    treenode.returned_value = 0;
-    fullrec.push(treenode.parent);
-    return 0;
-  }
-
   if (j < 0) {
     treenode.returned_value = -1000;
     fullrec.push(treenode.parent);
     return -1000;
+  }
+
+  if (i == value_array.length) {
+    treenode.returned_value = 0;
+    fullrec.push(treenode.parent);
+    return 0;
   }
 
   /*----------------------------------Memory remover---------------------------------------------*/

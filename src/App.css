@@ -202,10 +202,10 @@
   font-size: 40px;
   font-weight: bold;
   text-anchor: middle;
-  alignment-baseline: central;
   transform: scale(0.83333);
   transform-origin: center center;
   transform-box: fill-box;
+  alignment-baseline: central;
   font-family: Inter, -apple-system, system-ui, "Helvetica Neue", sans-serif;
   display: block;
   white-space: nowrap;
