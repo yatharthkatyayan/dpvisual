@@ -8,6 +8,7 @@ import homepage from "./start_homepage";
 import DpInfo from "./dp_info";
 import ContactUs from "./contactUS";
 import ED from "./problems/ED/ED";
+import KS from "./problems/01KS/01_KS";
 
 class Home extends Component {
   state = {};
@@ -36,6 +37,9 @@ class Home extends Component {
               <Link to="/dpvisual/problem/ED">
                 <div className=" homepage_button">Edit Distance</div>
               </Link>
+              <Link to="/dpvisual/problem/KS">
+                <div className=" homepage_button">0-1 Knapsack</div>
+              </Link>
             </div>
           </Route>
           <Route path="/dpvisual/problem/LCS" exact component={LCS} />
@@ -46,6 +50,7 @@ class Home extends Component {
           />
           <Route path="/dpvisual/problem/LIS" exact component={LIS} />
           <Route path="/dpvisual/problem/ED" exact component={ED} />
+          <Route path="/dpvisual/problem/KS" exact component={KS} />
 
           <Route path="/dpvisual" exact component={homepage} />
           <Route path="/dpvisual/info" exact component={DpInfo} />

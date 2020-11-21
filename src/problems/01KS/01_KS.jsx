@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import LCSTree from "./LCS_tree";
-import LCSEdges from "./lcs_edges";
+import LCSTree from "../LCS/LCS_tree";
+import LCSEdges from "../LCS/lcs_edges";
 let treearray = [];
 let treeEdge = [];
 let fullrec = [];
-let str1 = "";
-let str2 = "";
+let value_array = [];
+let weight_array = [];
 let timeout_array = [];
 
 let parent = node(0, 0);
@@ -142,10 +142,17 @@ function edge(parent, child) {
 
 function fn(i, j, treenode, dp) {
   fullrec.push(treenode);
-  if (i == str1.length || j == str2.length) {
+  console.log("i :", i);
+  console.log("j :", j);
+  if (i == value_array.length) {
     treenode.returned_value = 0;
     fullrec.push(treenode.parent);
     return 0;
+  }
+  if (j < 0) {
+    treenode.returned_value = -1000;
+    fullrec.push(treenode.parent);
+    return -1000;
   }
   /*----------------------------------Memory remover---------------------------------------------*/
   if (dp[i][j] != -1) {
@@ -155,43 +162,51 @@ function fn(i, j, treenode, dp) {
     return dp[i][j];
   }
   /*------------------------------------------------------------------------------------------------*/
-  if (str1[i] == str2[j]) {
-    treenode.left = node(i + 1, j + 1);
-    treenode.left.parent = treenode;
-    treenode.returned_value = 1 + fn(i + 1, j + 1, treenode.left, dp);
-    dp[i][j] = treenode.returned_value;
-    let temp = treenode.returned_value;
-    fullrec.push(treenode.parent);
-    return temp;
-  }
-  treenode.left = node(i, j + 1);
+
+  treenode.left = node(i + 1, j);
   treenode.left.parent = treenode;
-  treenode.right = node(i + 1, j);
+  treenode.right = node(i + 1, j - weight_array[i]);
   treenode.right.parent = treenode;
-  let temp1 = fn(i, j + 1, treenode.left, dp);
-  let temp2 = fn(i + 1, j, treenode.right, dp);
+  let temp1 = fn(i + 1, j, treenode.left, dp);
+  let temp2 =
+    value_array[i] + fn(i + 1, j - weight_array[i], treenode.right, dp);
   let temp = Math.max(temp1, temp2);
   treenode.returned_value = temp;
   dp[i][j] = treenode.returned_value;
   if (treenode.parent) fullrec.push(treenode.parent);
   return temp;
 }
+function takeValues(val) {
+  let number_pattern = /-?\d*\.{0,1}\d+/g;
 
+  let numbers = val.match(number_pattern);
+  if (numbers) {
+    for (let i = 0; i < numbers.length; i++) {
+      numbers[i] = parseInt(numbers[i], 10);
+    }
+  }
+  return numbers;
+}
 function traverse(xx, yy, treenode) {
-  let temp = document.getElementById("string_1").value;
-  str1 = temp;
-  temp = document.getElementById("string_2").value;
-  str2 = temp;
-  let dp = new Array(str1.length)
+  let temp = document.getElementById("values").value;
+  value_array = takeValues(temp);
+  temp = document.getElementById("weights").value;
+  weight_array = takeValues(temp);
+  let sum = document.getElementById("sum").value;
+  let dp = new Array(value_array.length)
     .fill(-1)
-    .map(() => new Array(str2.length).fill(-1));
-  let x = fn(xx, yy, treenode, dp);
-  //  traversetree(parent);
+    .map(() => new Array(weight_array.length).fill(-1));
+  console.log(value_array);
+  console.log(weight_array);
+  let x = fn(xx, sum, treenode, dp);
+  console.log(x);
+  console.log(fullrec);
 }
 /*-------------------------------------------------------------------------------------------------------*/
 
-class LCS extends Component {
+class KS extends Component {
   state = {};
+
   nextright(tree) {
     if (tree.thread) {
       return tree.thread;
@@ -414,21 +429,31 @@ class LCS extends Component {
         <div className="menu">
           <div>
             <input
-              id="string_1"
+              id="values"
               className="input_lcs font_input"
               required={true}
               type="text"
-              placeholder="String 1"
+              placeholder="Values"
               spellCheck={false}
             />
           </div>
           <div>
             <input
-              id="string_2"
+              id="weights"
               className="input_lcs font_input"
               required={true}
               type="text"
-              placeholder="String 2"
+              placeholder="Weights"
+              spellCheck={false}
+            />
+          </div>
+          <div>
+            <input
+              id="sum"
+              className="input_lcs font_input"
+              required={true}
+              type="text"
+              placeholder="Knapsack capacity"
               spellCheck={false}
             />
           </div>
@@ -503,4 +528,4 @@ class LCS extends Component {
   }
 }
 
-export default LCS;
+export default KS;
