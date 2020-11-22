@@ -407,6 +407,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: width 3s, height 3s, transform 100ms;
+  user-select: none;
 }
 .input_field_size {
   font-family: Times;

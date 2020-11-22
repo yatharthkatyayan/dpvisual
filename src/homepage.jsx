@@ -26,9 +26,6 @@ class Home extends Component {
                 </div>
               </Link>
 
-              <Link to="/dpvisual/problem/coins_change">
-                <div className=" homepage_button">Classical Coin Change</div>
-              </Link>
               <Link to="/dpvisual/problem/LIS">
                 <div className=" homepage_button">
                   Longest Increasing Subsequence
@@ -39,6 +36,10 @@ class Home extends Component {
               </Link>
               <Link to="/dpvisual/problem/KS">
                 <div className=" homepage_button">0-1 Knapsack</div>
+              </Link>
+
+              <Link to="/dpvisual/problem/coins_change">
+                <div className=" homepage_button">Classical Coin Change</div>
               </Link>
             </div>
           </Route>
