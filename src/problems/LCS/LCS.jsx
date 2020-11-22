@@ -537,8 +537,9 @@ class LCS extends Component {
               className="input_lcs font_input"
               required={true}
               type="text"
-              placeholder="String 1"
+              placeholder="Enter String 1 "
               spellCheck={false}
+              autoComplete="off"
             />
           </div>
           <div>
@@ -547,8 +548,9 @@ class LCS extends Component {
               className="input_lcs font_input"
               required={true}
               type="text"
-              placeholder="String 2"
+              placeholder="Enter String 2"
               spellCheck={false}
+              autoComplete="off"
             />
           </div>
           <div>
