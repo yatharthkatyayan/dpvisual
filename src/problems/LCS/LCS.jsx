@@ -338,6 +338,8 @@ class LCS extends Component {
     for (let i = 0; i < timeout_array.length; i++) {
       clearTimeout(timeout_array[i]);
     }
+    string1_array = [];
+    string2_array = [];
     timeout_array = [];
     treearray = [];
     treeEdge = [];
@@ -381,32 +383,18 @@ class LCS extends Component {
           string2_array[j].check = 0;
         }
 
-        console.log(
-          fullrec[i].str1_idx,
-          fullrec[i].str2_idx,
-          typeof fullrec[i].str2_idx
-        );
-
         if (string1_array[fullrec[i].str1_idx]) {
           string1_array[fullrec[i].str1_idx].check = 2;
-          console.log(
-            "str1 :",
-            string1_array[fullrec[i].str1_idx],
-            string1_array[fullrec[i].str1_idx].check
-          );
+
           this.setState({ string_data_1: string1_array });
         }
         if (string2_array[fullrec[i].str2_idx]) {
           string2_array[fullrec[i].str2_idx].check = 2;
-          console.log(
-            "str2 :",
-            string2_array[fullrec[i].str2_idx],
-            string2_array[fullrec[i].str2_idx].check
-          );
+
           this.setState({ string_data_2: string2_array });
         }
         this.setState({ nodes: treearray });
-      }, 250 * i);
+      }, 500 * i);
       timeout_array.push(time1);
       time1 = setTimeout(() => {
         if (fullrec[i + 1]) {
@@ -445,7 +433,7 @@ class LCS extends Component {
             if (icon2) icon2.beginElement();
           }
         }
-      }, 250 * i + 50);
+      }, 500 * i + 50);
       timeout_array.push(time1);
     }
   }
