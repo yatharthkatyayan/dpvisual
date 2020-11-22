@@ -478,7 +478,7 @@ class LCS extends Component {
                 );
               })}
             </div>
-            <div></div>
+
             <div className="graph">
               <svg
                 className="svg"
