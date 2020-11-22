@@ -129,10 +129,18 @@
 .graph {
   -webkit-box-flex: 1;
   flex-grow: 1;
-  height: 50%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+.string_data {
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 7px 7px 0 0;
+  padding: 7px;
+  background-color: yellow;
 }
 .font_input {
   font-family: Menlo, monospace;

@@ -440,6 +440,8 @@ class LCS extends Component {
         </div>
         <div className="hope">
           <div className="padding_style">
+            <div className="string_data">hm..</div>
+
             <div className="graph">
               <svg
                 className="svg"
