@@ -126,7 +126,14 @@
   }
 }
 /*---------------------------------------------------LCS------------------------------------------------------------*/
-
+.graph {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 .font_input {
   font-family: Menlo, monospace;
   font-size: 14px;

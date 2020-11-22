@@ -440,61 +440,63 @@ class LCS extends Component {
         </div>
         <div className="hope">
           <div className="padding_style">
-            <svg
-              className="svg"
-              viewBox={`0 0 ${x_place * 45 + 100} ${y_place * 150 + 100}`}
-            >
-              {nodes.map((node, nodeidx) => {
-                const {
-                  parent,
-                  id,
-                  x,
-                  y,
-                  left,
-                  right,
-                  str1_idx,
-                  str2_idx,
-                  value,
-                  mod,
-                  thread,
-                  calculated,
-                } = node;
-                return (
-                  <LCSTree
-                    key={nodeidx}
-                    parent={parent}
-                    id={id}
-                    x={x}
-                    y={y}
-                    left={left}
-                    right={right}
-                    str1_idx={str1_idx}
-                    str2_idx={str2_idx}
-                    value={value}
-                    mod={mod}
-                    thread={thread}
-                    calculated={calculated}
-                  >
-                    {value}
-                  </LCSTree>
-                );
-              })}
+            <div className="graph">
+              <svg
+                className="svg"
+                viewBox={`0 0 ${x_place * 45 + 100} ${y_place * 150 + 100}`}
+              >
+                {nodes.map((node, nodeidx) => {
+                  const {
+                    parent,
+                    id,
+                    x,
+                    y,
+                    left,
+                    right,
+                    str1_idx,
+                    str2_idx,
+                    value,
+                    mod,
+                    thread,
+                    calculated,
+                  } = node;
+                  return (
+                    <LCSTree
+                      key={nodeidx}
+                      parent={parent}
+                      id={id}
+                      x={x}
+                      y={y}
+                      left={left}
+                      right={right}
+                      str1_idx={str1_idx}
+                      str2_idx={str2_idx}
+                      value={value}
+                      mod={mod}
+                      thread={thread}
+                      calculated={calculated}
+                    >
+                      {value}
+                    </LCSTree>
+                  );
+                })}
 
-              {edges.map((edge, edgeidx) => {
-                const { x1, y1, x2, y2, value, time } = edge;
-                return (
-                  <LCSEdges
-                    key={edgeidx}
-                    x_1={x1}
-                    y_1={y1}
-                    x_2={x2}
-                    y_2={y2}
-                    value={value}
-                    time={time}
-                  ></LCSEdges>
-                );
-              })}
-            </svg>
+                {edges.map((edge, edgeidx) => {
+                  const { x1, y1, x2, y2, value, time } = edge;
+                  return (
+                    <LCSEdges
+                      key={edgeidx}
+                      x_1={x1}
+                      y_1={y1}
+                      x_2={x2}
+                      y_2={y2}
+                      value={value}
+                      time={time}
+                    ></LCSEdges>
+                  );
+                })}
+              </svg>
+            </div>
           </div>
           <div className="footer">made by yatharth katyayan</div>
         </div>
