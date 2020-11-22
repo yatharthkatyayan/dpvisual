@@ -338,6 +338,8 @@ class LCS extends Component {
     for (let i = 0; i < timeout_array.length; i++) {
       clearTimeout(timeout_array[i]);
     }
+    document.getElementById("LCS_ans").classList.add("remove");
+
     string1_array = [];
     string2_array = [];
     timeout_array = [];
@@ -461,7 +463,9 @@ class LCS extends Component {
       //   console.log(ans);
       this.setState({ string_data_1: string1_array });
       this.setState({ string_data_2: string2_array });
-    }, fullrec.length * 500 + 50);
+      document.getElementById("LCS_ans").classList.remove("remove");
+      this.setState({ LCS_length: res[str1.length][str2.length] });
+    }, fullrec.length * 500);
     timeout_array.push(time1);
   }
 
@@ -469,11 +473,7 @@ class LCS extends Component {
     let dp1 = new Array(X.length + 1)
       .fill(0)
       .map(() => new Array(Y.length + 1).fill(0));
-    /*
-    for (let i = 0; i <= n; i++) {
-      for (let j = 0; j <= m; j++) dp1[i][j] = 0;
-    }
-    */
+
     for (let i = 1; i <= n; i++) {
       for (let j = 1; j <= n; j++) {
         if (X[i - 1] == Y[j - 1]) dp1[i][j] = dp1[i - 1][j - 1] + 1;
@@ -517,8 +517,6 @@ class LCS extends Component {
     this.string_data_setter();
 
     this.animate();
-
-    //    console.log(ans);
   }
 
   render() {
@@ -527,6 +525,7 @@ class LCS extends Component {
       edges = [],
       string_data_1 = [],
       string_data_2 = [],
+      LCS_length = 0,
     } = this.state;
 
     return (
@@ -551,6 +550,11 @@ class LCS extends Component {
               placeholder="String 2"
               spellCheck={false}
             />
+          </div>
+          <div>
+            <p id="LCS_ans" className="string_font remove">
+              LCS length = {LCS_length}
+            </p>
           </div>
           <div>
             <button className="lcs-visual" onClick={() => this.help()}>
