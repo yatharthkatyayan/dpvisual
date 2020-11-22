@@ -127,14 +127,14 @@
 }
 /*---------------------------------------------------LCS------------------------------------------------------------*/
 .string_font {
-  font-size: 15px;
+  font-size: 20px;
   -webkit-box-flex: 0;
   flex-grow: 0;
   text-align: center;
   font-weight: bold;
   font-family: Menlo, monospace;
   color: rgb(0, 0, 0);
-  padding: 2px;
+  padding: 1px;
   user-select: none;
 }
 .string_text {
@@ -154,7 +154,7 @@
   flex-direction: column;
   align-items: center;
   border-radius: 7px 7px 0 0;
-  padding: 5px;
+  padding: 2px;
 }
 .font_input {
   font-family: Menlo, monospace;

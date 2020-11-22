@@ -372,6 +372,7 @@ class LCS extends Component {
   }
 
   animate() {
+    let animation_working = 1;
     for (let i = 0; i < fullrec.length - 1; i++) {
       let time1 = setTimeout(() => {
         treearray.push(fullrec[i]);
@@ -436,6 +437,73 @@ class LCS extends Component {
       }, 500 * i + 50);
       timeout_array.push(time1);
     }
+    let time1 = setTimeout(() => {
+      let res = this.LCS_TOP_DOWN(str1, str2, str1.length, str2.length);
+      let ans = this.printLCS(str1, str2, str1.length, str2.length, res);
+      let j = 0;
+      for (let i = 0; i < str1.length; i++) {
+        if (str1[i] == ans[j]) {
+          string1_array[i].check = -1;
+          j++;
+        } else {
+          string1_array[i].check = 0;
+        }
+      }
+      j = 0;
+      for (let i = 0; i < str2.length; i++) {
+        if (str2[i] == ans[j]) {
+          string2_array[i].check = -1;
+          j++;
+        } else {
+          string2_array[i].check = 0;
+        }
+      }
+      //   console.log(ans);
+      this.setState({ string_data_1: string1_array });
+      this.setState({ string_data_2: string2_array });
+    }, fullrec.length * 500 + 50);
+    timeout_array.push(time1);
+  }
+
+  LCS_TOP_DOWN(X, Y, n, m) {
+    let dp1 = new Array(X.length + 1)
+      .fill(0)
+      .map(() => new Array(Y.length + 1).fill(0));
+    /*
+    for (let i = 0; i <= n; i++) {
+      for (let j = 0; j <= m; j++) dp1[i][j] = 0;
+    }
+    */
+    for (let i = 1; i <= n; i++) {
+      for (let j = 1; j <= n; j++) {
+        if (X[i - 1] == Y[j - 1]) dp1[i][j] = dp1[i - 1][j - 1] + 1;
+        else dp1[i][j] = Math.max(dp1[i - 1][j], dp1[i][j - 1]);
+      }
+    }
+    return dp1;
+  }
+
+  printLCS(X, Y, n, m, dp1) {
+    let i = n;
+    let j = m;
+
+    let common = [];
+    while (i > 0 && j > 0) {
+      if (X[i - 1] == Y[j - 1]) {
+        common.push(X[i - 1]);
+        i--;
+        j--;
+      } else {
+        if (dp1[i - 1][j] > dp1[i][j - 1]) {
+          i--;
+        } else j--;
+      }
+    }
+    let result = [];
+    for (let i = common.length - 1; i >= 0; i--) {
+      result.push(common[i]);
+    }
+    return result;
   }
 
   componentDidMount() {
@@ -447,7 +515,10 @@ class LCS extends Component {
     traverse(0, 0, parent);
     this.layout(parent);
     this.string_data_setter();
+
     this.animate();
+
+    //    console.log(ans);
   }
 
   render() {
