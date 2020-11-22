@@ -134,7 +134,8 @@
   font-weight: bold;
   font-family: Menlo, monospace;
   color: rgb(0, 0, 0);
-  padding: 1px;
+  padding-left: 3px;
+  padding-right: 3px;
   user-select: none;
 }
 .string_text {
