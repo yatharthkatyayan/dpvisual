@@ -126,20 +126,49 @@
   }
 }
 /*---------------------------------------------------LCS------------------------------------------------------------*/
-.lcs_length {
+.lcs_prblm {
   margin: 35px;
-
-  font-size: 20px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 0px;
+  width: calc(100% - 50px);
+  border: 2px solid #ccc;
+  background-color: rgb(250, 250, 250);
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+  font-size: 18px;
   -webkit-box-flex: 0;
   flex-grow: 0;
-
   font-weight: bold;
   font-family: Menlo, monospace;
   color: rgb(0, 0, 0);
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
   user-select: none;
 }
+.lcs_length {
+  margin: 35px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 0px;
+  width: calc(100% - 50px);
+  border: 2px solid #ccc;
+  background-color: rgb(250, 250, 250);
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+  font-size: 18px;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  font-weight: bold;
+  font-family: Menlo, monospace;
+  color: rgb(0, 0, 0);
+  padding-left: 5px;
+  padding-right: 5px;
+  user-select: none;
+}
+
 .string_font {
   font-size: 20px;
   -webkit-box-flex: 0;
@@ -207,9 +236,11 @@
 }
 .input_lcs {
   margin: 35px;
+  margin-left: 25px;
+  margin-right: 25px;
   margin-bottom: 0px;
   font-family: Times;
-  width: calc(100% - 70px);
+  width: calc(100% - 50px);
   padding: 12px;
   border: 2px solid #ccc;
   background-color: rgb(250, 250, 250);
@@ -231,7 +262,7 @@
 }
 .lcs-visual {
   position: relative;
-  margin-top: 50px;
+  margin-top: 35px;
   margin-left: 35%;
   width: max-content;
   font-family: Times;

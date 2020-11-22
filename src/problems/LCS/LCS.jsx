@@ -338,7 +338,7 @@ class LCS extends Component {
     for (let i = 0; i < timeout_array.length; i++) {
       clearTimeout(timeout_array[i]);
     }
-    document.getElementById("LCS_ans").classList.add("remove");
+
     document.getElementById("LCS_data").classList.add("remove");
     string1_array = [];
     string2_array = [];
@@ -463,7 +463,6 @@ class LCS extends Component {
       //   console.log(ans);
       this.setState({ string_data_1: string1_array });
       this.setState({ string_data_2: string2_array });
-      document.getElementById("LCS_ans").classList.remove("remove");
       document.getElementById("LCS_data").classList.remove("remove");
       this.setState({ LCS_length: res[str1.length][str2.length] });
       this.setState({ LCS_data: ans });
@@ -534,6 +533,15 @@ class LCS extends Component {
     return (
       <div className="parent_div">
         <div className="menu">
+          <div className=" lcs_prblm">
+            <p>
+              Find out the longest common subsequence between two given strings.
+            </p>
+            <p>For example :</p>
+            <p>String 1 : abcdgh</p>
+            <p>String 2 : abedfh</p>
+            <p>LCS : abdh</p>
+          </div>
           <div>
             <input
               id="string_1"
@@ -556,13 +564,10 @@ class LCS extends Component {
               autoComplete="off"
             />
           </div>
-          <div>
-            <p id="LCS_ans" className="lcs_length remove">
-              LCS length = {LCS_length}
-            </p>
-            <p id="LCS_data" className="lcs_length remove">
-              LCS String = ["{LCS_data}"]
-            </p>
+
+          <div id="LCS_data" className="lcs_length remove">
+            <p>LCS length = {LCS_length}</p>
+            <p>LCS String = ["{LCS_data}"]</p>
           </div>
           <div>
             <button className="lcs-visual" onClick={() => this.help()}>
