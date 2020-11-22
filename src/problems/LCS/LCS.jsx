@@ -7,6 +7,8 @@ let treeEdge = [];
 let fullrec = [];
 let str1 = "";
 let str2 = "";
+let string1_array = [];
+let string2_array = [];
 let timeout_array = [];
 
 let parent = node(0, 0);
@@ -356,22 +358,53 @@ class LCS extends Component {
   }
 
   string_data_setter() {
-    let temp1 = [];
     for (let i = 0; i < str1.length; i++) {
-      temp1.push(this.string_obj(str1[i], i));
+      string1_array.push(this.string_obj(str1[i], i));
     }
-    this.setState({ string_data_1: temp1 });
-    let temp2 = [];
+    this.setState({ string_data_1: string1_array });
+
     for (let i = 0; i < str2.length; i++) {
-      temp2.push(this.string_obj(str2[i], i));
+      string2_array.push(this.string_obj(str2[i], i));
     }
-    this.setState({ string_data_2: temp2 });
+    this.setState({ string_data_2: string2_array });
   }
 
   animate() {
     for (let i = 0; i < fullrec.length - 1; i++) {
       let time1 = setTimeout(() => {
         treearray.push(fullrec[i]);
+
+        for (let j = 0; j < string1_array.length; j++) {
+          string1_array[j].check = 0;
+        }
+        for (let j = 0; j < string2_array.length; j++) {
+          string2_array[j].check = 0;
+        }
+
+        console.log(
+          fullrec[i].str1_idx,
+          fullrec[i].str2_idx,
+          typeof fullrec[i].str2_idx
+        );
+
+        if (string1_array[fullrec[i].str1_idx]) {
+          string1_array[fullrec[i].str1_idx].check = 2;
+          console.log(
+            "str1 :",
+            string1_array[fullrec[i].str1_idx],
+            string1_array[fullrec[i].str1_idx].check
+          );
+          this.setState({ string_data_1: string1_array });
+        }
+        if (string2_array[fullrec[i].str2_idx]) {
+          string2_array[fullrec[i].str2_idx].check = 2;
+          console.log(
+            "str2 :",
+            string2_array[fullrec[i].str2_idx],
+            string2_array[fullrec[i].str2_idx].check
+          );
+          this.setState({ string_data_2: string2_array });
+        }
         this.setState({ nodes: treearray });
       }, 250 * i);
       timeout_array.push(time1);
@@ -469,14 +502,36 @@ class LCS extends Component {
         <div className="hope">
           <div className="padding_style">
             <div className="string_data">
-              {string_data_1.map((node, nodeidx) => {
-                const { id, value, check } = node;
-                return (
-                  <LCS_string key={nodeidx} id={id} value={value} check={check}>
-                    {value}
-                  </LCS_string>
-                );
-              })}
+              <div className="string_text">
+                {string_data_1.map((node, nodeidx) => {
+                  const { id, value, check } = node;
+                  return (
+                    <LCS_string
+                      key={nodeidx}
+                      id={id}
+                      value={value}
+                      check={check}
+                    >
+                      {value}
+                    </LCS_string>
+                  );
+                })}
+              </div>
+              <div className="string_text">
+                {string_data_2.map((node, nodeidx) => {
+                  const { id, value, check } = node;
+                  return (
+                    <LCS_string
+                      key={nodeidx}
+                      id={id}
+                      value={value}
+                      check={check}
+                    >
+                      {value}
+                    </LCS_string>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="graph">

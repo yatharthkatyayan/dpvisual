@@ -126,6 +126,21 @@
   }
 }
 /*---------------------------------------------------LCS------------------------------------------------------------*/
+.string_font {
+  font-size: 15px;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  text-align: center;
+  font-weight: bold;
+  font-family: Menlo, monospace;
+  color: rgb(0, 0, 0);
+  padding: 2px;
+  user-select: none;
+}
+.string_text {
+  display: flex;
+  flex-direction: row;
+}
 .graph {
   -webkit-box-flex: 1;
   flex-grow: 1;
@@ -136,11 +151,10 @@
 .string_data {
   flex-grow: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   border-radius: 7px 7px 0 0;
-  padding: 7px;
-  background-color: yellow;
+  padding: 5px;
 }
 .font_input {
   font-family: Menlo, monospace;
