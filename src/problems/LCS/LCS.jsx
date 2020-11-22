@@ -339,7 +339,7 @@ class LCS extends Component {
       clearTimeout(timeout_array[i]);
     }
     document.getElementById("LCS_ans").classList.add("remove");
-
+    document.getElementById("LCS_data").classList.add("remove");
     string1_array = [];
     string2_array = [];
     timeout_array = [];
@@ -464,7 +464,9 @@ class LCS extends Component {
       this.setState({ string_data_1: string1_array });
       this.setState({ string_data_2: string2_array });
       document.getElementById("LCS_ans").classList.remove("remove");
+      document.getElementById("LCS_data").classList.remove("remove");
       this.setState({ LCS_length: res[str1.length][str2.length] });
+      this.setState({ LCS_data: ans });
     }, fullrec.length * 500);
     timeout_array.push(time1);
   }
@@ -526,6 +528,7 @@ class LCS extends Component {
       string_data_1 = [],
       string_data_2 = [],
       LCS_length = 0,
+      LCS_data = [],
     } = this.state;
 
     return (
@@ -554,8 +557,11 @@ class LCS extends Component {
             />
           </div>
           <div>
-            <p id="LCS_ans" className="string_font remove">
+            <p id="LCS_ans" className="lcs_length remove">
               LCS length = {LCS_length}
+            </p>
+            <p id="LCS_data" className="lcs_length remove">
+              LCS String = ["{LCS_data}"]
             </p>
           </div>
           <div>

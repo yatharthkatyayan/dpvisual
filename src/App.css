@@ -126,6 +126,20 @@
   }
 }
 /*---------------------------------------------------LCS------------------------------------------------------------*/
+.lcs_length {
+  margin: 35px;
+
+  font-size: 20px;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+
+  font-weight: bold;
+  font-family: Menlo, monospace;
+  color: rgb(0, 0, 0);
+  padding-left: 3px;
+  padding-right: 3px;
+  user-select: none;
+}
 .string_font {
   font-size: 20px;
   -webkit-box-flex: 0;
@@ -216,7 +230,8 @@
   cursor: pointer;
 }
 .lcs-visual {
-  margin-top: 50vh;
+  position: relative;
+  margin-top: 50px;
   margin-left: 35%;
   width: max-content;
   font-family: Times;
