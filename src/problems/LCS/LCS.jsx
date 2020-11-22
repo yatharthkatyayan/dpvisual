@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LCSTree from "./LCS_tree";
 import LCSEdges from "./lcs_edges";
+import LCS_string from "./LCS_string";
 let treearray = [];
 let treeEdge = [];
 let fullrec = [];
@@ -346,6 +347,27 @@ class LCS extends Component {
     this.setState({ edges: treeEdge });
   }
 
+  string_obj(value, id) {
+    return {
+      id: id,
+      value: value,
+      check: 0,
+    };
+  }
+
+  string_data_setter() {
+    let temp1 = [];
+    for (let i = 0; i < str1.length; i++) {
+      temp1.push(this.string_obj(str1[i], i));
+    }
+    this.setState({ string_data_1: temp1 });
+    let temp2 = [];
+    for (let i = 0; i < str2.length; i++) {
+      temp2.push(this.string_obj(str2[i], i));
+    }
+    this.setState({ string_data_2: temp2 });
+  }
+
   animate() {
     for (let i = 0; i < fullrec.length - 1; i++) {
       let time1 = setTimeout(() => {
@@ -403,11 +425,17 @@ class LCS extends Component {
     this.clearScreen();
     traverse(0, 0, parent);
     this.layout(parent);
+    this.string_data_setter();
     this.animate();
   }
 
   render() {
-    const { nodes = [], edges = [] } = this.state;
+    const {
+      nodes = [],
+      edges = [],
+      string_data_1 = [],
+      string_data_2 = [],
+    } = this.state;
 
     return (
       <div className="parent_div">
@@ -440,7 +468,16 @@ class LCS extends Component {
         </div>
         <div className="hope">
           <div className="padding_style">
-            <div className="string_data">hm..</div>
+            <div className="string_data">
+              {string_data_1.map((node, nodeidx) => {
+                const { id, value, check } = node;
+                return (
+                  <LCS_string key={nodeidx} id={id} value={value} check={check}>
+                    {value}
+                  </LCS_string>
+                );
+              })}
+            </div>
 
             <div className="graph">
               <svg
