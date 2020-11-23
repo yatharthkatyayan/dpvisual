@@ -45,6 +45,7 @@
   animation-duration: 6s;
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;
+  user-select: none;
 }
 .homepage_screen {
   -webkit-box-flex: 1;
