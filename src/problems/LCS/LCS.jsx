@@ -535,7 +535,8 @@ class LCS extends Component {
         <div className="menu">
           <div className=" lcs_prblm">
             <p>
-              Find out the longest common subsequence between two given strings.
+              Find out the longest common subsequence(LCS) between two given
+              strings.
             </p>
             <p>For example :</p>
             <p>String 1 : abcdgh</p>
