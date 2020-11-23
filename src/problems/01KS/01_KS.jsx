@@ -230,12 +230,17 @@ class KS extends Component {
     temp = document.getElementById("weights").value;
     weight_array = takeValues(temp);
     temp = document.getElementById("sum").value;
-    let sum = takeValues(temp)[0];
-    let dp = new Array(value_array.length)
-      .fill(-1)
-      .map(() => new Array(sum).fill(-1));
+    let sum = 0;
+    if (takeValues(temp)) sum = takeValues(temp)[0];
+    let dp;
+    if (value_array) {
+      dp = new Array(value_array.length)
+        .fill(-1)
+        .map(() => new Array(sum).fill(-1));
+    }
     let parent = node(xx, sum);
-    let x = fn(xx, sum, parent, dp);
+    let x = 0;
+    if (sum > 0) x = fn(xx, sum, parent, dp);
     this.layout(parent);
     if (toggle == 0) {
       traversetree(parent);
