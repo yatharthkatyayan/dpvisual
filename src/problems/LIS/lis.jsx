@@ -9,7 +9,18 @@ let font_size = 0;
 function toggled() {
   toggle = !toggle;
 }
-
+function codeShow() {
+  let x = document.getElementById("codeid");
+  if (x) {
+    x.classList.toggle("active");
+  }
+  let content = x.nextElementSibling;
+  if (content.style.maxHeight) {
+    content.style.maxHeight = null;
+  } else {
+    content.style.maxHeight = content.scrollHeight + "px";
+  }
+}
 class LIS extends Component {
   state = {};
 
@@ -284,10 +295,54 @@ class LIS extends Component {
               <div className="slider round "></div>
             </label>
           </div>
+
+          <button
+            id="codeid"
+            className="collapsible"
+            onClick={() => {
+              codeShow();
+            }}
+          >
+            View Code
+          </button>
+          <div className="content code">
+            <pre>
+              {`
+int lis( int arr[], int n )  
+{  
+  int lis[n]; 
+   
+  lis[0] = 1;    
+  
+  /* Compute optimized LIS values in  
+     bottom up manner */
+  
+     for (int i = 1; i < n; i++ ){
+    lis[i] = 1; 
+    
+    for (int j = 0; j < i; j++ ){  
+
+        if ( arr[i] > arr[j] 
+          && lis[i] < lis[j] + 1){  
+            lis[i] = lis[j] + 1;  
+        }
+
+    }
+
+  }
+    // Return maximum value in lis[] 
+    
+    return *max_element(lis, lis+n); 
+}  
+              `}
+            </pre>
+          </div>
+
           <div id="LIS_data" className="lcs_length remove">
             <p>LIS length = {LIS_length}</p>
             <p>LIS subsequence = [{LIS_data}]</p>
           </div>
+
           <div>
             <button className="lcs-visual" onClick={() => this.visualize()}>
               Visualize

@@ -629,15 +629,41 @@ class LCS extends Component {
           >
             View Code
           </button>
-          <div className="content">
-            <p>
+          <div className="content code">
+            <pre>
               {`
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-enim ad minim veniam, quis nostrud exercitation ullamco laboris
-nisi ut aliquip ex ea commodo consequat.
+/*
+initialize whole dp matrix to -1;
+dp[String1.length][String2.length] = -1;
+*/
+
+function fn(i,j) {
+  // i-th char of String1
+  //j-th char of String2
+
+  if (i == String1.length
+   || j == String2.length){
+    return 0;
+   }
+  
+  if(dp[i][j] != -1){
+    return dp[i][j];
+  }
+
+  if (String1[i] == String2[j]){
+    dp[i][j] = 1+1+fn(i+1, j+1);
+    return dp[i][j];
+  }
+
+  dp[i][j] = Math.max(
+    fn(i, j+1),
+    fn(i+1, j)
+  ); 
+
+  return dp[i][j]; 
+}    
               `}
-            </p>
+            </pre>
           </div>
 
           <div id="LCS_data" className="lcs_length remove">

@@ -136,7 +136,7 @@
   background-color: #777;
   color: white;
   cursor: pointer;
-  padding: 10px;
+  padding: 8px;
   width: calc(100% - 50px);
   border: none;
   text-align: left;
@@ -247,8 +247,28 @@ input:checked + .slider:before {
 .toggle_bar {
   float: right;
 }
+.code {
+  margin: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 0px;
+  width: calc(100% - 50px);
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+  font-size: 15px;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  font-weight: 500;
+  font-family: Menlo, monospace;
+  color: rgb(0, 0, 0);
+  padding-left: 5px;
+  padding-right: 5px;
+  user-select: none;
+  border-radius: 8px;
+}
 .lcs_prblm {
-  margin: 20px;
+  margin: 15px;
   margin-left: 25px;
   margin-right: 25px;
   margin-bottom: 0px;
