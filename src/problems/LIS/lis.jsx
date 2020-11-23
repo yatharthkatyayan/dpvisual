@@ -272,6 +272,7 @@ class LIS extends Component {
             <p>For example :</p>
             <p>Array : [10,22,9,33,103,50,80]</p>
             <p>LIS : [10,22,33,50,80]</p>
+            <p>*NOTE : GREEN NODES ARE BEING COMPARED.</p>
           </div>
           <div>
             <input

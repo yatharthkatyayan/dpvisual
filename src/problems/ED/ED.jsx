@@ -470,7 +470,7 @@ class ED extends Component {
     if (toggle) {
       treeEdge = [];
       treearray = [];
-      time_delay = 500;
+      time_delay = 400;
       time_curve = 50;
       for (let i = 0; i < fullrec.length - 1; i++) {
         let time1 = setTimeout(() => {
