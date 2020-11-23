@@ -191,8 +191,21 @@ function traverse(xx, yy, treenode) {
     .fill(-1)
     .map(() => new Array(str2.length).fill(-1));
   let x = fn(xx, yy, treenode, dp);
-  //  traversetree(parent);
 }
+
+function traversetree(node) {
+  treearray.push(node);
+  if (node.left) {
+    traversetree(node.left);
+  }
+  if (node.right) {
+    traversetree(node.right);
+  }
+  if (node.parent) {
+    treeEdge.push(edge(node, node.parent));
+  }
+}
+
 /*-------------------------------------------------------------------------------------------------------*/
 
 class LCS extends Component {
@@ -299,6 +312,7 @@ class LCS extends Component {
     } else if (li && !ri) {
       ro.thread = li;
       ro.mod = loffset - roffset;
+      if (li.parent.mod) ro.mod += li.parent.mod;
     }
     return (left_tree.x + right_tree.x) / 2;
   }
@@ -379,74 +393,83 @@ class LCS extends Component {
     let animation_working = 1;
     let delay_time = 0;
     let delay_edge = 0;
+
     if (toggle) {
       delay_time = 400;
       delay_edge = 50;
-    }
-    for (let i = 0; i < fullrec.length - 1; i++) {
-      let time1 = setTimeout(() => {
-        treearray.push(fullrec[i]);
 
-        for (let j = 0; j < string1_array.length; j++) {
-          string1_array[j].check = 0;
-        }
-        for (let j = 0; j < string2_array.length; j++) {
-          string2_array[j].check = 0;
-        }
+      for (let i = 0; i < fullrec.length - 1; i++) {
+        let time1 = setTimeout(() => {
+          treearray.push(fullrec[i]);
 
-        if (string1_array[fullrec[i].str1_idx]) {
-          string1_array[fullrec[i].str1_idx].check = 2;
+          for (let j = 0; j < string1_array.length; j++) {
+            string1_array[j].check = 0;
+          }
+          for (let j = 0; j < string2_array.length; j++) {
+            string2_array[j].check = 0;
+          }
 
-          this.setState({ string_data_1: string1_array });
-        }
-        if (string2_array[fullrec[i].str2_idx]) {
-          string2_array[fullrec[i].str2_idx].check = 2;
+          if (string1_array[fullrec[i].str1_idx]) {
+            string1_array[fullrec[i].str1_idx].check = 2;
 
-          this.setState({ string_data_2: string2_array });
-        }
-        this.setState({ nodes: treearray });
-      }, delay_time * i);
-      timeout_array.push(time1);
-      time1 = setTimeout(() => {
-        if (fullrec[i + 1]) {
-          let edge_new = edge(fullrec[i], fullrec[i + 1]);
-          let temp_id = edge(fullrec[i + 1], fullrec[i]).id;
-          let index = -1;
-          for (let j = 0; j < treeEdge.length; j++) {
-            if (treeEdge[j].id == temp_id) {
-              index = j;
-              break;
+            this.setState({ string_data_1: string1_array });
+          }
+          if (string2_array[fullrec[i].str2_idx]) {
+            string2_array[fullrec[i].str2_idx].check = 2;
+
+            this.setState({ string_data_2: string2_array });
+          }
+          this.setState({ nodes: treearray });
+        }, delay_time * i);
+
+        timeout_array.push(time1);
+
+        time1 = setTimeout(() => {
+          if (fullrec[i + 1]) {
+            let edge_new = edge(fullrec[i], fullrec[i + 1]);
+            let temp_id = edge(fullrec[i + 1], fullrec[i]).id;
+            let index = -1;
+            for (let j = 0; j < treeEdge.length; j++) {
+              if (treeEdge[j].id == temp_id) {
+                index = j;
+                break;
+              }
+            }
+            edge_new.time = i + 2;
+            if (index == -1) {
+              treeEdge.push(edge_new);
+              this.setState({ edges: treeEdge });
+              let icon1 = document.getElementById(
+                `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 1`
+              );
+              let icon2 = document.getElementById(
+                `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
+              );
+              if (icon1) icon1.beginElement();
+              if (icon2) icon2.beginElement();
+            } else {
+              treeEdge.splice(index, 1);
+              treeEdge.push(edge_new);
+              this.setState({ edges: treeEdge });
+              let icon1 = document.getElementById(
+                `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 1`
+              );
+              let icon2 = document.getElementById(
+                `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
+              );
+              if (icon1) icon1.beginElement();
+              if (icon2) icon2.beginElement();
             }
           }
-          edge_new.time = i + 2;
-          if (index == -1) {
-            treeEdge.push(edge_new);
-            this.setState({ edges: treeEdge });
-            let icon1 = document.getElementById(
-              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 1`
-            );
-            let icon2 = document.getElementById(
-              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
-            );
-            if (icon1) icon1.beginElement();
-            if (icon2) icon2.beginElement();
-          } else {
-            treeEdge.splice(index, 1);
-            treeEdge.push(edge_new);
-            this.setState({ edges: treeEdge });
-            let icon1 = document.getElementById(
-              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 1`
-            );
-            let icon2 = document.getElementById(
-              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
-            );
-            if (icon1) icon1.beginElement();
-            if (icon2) icon2.beginElement();
-          }
-        }
-      }, delay_time * i + delay_edge);
-      timeout_array.push(time1);
+        }, delay_time * i + delay_edge);
+        timeout_array.push(time1);
+      }
+    } else {
+      traversetree(parent);
+      this.setState({ nodes: treearray });
+      this.setState({ edges: treeEdge });
     }
+
     let time1 = setTimeout(() => {
       let res = this.LCS_TOP_DOWN(str1, str2, str1.length, str2.length);
       let ans = this.printLCS(str1, str2, str1.length, str2.length, res);
