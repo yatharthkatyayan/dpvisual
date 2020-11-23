@@ -585,6 +585,12 @@ class LCS extends Component {
             <p>String 1 : abcdgh</p>
             <p>String 2 : abedfh</p>
             <p>LCS : abdh</p>
+            <p>
+              *NOTE : WHITE NODES ARE CALCULATED.
+              <br />
+              <br />
+              *NOTE : BLACK NODES ARE MEMORISED.
+            </p>
           </div>
           <div>
             <input

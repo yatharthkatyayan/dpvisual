@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import EDTree from "./ED_tree";
 import EDEdges from "./ED_edges";
+import LCS_string from "../LCS/LCS_string";
 
 let treearray = [];
 let treeEdge = [];
 let fullrec = [];
+let string1_array = [];
+let string2_array = [];
 let str1 = "";
 let str2 = "";
 let timeout_array = [];
@@ -430,6 +433,8 @@ class ED extends Component {
     }
     document.getElementById("ED_data").classList.add("remove");
     timeout_array = [];
+    string1_array = [];
+    string2_array = [];
     treearray = [];
     treeEdge = [];
     fullrec = [];
@@ -437,6 +442,26 @@ class ED extends Component {
     y_place = 0;
     this.setState({ nodes: treearray });
     this.setState({ edges: treeEdge });
+  }
+
+  string_obj(value, id) {
+    return {
+      id: id,
+      value: value,
+      check: 0,
+    };
+  }
+
+  string_data_setter() {
+    for (let i = 0; i < str1.length; i++) {
+      string1_array.push(this.string_obj(str1[i], i));
+    }
+    this.setState({ string_data_1: string1_array });
+
+    for (let i = 0; i < str2.length; i++) {
+      string2_array.push(this.string_obj(str2[i], i));
+    }
+    this.setState({ string_data_2: string2_array });
   }
 
   animate(ans) {
@@ -450,6 +475,25 @@ class ED extends Component {
       for (let i = 0; i < fullrec.length - 1; i++) {
         let time1 = setTimeout(() => {
           treearray.push(fullrec[i]);
+
+          for (let j = 0; j < string1_array.length; j++) {
+            string1_array[j].check = 0;
+          }
+          for (let j = 0; j < string2_array.length; j++) {
+            string2_array[j].check = 0;
+          }
+
+          if (string1_array[fullrec[i].str1_idx]) {
+            string1_array[fullrec[i].str1_idx].check = 2;
+
+            this.setState({ string_data_1: string1_array });
+          }
+          if (string2_array[fullrec[i].str2_idx]) {
+            string2_array[fullrec[i].str2_idx].check = 2;
+
+            this.setState({ string_data_2: string2_array });
+          }
+
           this.setState({ nodes: treearray });
         }, time_delay * i);
         timeout_array.push(time1);
@@ -516,11 +560,18 @@ class ED extends Component {
   help() {
     this.clearScreen();
     let x = this.traverse(0, 0);
+    this.string_data_setter();
     this.animate(x);
   }
 
   render() {
-    const { nodes = [], edges = [], ans = 0 } = this.state;
+    const {
+      nodes = [],
+      edges = [],
+      ans = 0,
+      string_data_1 = [],
+      string_data_2 = [],
+    } = this.state;
     return (
       <div className="parent_div">
         <div className="menu">
@@ -543,6 +594,12 @@ class ED extends Component {
               Last three and first characters are same. We basically need to
               convert "un" to "atur". This can be done using below three
               operations. Replace 'n' with 'r', insert t, insert a
+            </p>
+            <p>
+              *NOTE : WHITE NODES ARE CALCULATED.
+              <br />
+              <br />
+              *NOTE : BLACK NODES ARE MEMORISED.
             </p>
           </div>
           <div>
@@ -612,6 +669,9 @@ function fn(i,j) {
    }
   
   if(dp[i-1][j-1] != -1){
+
+    // BLACK NODES ARE MEMORISED...
+    
     return dp[i-1][j-1];
   }
 
@@ -642,63 +702,98 @@ function fn(i,j) {
         </div>
         <div className="hope">
           <div className="padding_style">
-            <svg
-              className="svg"
-              viewBox={`0 0 ${x_place * 45 + 100} ${y_place * 150 + 100}`}
-            >
-              {nodes.map((node, nodeidx) => {
-                const {
-                  parent,
-                  id,
-                  x,
-                  y,
-                  left,
-                  right,
-                  middle,
-                  str1_idx,
-                  str2_idx,
-                  value,
-                  mod,
-                  thread,
-                  calculated,
-                } = node;
-                return (
-                  <EDTree
-                    key={nodeidx}
-                    parent={parent}
-                    id={id}
-                    x={x}
-                    y={y}
-                    left={left}
-                    right={right}
-                    middle={middle}
-                    str1_idx={str1_idx}
-                    str2_idx={str2_idx}
-                    value={value}
-                    mod={mod}
-                    thread={thread}
-                    calculated={calculated}
-                  >
-                    {value}
-                  </EDTree>
-                );
-              })}
+            <div className="string_data">
+              <div className="string_text">
+                {string_data_1.map((node, nodeidx) => {
+                  const { id, value, check } = node;
+                  return (
+                    <LCS_string
+                      key={nodeidx}
+                      id={id}
+                      value={value}
+                      check={check}
+                    >
+                      {value}
+                    </LCS_string>
+                  );
+                })}
+              </div>
+              <div className="string_text">
+                {string_data_2.map((node, nodeidx) => {
+                  const { id, value, check } = node;
+                  return (
+                    <LCS_string
+                      key={nodeidx}
+                      id={id}
+                      value={value}
+                      check={check}
+                    >
+                      {value}
+                    </LCS_string>
+                  );
+                })}
+              </div>
+            </div>
 
-              {edges.map((edge, edgeidx) => {
-                const { x1, y1, x2, y2, value, time } = edge;
-                return (
-                  <EDEdges
-                    key={edgeidx}
-                    x_1={x1}
-                    y_1={y1}
-                    x_2={x2}
-                    y_2={y2}
-                    value={value}
-                    time={time}
-                  ></EDEdges>
-                );
-              })}
-            </svg>
+            <div className="graph">
+              <svg
+                className="svg"
+                viewBox={`0 0 ${x_place * 45 + 100} ${y_place * 150 + 100}`}
+              >
+                {nodes.map((node, nodeidx) => {
+                  const {
+                    parent,
+                    id,
+                    x,
+                    y,
+                    left,
+                    right,
+                    middle,
+                    str1_idx,
+                    str2_idx,
+                    value,
+                    mod,
+                    thread,
+                    calculated,
+                  } = node;
+                  return (
+                    <EDTree
+                      key={nodeidx}
+                      parent={parent}
+                      id={id}
+                      x={x}
+                      y={y}
+                      left={left}
+                      right={right}
+                      middle={middle}
+                      str1_idx={str1_idx}
+                      str2_idx={str2_idx}
+                      value={value}
+                      mod={mod}
+                      thread={thread}
+                      calculated={calculated}
+                    >
+                      {value}
+                    </EDTree>
+                  );
+                })}
+
+                {edges.map((edge, edgeidx) => {
+                  const { x1, y1, x2, y2, value, time } = edge;
+                  return (
+                    <EDEdges
+                      key={edgeidx}
+                      x_1={x1}
+                      y_1={y1}
+                      x_2={x2}
+                      y_2={y2}
+                      value={value}
+                      time={time}
+                    ></EDEdges>
+                  );
+                })}
+              </svg>
+            </div>
           </div>
           <div className="footer">made by yatharth katyayan</div>
         </div>

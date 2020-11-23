@@ -407,6 +407,7 @@ int lis( int arr[], int n )
               })}
             </svg>
           </div>
+          <div className="footer">made by yatharth katyayan</div>
         </div>
       </div>
     );
