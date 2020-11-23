@@ -390,7 +390,6 @@ class LCS extends Component {
   }
 
   animate() {
-    let animation_working = 1;
     let delay_time = 0;
     let delay_edge = 0;
 
@@ -541,6 +540,7 @@ class LCS extends Component {
 
   componentDidMount() {
     this.clearScreen();
+    toggle = 1;
   }
 
   help() {

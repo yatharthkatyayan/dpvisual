@@ -210,7 +210,6 @@ class LIS extends Component {
   }
 
   clearScreen() {
-    toggle = 1;
     numbers = [];
     this.setState({ numbers_array: numbers });
     font_size = 0;
@@ -223,6 +222,7 @@ class LIS extends Component {
   }
   componentDidMount() {
     this.clearScreen();
+    toggle = 1;
   }
   visualize() {
     this.clearScreen();
