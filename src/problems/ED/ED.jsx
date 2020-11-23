@@ -9,7 +9,7 @@ let str1 = "";
 let str2 = "";
 let timeout_array = [];
 let pos = 10;
-
+let toggle = 1;
 let x_place = 0;
 let y_place = 0;
 
@@ -201,6 +201,23 @@ function fn(i, j, treenode, dp) {
   dp[i - 1][j - 1] = treenode.returned_value;
   if (treenode.parent) fullrec.push(treenode.parent);
   return temp;
+}
+
+function toggled() {
+  toggle = !toggle;
+}
+
+function codeShow() {
+  let x = document.getElementById("codeid");
+  if (x) {
+    x.classList.toggle("active");
+  }
+  let content = x.nextElementSibling;
+  if (content.style.maxHeight) {
+    content.style.maxHeight = null;
+  } else {
+    content.style.maxHeight = content.scrollHeight + "px";
+  }
 }
 
 /*-------------------------------------------------------------------------------------------------------*/
@@ -457,6 +474,7 @@ class ED extends Component {
 
   componentDidMount() {
     this.clearScreen();
+    toggle = 1;
   }
 
   help() {
@@ -470,6 +488,27 @@ class ED extends Component {
     return (
       <div className="parent_div">
         <div className="menu">
+          <div className=" lcs_prblm">
+            <p>
+              Given two strings str1 and str2 and below operations that can
+              performed on str1. Find minimum number of edits (operations)
+              required to convert ‘str1’ into ‘str2’.
+            </p>
+            <p>
+              1. Insert
+              <br /> 2. Remove <br /> 3. Replace
+            </p>
+            <p>All of the above operations are of equal cost. </p>
+            <p>For example :</p>
+            <p>str1 = "sunday" </p>
+            <p>str2 = "saturday"</p>
+            <p>Output: 3</p>
+            <p>
+              Last three and first characters are same. We basically need to
+              convert "un" to "atur". This can be done using below three
+              operations. Replace 'n' with 'r', insert t, insert a
+            </p>
+          </div>
           <div>
             <input
               id="string_1"
@@ -490,6 +529,71 @@ class ED extends Component {
               spellCheck={false}
             />
           </div>
+          <div className="toggle_check">
+            <label>Enable step-by-step animation</label>
+            <label className="switch toggle_bar">
+              <input
+                type="checkbox"
+                defaultChecked
+                onClick={() => toggled()}
+              ></input>
+              <div className="slider round "></div>
+            </label>
+          </div>
+
+          <button
+            id="codeid"
+            className="collapsible"
+            onClick={() => {
+              codeShow();
+            }}
+          >
+            View Code
+          </button>
+          <div className="content code">
+            <pre>
+              {`
+/*
+
+initialize whole dp matrix to -1;
+
+dp[String1.length][String2.length] = -1;
+
+*/
+
+function fn(i,j) {
+  // i-th char of String1
+  //j-th char of String2
+
+  if (i == 0){
+    return j;
+   }
+
+  if (j == 0){
+    return i;
+   }
+  
+  if(dp[i-1][j-1] != -1){
+    return dp[i-1][j-1];
+  }
+
+  if (String1[i-1] == String2[j-1]){
+    dp[i-1][j-1] = fn(i-1, j-1);
+    return dp[i-1][j-1];
+  }
+
+  dp[i-1][j-1] =1+ Math.min(
+    fn(i, j-1),
+    fn(i-1, j),
+    fn(i-1,j-1)
+  ); 
+
+  return dp[i-1][j-1]; 
+}    
+              `}
+            </pre>
+          </div>
+
           <div>
             <button className="lcs-visual" onClick={() => this.help()}>
               Visualize

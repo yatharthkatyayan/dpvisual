@@ -633,8 +633,11 @@ class LCS extends Component {
             <pre>
               {`
 /*
+
 initialize whole dp matrix to -1;
+
 dp[String1.length][String2.length] = -1;
+
 */
 
 function fn(i,j) {
@@ -651,7 +654,7 @@ function fn(i,j) {
   }
 
   if (String1[i] == String2[j]){
-    dp[i][j] = 1+1+fn(i+1, j+1);
+    dp[i][j] = 1+fn(i+1, j+1);
     return dp[i][j];
   }
 
