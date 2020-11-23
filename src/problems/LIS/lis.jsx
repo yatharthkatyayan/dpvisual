@@ -149,11 +149,15 @@ class LIS extends Component {
           max_lis = lis_seq[i].slice();
         }
       }
-
+      let LIS_ans = [];
       for (let i = 0; i < max_lis.length; i++) {
         numbers[max_lis[i].id].incheck = -1;
+        LIS_ans.push(max_lis[i].value);
+        if (i != max_lis.length - 1) LIS_ans.push(",");
       }
-
+      document.getElementById("LIS_data").classList.remove("remove");
+      this.setState({ LIS_length: max_lis.length });
+      this.setState({ LIS_data: LIS_ans });
       this.setState({ numbers_array: numbers });
     }, ((n * (n - 1)) / 2) * delay_time + delay_curve);
     timeout_array.push(time2);
@@ -214,6 +218,7 @@ class LIS extends Component {
     for (let i = 0; i < timeout_array.length; i++) {
       clearTimeout(timeout_array[i]);
     }
+    document.getElementById("LIS_data").classList.add("remove");
   }
   componentDidMount() {
     this.clearScreen();
@@ -226,12 +231,19 @@ class LIS extends Component {
       let dp = this.setArray(numbers.length);
       this.setState({ dp_array: dp });
       this.setState({ numbers_array: numbers });
-      let x = this.lis(numbers, numbers.length, dp);
+      let x = 0;
+      x = this.lis(numbers, numbers.length, dp);
       this.setState({ dp_array: dp });
     }
   }
   render() {
-    const { numbers_array = [], dp_array = [], svg_array = [] } = this.state;
+    const {
+      numbers_array = [],
+      dp_array = [],
+      svg_array = [],
+      LIS_data = [],
+      LIS_length = 0,
+    } = this.state;
     return (
       <div className="parent_div">
         <div className="menu">
@@ -240,7 +252,7 @@ class LIS extends Component {
               Find out the longest increasing subsequence(LIS) in a given array.
             </p>
             <p>For example :</p>
-            <p>Array : [10,22,9,33,50,41,80]</p>
+            <p>Array : [10,22,9,33,103,50,80]</p>
             <p>LIS : [10,22,33,50,80]</p>
           </div>
           <div>
@@ -264,6 +276,10 @@ class LIS extends Component {
               ></input>
               <div className="slider round "></div>
             </label>
+          </div>
+          <div id="LIS_data" className="lcs_length remove">
+            <p>LIS length = {LIS_length}</p>
+            <p>LIS subsequence = [{LIS_data}]</p>
           </div>
           <div>
             <button className="lcs-visual" onClick={() => this.visualize()}>
