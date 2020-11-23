@@ -493,7 +493,8 @@ class LCS extends Component {
       //   console.log(ans);
       this.setState({ string_data_1: string1_array });
       this.setState({ string_data_2: string2_array });
-      document.getElementById("LCS_data").classList.remove("remove");
+      if (document.getElementById("LCS_data"))
+        document.getElementById("LCS_data").classList.remove("remove");
       this.setState({ LCS_length: ans.length });
       this.setState({ LCS_data: ans });
     }, fullrec.length * delay_time);

@@ -155,7 +155,8 @@ class LIS extends Component {
         LIS_ans.push(max_lis[i].value);
         if (i != max_lis.length - 1) LIS_ans.push(",");
       }
-      document.getElementById("LIS_data").classList.remove("remove");
+      if (document.getElementById("LCS_data"))
+        document.getElementById("LIS_data").classList.remove("remove");
       this.setState({ LIS_length: max_lis.length });
       this.setState({ LIS_data: LIS_ans });
       this.setState({ numbers_array: numbers });
@@ -210,20 +211,22 @@ class LIS extends Component {
   }
 
   clearScreen() {
+    for (let i = 0; i < timeout_array.length; i++) {
+      clearTimeout(timeout_array[i]);
+    }
     numbers = [];
     this.setState({ numbers_array: numbers });
     font_size = 0;
     this.setState({ dp_array: [] });
     this.setState({ svg_array: [] });
-    for (let i = 0; i < timeout_array.length; i++) {
-      clearTimeout(timeout_array[i]);
-    }
+
     document.getElementById("LIS_data").classList.add("remove");
   }
   componentDidMount() {
     this.clearScreen();
     toggle = 1;
   }
+
   visualize() {
     this.clearScreen();
     this.takeValues();
