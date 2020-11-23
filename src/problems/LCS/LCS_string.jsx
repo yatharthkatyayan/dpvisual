@@ -5,9 +5,9 @@ class LCS_string extends Component {
     const { id, value, check } = this.props;
     let temp_color = "black";
     if (check == -1) {
-      temp_color = "red";
+      temp_color = "#2196f3";
     } else if (check == 2) {
-      temp_color = "blue";
+      temp_color = "red";
     }
     return (
       <div

@@ -10,7 +10,7 @@ let str2 = "";
 let string1_array = [];
 let string2_array = [];
 let timeout_array = [];
-
+let toggle = 1;
 let parent = node(0, 0);
 let x_place = 0;
 let y_place = 0;
@@ -32,7 +32,9 @@ function node(i, j) {
     calculated: 0,
   };
 }
-
+function toggled() {
+  toggle = !toggle;
+}
 function edge(parent, child) {
   let slope = 0;
   if (parent && child) {
@@ -464,7 +466,7 @@ class LCS extends Component {
       this.setState({ string_data_1: string1_array });
       this.setState({ string_data_2: string2_array });
       document.getElementById("LCS_data").classList.remove("remove");
-      this.setState({ LCS_length: res[str1.length][str2.length] });
+      this.setState({ LCS_length: ans.length });
       this.setState({ LCS_data: ans });
     }, fullrec.length * 500);
     timeout_array.push(time1);
@@ -565,11 +567,23 @@ class LCS extends Component {
               autoComplete="off"
             />
           </div>
+          <div className="toggle_check">
+            <label>Enable step-by-step animation</label>
+            <label className="switch toggle_bar">
+              <input
+                type="checkbox"
+                defaultChecked
+                onClick={() => toggled()}
+              ></input>
+              <div className="slider round "></div>
+            </label>
+          </div>
 
           <div id="LCS_data" className="lcs_length remove">
             <p>LCS length = {LCS_length}</p>
             <p>LCS String = ["{LCS_data}"]</p>
           </div>
+
           <div>
             <button className="lcs-visual" onClick={() => this.help()}>
               Visualize
