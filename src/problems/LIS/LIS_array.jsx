@@ -2,12 +2,14 @@ import React, { Component } from "react";
 class LIS_array extends Component {
   state = {};
   render() {
-    const { value, x1, y1, font, incheck = false } = this.props;
+    const { value, x1, y1, font, incheck = 0 } = this.props;
     let b_color = "white";
-    if (incheck) {
-      b_color = "yellow";
-    } else {
+    if (incheck == -1) {
+      b_color = "#2196f3";
+    } else if (incheck == 0) {
       b_color = "white";
+    } else {
+      b_color = "#4caf50";
     }
     return (
       <g>

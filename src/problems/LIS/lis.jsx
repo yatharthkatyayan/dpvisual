@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import LIS_array from "./LIS_array";
 import "../../App.css";
 import LIScurve from "./LIS_SVG";
-
+let toggle = 1;
 let numbers = [];
 let timeout_array = [];
 let font_size = 0;
+function toggled() {
+  toggle = !toggle;
+}
+
 class LIS extends Component {
   state = {};
 
@@ -44,65 +48,118 @@ class LIS extends Component {
   }
 
   lis(arr, n, DP_array) {
-    if (n) {
-      let count = 0;
-      let dp = new Array(n);
+    let delay_time = 0;
+    let delay_curve = 0;
+    if (toggle) {
+      delay_time = 1000;
+      delay_curve = 500;
+
+      if (n) {
+        let count = 0;
+        let dp = new Array(n);
+        DP_array[0].value = 1;
+        dp[0] = 1;
+        let temp_curve_array = [];
+        for (let i = 1; i < n; i++) {
+          let maxval = 0;
+
+          let time1 = setTimeout(() => {
+            numbers[i].incheck = 1;
+            this.setState({ numbers_array: numbers });
+          }, delay_time * count + delay_curve);
+          timeout_array.push(time1);
+
+          for (let j = 0; j < i; j++) {
+            count++;
+            time1 = setTimeout(() => {
+              numbers[j].incheck = 1;
+              this.setState({ numbers_array: numbers });
+              DP_array[j].incheck = 1;
+              this.setState({ dp_array: DP_array });
+              let curve_obj = this.curveSetter(i, j);
+              temp_curve_array.push(curve_obj);
+              this.setState({ svg_array: temp_curve_array });
+            }, count * delay_time);
+
+            timeout_array.push(time1);
+
+            time1 = setTimeout(() => {
+              numbers[j].incheck = 0;
+              this.setState({ numbers_array: numbers });
+              DP_array[j].incheck = 0;
+              this.setState({ dp_array: DP_array });
+              temp_curve_array.pop();
+              this.setState({ svg_array: temp_curve_array });
+            }, count * delay_time + delay_curve);
+
+            timeout_array.push(time1);
+            if (arr[i].value > arr[j].value) {
+              maxval = Math.max(maxval, dp[j]);
+            }
+          }
+
+          dp[i] = maxval + 1;
+          time1 = setTimeout(() => {
+            DP_array[i].value = dp[i];
+            this.setState({ dp_array: DP_array });
+            numbers[i].incheck = 0;
+            this.setState({ numbers_array: numbers });
+          }, count * delay_time + delay_curve);
+          timeout_array.push(time1);
+        }
+        return DP_array;
+      }
+    } else {
       DP_array[0].value = 1;
-      dp[0] = 1;
-      let temp_curve_array = [];
-      for (let i = 1; i < n; i++) {
-        let maxval = 0;
-
-        let time1 = setTimeout(() => {
-          numbers[i].incheck = true;
-          this.setState({ numbers_array: numbers });
-        }, 1000 * count + 500);
-        timeout_array.push(time1);
+      for (let i = 0; i < n; i++) {
+        DP_array[i].value = 1;
         for (let j = 0; j < i; j++) {
-          count++;
+          if (
+            arr[i].value > arr[j].value &&
+            DP_array[i].value < DP_array[j].value + 1
+          ) {
+            DP_array[i].value = DP_array[j].value + 1;
+          }
+        }
+      }
+      this.setState({ dp_array: DP_array });
+    }
+    setTimeout(() => {
+      let lis_seq = new Array(n).fill(-1).map(() => new Array());
 
-          time1 = setTimeout(() => {
-            numbers[j].incheck = true;
-            this.setState({ numbers_array: numbers });
-            DP_array[j].incheck = true;
-            this.setState({ dp_array: DP_array });
-            let curve_obj = this.curveSetter(i, j);
-
-            temp_curve_array.push(curve_obj);
-            this.setState({ svg_array: temp_curve_array });
-          }, count * 1000);
-          timeout_array.push(time1);
-          time1 = setTimeout(() => {
-            numbers[j].incheck = false;
-            this.setState({ numbers_array: numbers });
-            DP_array[j].incheck = false;
-            this.setState({ dp_array: DP_array });
-            temp_curve_array.pop();
-            this.setState({ svg_array: temp_curve_array });
-          }, count * 1000 + 500);
-          timeout_array.push(time1);
-          if (arr[i].value > arr[j].value) {
-            maxval = Math.max(maxval, dp[j]);
+      lis_seq[0].push(arr[0]);
+      for (let i = 1; i < n; i++) {
+        for (let j = 0; j < i; j++) {
+          if (
+            arr[i].value > arr[j].value &&
+            lis_seq[i].length < lis_seq[j].length + 1
+          ) {
+            lis_seq[i] = lis_seq[j].slice();
           }
         }
 
-        dp[i] = maxval + 1;
-        time1 = setTimeout(() => {
-          DP_array[i].value = dp[i];
-          this.setState({ dp_array: DP_array });
-          numbers[i].incheck = false;
-          this.setState({ numbers_array: numbers });
-        }, count * 1000 + 500);
-        timeout_array.push(time1);
+        lis_seq[i].push(arr[i]);
       }
-      return DP_array;
-    }
+      let max_lis = lis_seq[0].slice();
+      for (let i = 0; i < n; i++) {
+        if (lis_seq[i].length > max_lis.length) {
+          max_lis = lis_seq[i].slice();
+        }
+      }
+
+      for (let i = 0; i < max_lis.length; i++) {
+        numbers[max_lis[i].id].incheck = -1;
+      }
+
+      this.setState({ numbers_array: numbers });
+    }, ((n * (n - 1)) / 2) * delay_time);
   }
 
-  createobj(value) {
+  createobj(value, id) {
     return {
+      id: id,
       value: value,
-      incheck: false,
+      incheck: 0,
     };
   }
 
@@ -119,7 +176,7 @@ class LIS extends Component {
         }
       }
       for (let i = 0; i < numbers.length; i++) {
-        numbers[i] = this.createobj(numbers[i]);
+        numbers[i] = this.createobj(numbers[i], i);
       }
     }
 
@@ -173,6 +230,14 @@ class LIS extends Component {
     return (
       <div className="parent_div">
         <div className="menu">
+          <div className=" lcs_prblm">
+            <p>
+              Find out the longest increasing subsequence(LIS) in a given array.
+            </p>
+            <p>For example :</p>
+            <p>Array : [10,22,9,33,50,41,80]</p>
+            <p>LIS : [10,22,33,50,80]</p>
+          </div>
           <div>
             <input
               id="Input_1"
@@ -181,7 +246,19 @@ class LIS extends Component {
               type="text"
               placeholder="Input Array here"
               spellCheck={false}
+              autoComplete="off"
             />
+          </div>
+          <div className="toggle_check">
+            <label>Enable step-by-step animation</label>
+            <label className="switch toggle_bar">
+              <input
+                type="checkbox"
+                defaultChecked
+                onClick={() => toggled()}
+              ></input>
+              <div className="slider round "></div>
+            </label>
           </div>
           <div>
             <button className="lcs-visual" onClick={() => this.visualize()}>
