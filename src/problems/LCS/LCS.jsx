@@ -205,7 +205,18 @@ function traversetree(node) {
     treeEdge.push(edge(node, node.parent));
   }
 }
-
+function codeShow() {
+  let x = document.getElementById("codeid");
+  if (x) {
+    x.classList.toggle("active");
+  }
+  let content = x.nextElementSibling;
+  if (content.style.maxHeight) {
+    content.style.maxHeight = null;
+  } else {
+    content.style.maxHeight = content.scrollHeight + "px";
+  }
+}
 /*-------------------------------------------------------------------------------------------------------*/
 
 class LCS extends Component {
@@ -607,6 +618,26 @@ class LCS extends Component {
               ></input>
               <div className="slider round "></div>
             </label>
+          </div>
+
+          <button
+            id="codeid"
+            className="collapsible"
+            onClick={() => {
+              codeShow();
+            }}
+          >
+            View Code
+          </button>
+          <div className="content">
+            <p>
+              {`
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+enim ad minim veniam, quis nostrud exercitation ullamco laboris
+nisi ut aliquip ex ea commodo consequat.
+              `}
+            </p>
           </div>
 
           <div id="LCS_data" className="lcs_length remove">
