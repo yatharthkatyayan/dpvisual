@@ -243,6 +243,7 @@ input:checked + .slider:before {
   font-family: Menlo, monospace;
   font-size: 16px;
   font-weight: 500;
+  user-select: none;
 }
 .toggle_bar {
   float: right;
@@ -406,6 +407,7 @@ input:checked + .slider:before {
   position: relative;
   margin-top: 20px;
   margin-left: 35%;
+  margin-bottom: 15px;
   width: max-content;
   font-family: Menlo, monospace;
   font-weight: 600;
@@ -415,6 +417,7 @@ input:checked + .slider:before {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  user-select: none;
 }
 *:focus {
   outline: none;
