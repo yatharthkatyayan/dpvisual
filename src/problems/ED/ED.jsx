@@ -220,6 +220,21 @@ function codeShow() {
   }
 }
 
+function traversetree(node) {
+  treearray.push(node);
+  if (node.left) {
+    traversetree(node.left);
+  }
+  if (node.middle) {
+    traversetree(node.middle);
+  }
+  if (node.right) {
+    traversetree(node.right);
+  }
+  if (node.parent) {
+    treeEdge.push(edge(node, node.parent));
+  }
+}
 /*-------------------------------------------------------------------------------------------------------*/
 
 class ED extends Component {
@@ -235,6 +250,8 @@ class ED extends Component {
       .map(() => new Array(str2.length).fill(-1));
     let x = fn(str1.length, str2.length, parent, dp);
     this.layout(parent);
+    if (toggle == 0) traversetree(parent);
+    return x;
   }
 
   nextright(tree) {
@@ -411,65 +428,84 @@ class ED extends Component {
     for (let i = 0; i < timeout_array.length; i++) {
       clearTimeout(timeout_array[i]);
     }
+    document.getElementById("ED_data").classList.add("remove");
     timeout_array = [];
     treearray = [];
     treeEdge = [];
     fullrec = [];
     x_place = 0;
     y_place = 0;
-
     this.setState({ nodes: treearray });
     this.setState({ edges: treeEdge });
   }
 
-  animate() {
-    for (let i = 0; i < fullrec.length - 1; i++) {
-      let time1 = setTimeout(() => {
-        treearray.push(fullrec[i]);
-        this.setState({ nodes: treearray });
-      }, 250 * i);
-      timeout_array.push(time1);
+  animate(ans) {
+    let time_delay = 0;
+    let time_curve = 0;
+    if (toggle) {
+      treeEdge = [];
+      treearray = [];
+      time_delay = 500;
+      time_curve = 50;
+      for (let i = 0; i < fullrec.length - 1; i++) {
+        let time1 = setTimeout(() => {
+          treearray.push(fullrec[i]);
+          this.setState({ nodes: treearray });
+        }, time_delay * i);
+        timeout_array.push(time1);
 
-      time1 = setTimeout(() => {
-        if (fullrec[i + 1]) {
-          let edge_new = edge(fullrec[i], fullrec[i + 1]);
-          let temp_id = edge(fullrec[i + 1], fullrec[i]).id;
-          let index = -1;
-          for (let j = 0; j < treeEdge.length; j++) {
-            if (treeEdge[j].id == temp_id) {
-              index = j;
-              break;
+        time1 = setTimeout(() => {
+          if (fullrec[i + 1]) {
+            let edge_new = edge(fullrec[i], fullrec[i + 1]);
+            let temp_id = edge(fullrec[i + 1], fullrec[i]).id;
+            let index = -1;
+            for (let j = 0; j < treeEdge.length; j++) {
+              if (treeEdge[j].id == temp_id) {
+                index = j;
+                break;
+              }
+            }
+            edge_new.time = i + 2;
+            if (index == -1) {
+              treeEdge.push(edge_new);
+              this.setState({ edges: treeEdge });
+              let icon1 = document.getElementById(
+                `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 1`
+              );
+              let icon2 = document.getElementById(
+                `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
+              );
+              if (icon1) icon1.beginElement();
+              if (icon2) icon2.beginElement();
+            } else {
+              treeEdge.splice(index, 1);
+              treeEdge.push(edge_new);
+              this.setState({ edges: treeEdge });
+              let icon1 = document.getElementById(
+                `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 1`
+              );
+              let icon2 = document.getElementById(
+                `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
+              );
+              if (icon1) icon1.beginElement();
+              if (icon2) icon2.beginElement();
             }
           }
-          edge_new.time = i + 2;
-          if (index == -1) {
-            treeEdge.push(edge_new);
-            this.setState({ edges: treeEdge });
-            let icon1 = document.getElementById(
-              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 1`
-            );
-            let icon2 = document.getElementById(
-              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
-            );
-            if (icon1) icon1.beginElement();
-            if (icon2) icon2.beginElement();
-          } else {
-            treeEdge.splice(index, 1);
-            treeEdge.push(edge_new);
-            this.setState({ edges: treeEdge });
-            let icon1 = document.getElementById(
-              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 1`
-            );
-            let icon2 = document.getElementById(
-              `edge ${edge_new.x1} ${edge_new.y1} ${edge_new.x2} ${edge_new.y2} 2`
-            );
-            if (icon1) icon1.beginElement();
-            if (icon2) icon2.beginElement();
-          }
-        }
-      }, 250 * i + 50);
-      timeout_array.push(time1);
+        }, time_delay * i + time_curve);
+        timeout_array.push(time1);
+      }
+    } else {
+      if (toggle == 0) {
+        this.setState({ nodes: treearray });
+        this.setState({ edges: treeEdge });
+      }
     }
+    let time2 = setTimeout(() => {
+      if (document.getElementById("ED_data"))
+        document.getElementById("ED_data").classList.remove("remove");
+      this.setState({ ans: ans });
+    }, fullrec.length * time_delay);
+    timeout_array.push(time2);
   }
 
   componentDidMount() {
@@ -479,12 +515,12 @@ class ED extends Component {
 
   help() {
     this.clearScreen();
-    this.traverse(0, 0);
-    this.animate();
+    let x = this.traverse(0, 0);
+    this.animate(x);
   }
 
   render() {
-    const { nodes = [], edges = [] } = this.state;
+    const { nodes = [], edges = [], ans = 0 } = this.state;
     return (
       <div className="parent_div">
         <div className="menu">
@@ -517,6 +553,7 @@ class ED extends Component {
               type="text"
               placeholder="String 1"
               spellCheck={false}
+              autoComplete="off"
             />
           </div>
           <div>
@@ -527,6 +564,7 @@ class ED extends Component {
               type="text"
               placeholder="String 2"
               spellCheck={false}
+              autoComplete="off"
             />
           </div>
           <div className="toggle_check">
@@ -593,7 +631,9 @@ function fn(i,j) {
               `}
             </pre>
           </div>
-
+          <div id="ED_data" className="lcs_length remove">
+            <p>Output = {ans}</p>
+          </div>
           <div>
             <button className="lcs-visual" onClick={() => this.help()}>
               Visualize
