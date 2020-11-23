@@ -377,6 +377,12 @@ class LCS extends Component {
 
   animate() {
     let animation_working = 1;
+    let delay_time = 0;
+    let delay_edge = 0;
+    if (toggle) {
+      delay_time = 400;
+      delay_edge = 50;
+    }
     for (let i = 0; i < fullrec.length - 1; i++) {
       let time1 = setTimeout(() => {
         treearray.push(fullrec[i]);
@@ -399,7 +405,7 @@ class LCS extends Component {
           this.setState({ string_data_2: string2_array });
         }
         this.setState({ nodes: treearray });
-      }, 500 * i);
+      }, delay_time * i);
       timeout_array.push(time1);
       time1 = setTimeout(() => {
         if (fullrec[i + 1]) {
@@ -438,7 +444,7 @@ class LCS extends Component {
             if (icon2) icon2.beginElement();
           }
         }
-      }, 500 * i + 50);
+      }, delay_time * i + delay_edge);
       timeout_array.push(time1);
     }
     let time1 = setTimeout(() => {
@@ -468,7 +474,8 @@ class LCS extends Component {
       document.getElementById("LCS_data").classList.remove("remove");
       this.setState({ LCS_length: ans.length });
       this.setState({ LCS_data: ans });
-    }, fullrec.length * 500);
+    }, fullrec.length * delay_time);
+
     timeout_array.push(time1);
   }
 
