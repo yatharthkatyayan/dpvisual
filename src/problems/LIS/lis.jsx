@@ -210,6 +210,7 @@ class LIS extends Component {
   }
 
   clearScreen() {
+    toggle = 1;
     numbers = [];
     this.setState({ numbers_array: numbers });
     font_size = 0;
@@ -234,6 +235,9 @@ class LIS extends Component {
       let x = 0;
       x = this.lis(numbers, numbers.length, dp);
       this.setState({ dp_array: dp });
+    } else {
+      this.setState({ dp_array: [] });
+      this.setState({ numbers_array: [] });
     }
   }
   render() {
@@ -292,8 +296,8 @@ class LIS extends Component {
           <div className="padding_style">
             <svg
               className="svg"
-              viewBox={`0 0 ${numbers.length * 75 + 100} ${
-                numbers.length * 75 + 200
+              viewBox={`0 0 ${numbers_array.length * 75 + 100} ${
+                numbers_array.length * 75 + 200
               }`}
             >
               <text

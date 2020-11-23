@@ -548,7 +548,6 @@ class LCS extends Component {
     traverse(0, 0, parent);
     this.layout(parent);
     this.string_data_setter();
-
     this.animate();
   }
 
