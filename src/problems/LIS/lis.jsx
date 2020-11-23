@@ -99,6 +99,7 @@ class LIS extends Component {
           }
 
           dp[i] = maxval + 1;
+
           time1 = setTimeout(() => {
             DP_array[i].value = dp[i];
             this.setState({ dp_array: DP_array });
@@ -107,7 +108,6 @@ class LIS extends Component {
           }, count * delay_time + delay_curve);
           timeout_array.push(time1);
         }
-        return DP_array;
       }
     } else {
       DP_array[0].value = 1;
@@ -124,10 +124,11 @@ class LIS extends Component {
       }
       this.setState({ dp_array: DP_array });
     }
-    setTimeout(() => {
+    let time2 = setTimeout(() => {
       let lis_seq = new Array(n).fill(-1).map(() => new Array());
 
       lis_seq[0].push(arr[0]);
+
       for (let i = 1; i < n; i++) {
         for (let j = 0; j < i; j++) {
           if (
@@ -140,7 +141,9 @@ class LIS extends Component {
 
         lis_seq[i].push(arr[i]);
       }
+
       let max_lis = lis_seq[0].slice();
+
       for (let i = 0; i < n; i++) {
         if (lis_seq[i].length > max_lis.length) {
           max_lis = lis_seq[i].slice();
@@ -152,7 +155,9 @@ class LIS extends Component {
       }
 
       this.setState({ numbers_array: numbers });
-    }, ((n * (n - 1)) / 2) * delay_time);
+    }, ((n * (n - 1)) / 2) * delay_time + delay_curve);
+    timeout_array.push(time2);
+    return DP_array;
   }
 
   createobj(value, id) {
