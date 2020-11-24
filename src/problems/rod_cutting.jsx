@@ -189,11 +189,11 @@ function takeValues(val) {
 
 function traversetree(node) {
   treearray.push(node);
+  if (node.parent) {
+    treeEdge.push(edge(node, node.parent));
+  }
   for (let i = 0; i < node.children.length; i++) {
-    if (node.parent) {
-      treeEdge.push(edge(node, node.parent));
-    }
-    treearray.push(node.children[i]);
+    traversetree(node.children[i]);
   }
 }
 
@@ -430,7 +430,6 @@ class ROD extends Component {
         timeout_array.push(time1);
       }
     } else {
-      traversetree(parent);
       this.setState({ nodes: treearray });
       this.setState({ edges: treeEdge });
     }
