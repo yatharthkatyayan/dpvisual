@@ -164,11 +164,12 @@ function fn(price, rod_length, treenode, dp) {
     temp.parent = treenode;
     treenode.children.push(temp);
     let cost = price[k - 1] + fn(price, rod_length - k, temp, dp);
-    dp[rod_length - 1] = cost;
     if (cost > maxval) {
       maxval = cost;
     }
   }
+
+  dp[rod_length - 1] = maxval;
   treenode.returned_value = dp[rod_length - 1];
   if (treenode.parent) fullrec.push(treenode.parent);
 
@@ -482,7 +483,7 @@ class ROD extends Component {
               className="input_lcs font_input"
               required={true}
               type="text"
-              placeholder="Weights"
+              placeholder="Prices"
               spellCheck={false}
               autoComplete="off"
             />
@@ -493,7 +494,7 @@ class ROD extends Component {
               className="input_lcs font_input"
               required={true}
               type="text"
-              placeholder="Knapsack capacity"
+              placeholder="Rod length"
               spellCheck={false}
               autoComplete="off"
             />
