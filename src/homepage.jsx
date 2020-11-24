@@ -53,6 +53,7 @@ class Home extends Component {
             exact
             component={Coins}
           />
+
           <Route path="/dpvisual/problem/LIS" exact component={LIS} />
           <Route path="/dpvisual/problem/ED" exact component={ED} />
           <Route path="/dpvisual/problem/KS" exact component={KS} />
