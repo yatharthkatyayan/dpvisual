@@ -14,7 +14,7 @@ let last3 = [];
 let last4 = [];
 let last5 = [];
 let timeout_array = [];
-let time = 150;
+let time = 100;
 class homepage extends Component {
   state = {};
 
@@ -46,6 +46,7 @@ class homepage extends Component {
     }
     middle2 = [];
     let mid2 = "Ohh.. if you don't know what is 'Dynamic Programming' ....";
+
     time1 = setTimeout(() => {
       for (let i = 0; i < mid2.length; i++) {
         let time2 = setTimeout(() => {
@@ -55,10 +56,13 @@ class homepage extends Component {
         timeout_array.push(time2);
       }
     }, time * mid1.length);
+
     timeout_array.push(time1);
+
     middle3 = [];
     let mid3 = "Well... Don't you worry i got your back, just click ";
-    time = setTimeout(() => {
+
+    time1 = setTimeout(() => {
       for (let i = 0; i < mid3.length; i++) {
         let time2 = setTimeout(() => {
           middle3.push(mid3[i]);
@@ -67,6 +71,7 @@ class homepage extends Component {
         timeout_array.push(time2);
       }
     }, time * mid1.length + time * mid2.length);
+
     timeout_array.push(time1);
     let here = (
       <Link to="/dpvisual/info" style={{ color: "#2196f3" }}>
