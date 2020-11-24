@@ -56,7 +56,7 @@ class Home extends Component {
           <Route path="/dpvisual/problem/LIS" exact component={LIS} />
           <Route path="/dpvisual/problem/ED" exact component={ED} />
           <Route path="/dpvisual/problem/KS" exact component={KS} />
-          <Route path="/dpvisual/problem/KS" exact component={ROD} />
+          <Route path="/dpvisual/problem/Rod" exact component={ROD} />
 
           <Route path="/dpvisual" exact component={homepage} />
           <Route path="/dpvisual/info" exact component={DpInfo} />
