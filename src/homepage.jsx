@@ -23,7 +23,7 @@ class Home extends Component {
             <div className="coin_input ">
               <Link to="/dpvisual/problem/LCS">
                 <div className=" homepage_button ">
-                  Longest Comman Subsequence
+                  Longest Common Subsequence
                 </div>
               </Link>
 

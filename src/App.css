@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Shadows+Into+Light&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Dancing+Script:wght@600&family=Shadows+Into+Light&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap");
 /*---------------------------------------------LIS---------------------------------------------------------------*/
 .LISdata {
   overflow-wrap: break-word;
@@ -16,46 +17,25 @@
   user-select: none;
 }
 /*----------------------------------------------------------HOMEPAGE-------------------------------------------------*/
-@keyframes homepage {
-  0% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 0.3;
-  }
-  40% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 0.7;
-  }
-  90% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-.home_animation {
-  stroke: rgb(0, 0, 0);
-  animation-name: homepage;
-  animation-duration: 6s;
-  animation-iteration-count: infinite;
-  animation-fill-mode: forwards;
-  user-select: none;
-}
+
 .homepage_screen {
+  margin: 15px;
+  text-align: center;
+  font-family: "Shadows Into Light Two", cursive;
+  font-size: 40px;
+  font-weight: 500;
+  user-select: none;
   -webkit-box-flex: 1;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 }
-
+.home_div {
+  margin: 18px;
+  margin-bottom: 0px;
+}
 /*---------------------------------------------NAVBAR-------------------------------------------------------*/
 .navbar {
   max-width: fit-content;
