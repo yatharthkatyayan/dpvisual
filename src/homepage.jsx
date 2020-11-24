@@ -9,6 +9,7 @@ import DpInfo from "./dp_info";
 import ContactUs from "./contactUS";
 import ED from "./problems/ED/ED";
 import KS from "./problems/01KS/01_KS";
+import ROD from "./problems/rod_cutting";
 
 class Home extends Component {
   state = {};
@@ -37,6 +38,9 @@ class Home extends Component {
               <Link to="/dpvisual/problem/KS">
                 <div className=" homepage_button">0-1 Knapsack</div>
               </Link>
+              <Link to="/dpvisual/problem/Rod">
+                <div className=" homepage_button">Rod Cutting</div>
+              </Link>
 
               <Link to="/dpvisual/problem/coins_change">
                 <div className=" homepage_button">Classical Coin Change</div>
@@ -52,6 +56,7 @@ class Home extends Component {
           <Route path="/dpvisual/problem/LIS" exact component={LIS} />
           <Route path="/dpvisual/problem/ED" exact component={ED} />
           <Route path="/dpvisual/problem/KS" exact component={KS} />
+          <Route path="/dpvisual/problem/KS" exact component={ROD} />
 
           <Route path="/dpvisual" exact component={homepage} />
           <Route path="/dpvisual/info" exact component={DpInfo} />
