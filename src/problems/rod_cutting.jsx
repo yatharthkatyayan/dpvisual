@@ -462,13 +462,18 @@ class ROD extends Component {
         <div className="menu">
           <div className=" lcs_prblm">
             <p>
-              Find out the longest common subsequence(LCS) between two given
-              strings.
+              Given a rod of length n inches and an array of prices that
+              contains prices of all pieces of size smaller than n. Determine
+              the maximum value obtainable by cutting up the rod and selling the
+              pieces.
             </p>
             <p>For example :</p>
-            <p>String 1 : abcdgh</p>
-            <p>String 2 : abedfh</p>
-            <p>LCS : abdh</p>
+            <p>Prices : [1, 5, 8, 9, 10, 17, 17, 20]</p>
+            <p>Output : 22</p>
+            <p>
+              The maximum obtainable value is 22 (by cutting in two pieces of
+              lengths 2 and 6){" "}
+            </p>
             <p>
               *NOTE : WHITE NODES ARE CALCULATED.
               <br />
@@ -525,36 +530,40 @@ class ROD extends Component {
               {`
 /*
 
-initialize whole dp matrix to -1;
+initialize whole dp array to -1;
 
-dp[String1.length][String2.length] = -1;
+dp[Rod_length] = -1;
 
 */
 
-function fn(i,j) {
-  // i-th char of String1
-  //j-th char of String2
+function fn(Prices,Rod_length) {
+    
+  //Prices --> Prices array of rod.
+  //Rod_length --> length of rod.
 
-  if (i == String1.length
-   || j == String2.length){
+  if (Rod_length == 0){
     return 0;
    }
   
-  if(dp[i][j] != -1){
-    return dp[i][j];
+  if(dp[Rod_length-1] != -1){
+    return dp[Rod_length-1];
   }
 
-  if (String1[i] == String2[j]){
-    dp[i][j] = 1+fn(i+1, j+1);
-    return dp[i][j];
+  let max_value = -Infinity;
+  
+  for(let i = 1; i<=Rod_length; i++){
+    
+    let cost = Prices[i-1]
+     + fn(Prices,Rod_length-i);
+    
+    if(max_value < cost){
+        max_value = cost;
+    }
+
   }
 
-  dp[i][j] = Math.max(
-    fn(i, j+1),
-    fn(i+1, j)
-  ); 
+  dp[Rod_length-1] = max_value;
 
-  return dp[i][j]; 
 }    
               `}
             </pre>
