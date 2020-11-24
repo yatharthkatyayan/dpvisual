@@ -157,10 +157,10 @@ function fn(price, rod_length, treenode, dp) {
   }
   /*------------------------------------------------------------------------------------------------*/
   let maxval = -Infinity;
-  console.log("loooooooooooooop");
+
   for (let k = 1; k <= rod_length; k++) {
     let temp = node(rod_length - k);
-    console.log("called", temp);
+
     temp.parent = treenode;
     treenode.children.push(temp);
     let cost = price[k - 1] + fn(price, rod_length - k, temp, dp);
@@ -169,6 +169,9 @@ function fn(price, rod_length, treenode, dp) {
       maxval = cost;
     }
   }
+  treenode.returned_value = dp[rod_length - 1];
+  if (treenode.parent) fullrec.push(treenode.parent);
+
   return maxval;
 }
 
@@ -219,11 +222,11 @@ class ROD extends Component {
     let parent = node(rod_length);
     let dp = new Array(rod_length).fill(-1);
     let x = fn(price_array, rod_length, parent, dp);
-    // console.log("ans :", x);
+    console.log("ans :", x);
     console.log(price_array, rod_length);
     this.layout(parent);
     if (toggle == 0) traversetree(parent);
-    //    return x;
+    return x;
   }
 
   nextright(tree) {
