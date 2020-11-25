@@ -74,7 +74,7 @@ class DpInfo extends Component {
     this.clear();
     setTimeout(() => {
       this.starter();
-    }, 3000);
+    }, 2000);
   }
   componentWillUnmount() {
     this.clear();

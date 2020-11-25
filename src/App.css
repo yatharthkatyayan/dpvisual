@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Shadows+Into+Light&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Dancing+Script:wght@600&family=Shadows+Into+Light&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap");
+
 /*---------------------------------------------LIS---------------------------------------------------------------*/
 .LISdata {
   overflow-wrap: break-word;
@@ -41,10 +42,31 @@
     line-height: initial;
   }
 }
+/*------------------------------------------Contact--------------------------------------------------------*/
+.icon {
+  font-size: 15vw;
+  margin: 2vw;
+}
+.icon_div {
+  width: 100vw;
+  line-height: 7.5vh;
+  text-align: center;
+  font-family: "Shadows Into Light Two", cursive;
+  font-size: 2.7vw;
+  font-weight: 500;
+  user-select: none;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: visible;
+}
 
 /*----------------------------------------------------------HOMEPAGE-------------------------------------------------*/
 
 .homepage_screen {
+  width: 100vw;
   line-height: 7.5vh;
   text-align: center;
   font-family: "Shadows Into Light Two", cursive;
