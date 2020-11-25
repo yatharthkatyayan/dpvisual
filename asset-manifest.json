@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/dpvisual/static/css/main.60d2836e.chunk.css",
+    "main.css": "/dpvisual/static/css/main.d5fc2101.chunk.css",
     "main.js": "/dpvisual/static/js/main.e85dc1f3.chunk.js",
     "main.js.map": "/dpvisual/static/js/main.e85dc1f3.chunk.js.map",
     "runtime-main.js": "/dpvisual/static/js/runtime-main.267b6403.js",
@@ -8,9 +8,9 @@
     "static/js/2.74069011.chunk.js": "/dpvisual/static/js/2.74069011.chunk.js",
     "static/js/2.74069011.chunk.js.map": "/dpvisual/static/js/2.74069011.chunk.js.map",
     "index.html": "/dpvisual/index.html",
-    "precache-manifest.33a9cd040a20a304751fc6ecc02fb498.js": "/dpvisual/precache-manifest.33a9cd040a20a304751fc6ecc02fb498.js",
+    "precache-manifest.645d3b333f2df933b1784414ad4acd77.js": "/dpvisual/precache-manifest.645d3b333f2df933b1784414ad4acd77.js",
     "service-worker.js": "/dpvisual/service-worker.js",
-    "static/css/main.60d2836e.chunk.css.map": "/dpvisual/static/css/main.60d2836e.chunk.css.map",
+    "static/css/main.d5fc2101.chunk.css.map": "/dpvisual/static/css/main.d5fc2101.chunk.css.map",
     "static/js/2.74069011.chunk.js.LICENSE.txt": "/dpvisual/static/js/2.74069011.chunk.js.LICENSE.txt",
     "static/media/App.css": "/dpvisual/static/media/house.2b0d2d78.jpg",
     "static/media/logo.svg": "/dpvisual/static/media/logo.5d5d9eef.svg"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.267b6403.js",
     "static/js/2.74069011.chunk.js",
-    "static/css/main.60d2836e.chunk.css",
+    "static/css/main.d5fc2101.chunk.css",
     "static/js/main.e85dc1f3.chunk.js"
   ]
 }
