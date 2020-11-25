@@ -13,7 +13,7 @@ class SideNav extends Component {
   }
   render() {
     return (
-      <div className="navbar">
+      <div className="navbar ">
         <div id="myNav" className="overlay">
           <a
             href="javascript:void(0)"

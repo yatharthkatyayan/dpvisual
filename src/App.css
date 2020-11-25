@@ -19,7 +19,7 @@
 /*----------------------------------------------------------HOMEPAGE-------------------------------------------------*/
 
 .homepage_screen {
-  margin: 15px;
+  margin-top: 15px;
   text-align: center;
   font-family: "Shadows Into Light Two", cursive;
   font-size: 40px;
@@ -30,7 +30,12 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
+}
+@media screen and (max-width: 666px) {
+  .homepage_screen {
+    font-size: 20px;
+  }
 }
 .home_div {
   margin: 18px;

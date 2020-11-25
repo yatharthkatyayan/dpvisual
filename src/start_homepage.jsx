@@ -24,6 +24,7 @@ class homepage extends Component {
     for (let i = 0; i < gg.length; i++) {
       time1 = setTimeout(() => {
         greet.push(gg[i]);
+        document.getElementById("1").scrollIntoView();
         this.setState({ starter: greet });
       }, time * i);
       timeout_array.push(time1);
@@ -40,6 +41,7 @@ class homepage extends Component {
     for (let i = 0; i < mid1.length; i++) {
       time1 = setTimeout(() => {
         middle1.push(mid1[i]);
+        document.getElementById("2").scrollIntoView();
         this.setState({ midder1: middle1 });
       }, time * i);
       timeout_array.push(time1);
@@ -51,6 +53,7 @@ class homepage extends Component {
       for (let i = 0; i < mid2.length; i++) {
         let time2 = setTimeout(() => {
           middle2.push(mid2[i]);
+          document.getElementById("3").scrollIntoView();
           this.setState({ midder2: middle2 });
         }, time * i);
         timeout_array.push(time2);
@@ -66,6 +69,7 @@ class homepage extends Component {
       for (let i = 0; i < mid3.length; i++) {
         let time2 = setTimeout(() => {
           middle3.push(mid3[i]);
+          document.getElementById("4").scrollIntoView();
           this.setState({ midder3: middle3 });
         }, time * i);
         timeout_array.push(time2);
@@ -81,8 +85,9 @@ class homepage extends Component {
 
     time1 = setTimeout(() => {
       middle3.push(here);
+      document.getElementById("4").scrollIntoView();
       this.setState({ midder3: middle3 });
-    }, time * (mid1.length + mid2.length + mid3.length));
+    }, time * (mid1.length + mid2.length + mid3.length) + 100);
     timeout_array.push(time1);
     time1 = setTimeout(() => {
       this.laster();
@@ -97,6 +102,7 @@ class homepage extends Component {
     for (let i = 0; i < last_1.length; i++) {
       time1 = setTimeout(() => {
         last1.push(last_1[i]);
+        document.getElementById("5").scrollIntoView();
         this.setState({ laster1: last1 });
       }, time * i);
       timeout_array.push(time1);
@@ -108,6 +114,7 @@ class homepage extends Component {
       for (let i = 0; i < last_2.length; i++) {
         setTimeout(() => {
           last2.push(last_2[i]);
+          document.getElementById("6").scrollIntoView();
           this.setState({ laster2: last2 });
         }, time * i);
         timeout_array.push(time1);
@@ -120,6 +127,7 @@ class homepage extends Component {
       for (let i = 0; i < last_3.length; i++) {
         time1 = setTimeout(() => {
           last3.push(last_3[i]);
+          document.getElementById("7").scrollIntoView();
           this.setState({ laster3: last3 });
         }, time * i);
         timeout_array.push(time1);
@@ -132,6 +140,7 @@ class homepage extends Component {
       for (let i = 0; i < last_4.length; i++) {
         time1 = setTimeout(() => {
           last4.push(last_4[i]);
+          document.getElementById("8").scrollIntoView();
           this.setState({ laster4: last4 });
         }, time * i);
         timeout_array.push(time1);
@@ -144,6 +153,7 @@ class homepage extends Component {
       for (let i = 0; i < bye.length; i++) {
         time1 = setTimeout(() => {
           last5.push(bye[i]);
+          document.getElementById("9").scrollIntoView();
           this.setState({ laster5: last5 });
         }, time * i);
         timeout_array.push(time1);
@@ -195,16 +205,34 @@ class homepage extends Component {
     } = this.state;
     return (
       <div className="homepage_screen">
-        <div className="home_div">{starter}</div>
-        <div className="home_div">{midder1}</div>
+        <div id="1" className="home_div">
+          {starter}
+        </div>
+        <div id="2" className="home_div">
+          {midder1}
+        </div>
 
-        <div className="home_div">{midder2}</div>
-        <div className="home_div">{midder3}</div>
-        <div className="home_div">{laster1}</div>
-        <div className="home_div">{laster2}</div>
-        <div className="home_div">{laster3}</div>
-        <div className="home_div">{laster4}</div>
-        <div className="home_div">{laster5}</div>
+        <div id="3" className="home_div">
+          {midder2}
+        </div>
+        <div id="4" className="home_div">
+          {midder3}
+        </div>
+        <div id="5" className="home_div">
+          {laster1}
+        </div>
+        <div id="6" className="home_div">
+          {laster2}
+        </div>
+        <div id="7" className="home_div">
+          {laster3}
+        </div>
+        <div id="8" className="home_div">
+          {laster4}
+        </div>
+        <div id="9" className="home_div">
+          {laster5}
+        </div>
       </div>
     );
   }
