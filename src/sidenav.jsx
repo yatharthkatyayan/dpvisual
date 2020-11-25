@@ -15,25 +15,25 @@ class SideNav extends Component {
     return (
       <div className="navbar ">
         <div id="myNav" className="overlay">
-          <a
+          <div
             href="javascript:void(0)"
             className="closebtn"
             onClick={() => this.closeNav()}
           >
             &times;
-          </a>
+          </div>
           <div className="overlay-content">
             <Link to="/dpvisual" onClick={() => this.closeNav()}>
-              <a href="#">HomePage</a>
+              <div href="#">HomePage</div>
             </Link>
             <Link to="/dpvisual/info" onClick={() => this.closeNav()}>
-              <a href="#">What is Dynamic Programming(DP)</a>
+              <div href="#">What is Dynamic Programming(DP)</div>
             </Link>
             <Link to="/dpvisual/problem" onClick={() => this.closeNav()}>
-              <a href="#">Visualize Dynamic Programming</a>
+              <div href="#">Visualize Dynamic Programming</div>
             </Link>
             <Link to="/dpvisual/contact" onClick={() => this.closeNav()}>
-              <a href="#">Contact us</a>
+              <div href="#">Contact us</div>
             </Link>
           </div>
         </div>

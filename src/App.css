@@ -107,7 +107,7 @@
   margin-top: 30px;
 }
 
-.overlay a {
+.overlay div {
   padding: 8px;
   text-decoration: none;
   font-size: 36px;
@@ -116,8 +116,8 @@
   transition: 0.3s;
 }
 
-.overlay a:hover,
-.overlay a:focus {
+.overlay div:hover,
+.overlay div:focus {
   color: #f1f1f1;
 }
 
@@ -129,7 +129,7 @@
 }
 
 @media screen and (max-width: 666px) {
-  .overlay a {
+  .overlay div {
     font-size: 20px;
   }
   .overlay .closebtn {
@@ -653,6 +653,13 @@ input:checked + .slider:before {
   transition: width 3s, height 3s, transform 100ms;
   user-select: none;
 }
+
+@media only screen and (max-width: 666px) {
+  .homepage_button {
+    width: calc(100vw - 80px);
+  }
+}
+
 .input_field_size {
   font-family: Times;
   width: 400px;

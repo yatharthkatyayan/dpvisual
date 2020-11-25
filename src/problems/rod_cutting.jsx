@@ -223,8 +223,7 @@ class ROD extends Component {
     let parent = node(rod_length);
     let dp = new Array(rod_length).fill(-1);
     let x = fn(price_array, rod_length, parent, dp);
-    console.log("ans :", x);
-    console.log(price_array, rod_length);
+
     this.layout(parent);
     if (toggle == 0) traversetree(parent);
     return x;

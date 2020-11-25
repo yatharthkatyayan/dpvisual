@@ -11,6 +11,13 @@ import ED from "./problems/ED/ED";
 import KS from "./problems/01KS/01_KS";
 import ROD from "./problems/rod_cutting";
 
+/*
+
+              <Link to="/dpvisual/problem/coins_change">
+                <div className=" homepage_button">Classical Coin Change</div>
+              </Link>
+*/
+
 class Home extends Component {
   state = {};
 
@@ -40,10 +47,6 @@ class Home extends Component {
               </Link>
               <Link to="/dpvisual/problem/Rod">
                 <div className=" homepage_button">Rod Cutting</div>
-              </Link>
-
-              <Link to="/dpvisual/problem/coins_change">
-                <div className=" homepage_button">Classical Coin Change</div>
               </Link>
             </div>
           </Route>

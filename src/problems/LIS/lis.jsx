@@ -166,7 +166,7 @@ class LIS extends Component {
         LIS_ans.push(max_lis[i].value);
         if (i != max_lis.length - 1) LIS_ans.push(",");
       }
-      if (document.getElementById("LCS_data"))
+      if (document.getElementById("LIS_data"))
         document.getElementById("LIS_data").classList.remove("remove");
       this.setState({ LIS_length: max_lis.length });
       this.setState({ LIS_data: LIS_ans });
