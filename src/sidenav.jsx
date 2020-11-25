@@ -33,7 +33,7 @@ class SideNav extends Component {
               <div href="#">Visualize Dynamic Programming</div>
             </Link>
             <Link to="/dpvisual/contact" onClick={() => this.closeNav()}>
-              <div href="#">Contact us</div>
+              <div href="#">Connect to me</div>
             </Link>
           </div>
         </div>
