@@ -9,7 +9,7 @@ import DpInfo from "./dp_info";
 import ContactUs from "./contactUS";
 import ED from "./problems/ED/ED";
 import KS from "./problems/01KS/01_KS";
-import ROD from "./problems/rod_cutting";
+import ROD from "./problems/Rod-cutting/rod_cutting";
 
 /*
 
