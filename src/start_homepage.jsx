@@ -103,7 +103,7 @@ class homepage extends Component {
   laster() {
     let time1;
     let last_1 =
-      "Ahh.. you are a pro ... seems like you know all about 'Dynamic Programming'. ";
+      "Ahh.. you are a pro ... seems like you already know all about 'Dynamic Programming'. ";
     for (let i = 0; i < last_1.length; i++) {
       time1 = setTimeout(() => {
         last1.push(last_1[i]);
